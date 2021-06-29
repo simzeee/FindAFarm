@@ -12,7 +12,7 @@ class Booking(db.Model):
     end_day = db.Column(db.String, nullable=False)
     farmId = db.Column(db.Integer, db.ForeignKey("farms.id"), nullable=False)
 
-    userBooking = db.relationship("User", back_populates="bookings")
+    userBooking = db.relationship("User", back_populates="userBooked")
     farmBooked = db.relationship("Farm", back_populates="bookings")
 
     def to_dict(self):

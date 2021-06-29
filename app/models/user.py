@@ -13,8 +13,8 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
     farmer = db.Column(db.Boolean, nullable=False)
 
+    userBooked = db.relationship("Booking", back_populates="userBooking")
     farms = db.relationship("Farm", back_populates="user")
-    bookings = db.relationship("Booking", back_populates="userBooking")
 
     @property
     def password(self):
