@@ -29,6 +29,7 @@ export const authenticate = () => async (dispatch) => {
 };
 
 export const login = (email, password) => async (dispatch) => {
+  console.log("login")
   const response = await fetch('/api/auth/login', {
     method: 'POST',
     headers: {
@@ -85,6 +86,7 @@ const initialState = {user: null};
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_USER:
+      console.log("SET")
       return {user: action.payload}
     case REMOVE_USER:
       return {user: null}
