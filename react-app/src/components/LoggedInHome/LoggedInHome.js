@@ -18,7 +18,6 @@ export default function LoggedInHome(){
     <>
     <h1>You are logged in</h1>
     <div>
-      <CreateBooking></CreateBooking>
     </div>
     </>
   )

@@ -24,16 +24,17 @@ def one_booking(id):
 @login_required
 def createBooking():
     new_booking = request.json
+    new_booking = new_booking['userId']
     print("MY BOOKING", new_booking)
     booking = Booking(
         userId=current_user.id,
         cost_of_stay=new_booking["costOfStay"],
-        start_day=new_booking["startDay"],
-        end_day=new_booking["endDay"],
+        start_day=new_booking["startDate"],
+        end_day=new_booking["endDate"],
         farmId=new_booking["farmId"],
-        number_of_guest=new_booking["numberOfGuests"],
+        number_of_guests=new_booking["numberOfGuests"],
     )
 
     db.session.add(booking)
     db.session.commit()
-    return {"bookings": booking.to_dict}
+    return {"bookings": booking.to_dict()}
