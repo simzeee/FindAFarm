@@ -1,8 +1,8 @@
-"""create users table
+"""remaking Booking
 
-Revision ID: b96e357a4337
+Revision ID: d93c56fb30d8
 Revises: 
-Create Date: 2021-06-29 16:15:06.534359
+Create Date: 2021-06-30 11:55:25.796956
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'b96e357a4337'
+revision = 'd93c56fb30d8'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -45,6 +45,7 @@ def upgrade():
     sa.Column('start_day', sa.String(), nullable=False),
     sa.Column('end_day', sa.String(), nullable=False),
     sa.Column('farmId', sa.Integer(), nullable=False),
+    sa.Column('number_of_guests', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['farmId'], ['farms.id'], ),
     sa.ForeignKeyConstraint(['userId'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
