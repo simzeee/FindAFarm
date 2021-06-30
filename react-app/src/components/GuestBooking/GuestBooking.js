@@ -21,7 +21,6 @@ export default function GuestBooking(){
       {bookings.map((booking)=> (
         <NavLink to={`/bookings/${booking.id}`} key={booking.id}>
           <div>{booking.start_day}-{booking.end_day}</div>
-          {/* <Booking booking={booking}></Booking> */}
         </NavLink>
       ))}
     </div>

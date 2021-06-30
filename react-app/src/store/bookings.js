@@ -34,7 +34,7 @@ export const getAllBookings = () => async (dispatch) => {
 
 
 export const getOneBooking = (id) => async (dispatch) =>{
-  console.log("WHY?", id)
+  
   let data = await fetch(`/api/bookings/${id}`);
 
   data = await data.json();
