@@ -1,12 +1,20 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import {createOneBooking} from '../../store/bookings' 
 
 export default function CreateBooking() {
   const dispatch = useDispatch();
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [numberOfGuests, setNumberOfGuests] = useState(1);
+  const [costOfStay, setCostOfStay] = useState(0)
 
+  const { farmId } = useParams()
+  const pricerPerDay = useSelector((state)=> state.farms[farmId].price_per_day)
+  const userId = useSelector((state)=> state.session.user.id)
+
+  
   const updateStartDate = (e) => {
     setStartDate(e.target.value);
   };
@@ -19,6 +27,12 @@ export default function CreateBooking() {
     setNumberOfGuests(e.target.value);
   };
 
+  const calculateTotal = () => {
+    const timeDifference = new Date(endDate) - new Date(startDate)
+    const totalDays = timeDifference/(1000*3600*24)
+    setCostOfStay((totalDays*pricerPerDay)*numberOfGuests)
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // form values go here
@@ -26,9 +40,25 @@ export default function CreateBooking() {
     // farmId probably from props
     // Click on farm, then lead to CreateBooking component
     // redux stuff here
-    console.log(startDate);
-    console.log(endDate);
+    const payload = {
+      userId,
+      costOfStay,
+      startDate,
+      endDate,
+      farmId,
+      numberOfGuests
+    }
+    console.log(payload)
+    dispatch(createOneBooking(payload))
+
+   
   };
+
+  useEffect(()=>{
+    calculateTotal()
+  },[startDate, endDate, numberOfGuests])
+
+
   return (
     <>
       <div>
@@ -59,6 +89,7 @@ export default function CreateBooking() {
           <button type="submit">Book</button>
         </div>
       </form>
+      <div>{costOfStay? `$${costOfStay}` : '$'+0}</div>
     </>
   );
 }

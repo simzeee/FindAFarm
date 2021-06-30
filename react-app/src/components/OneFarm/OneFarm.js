@@ -9,6 +9,7 @@ export default function Farm() {
   const { farmId } = useParams();
 
   const farm = useSelector((state) => state.farms[farmId]);
+  
 
   useEffect(() => {
     dispatch(getOneFarm(farmId));
