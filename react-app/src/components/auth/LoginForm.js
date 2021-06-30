@@ -11,14 +11,14 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
 
   const onLogin = async (e) => {
-    console.log("hello")
+  
     e.preventDefault();
     const data = await dispatch(login(email, password));
-    console.log(data)
+
     if (data.errors) {
       setErrors(data.errors);
     } else {
-      console.log("auth?")
+
     }
   };
 
