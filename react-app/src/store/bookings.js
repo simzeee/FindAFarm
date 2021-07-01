@@ -22,10 +22,11 @@ const createBooking = (
   startDate,
   endDate,
   farmId,
-  numberOfGuests
+  numberOfGuests,
+  nameOfFarm
 ) => ({
   type: CREATE_BOOKING,
-  payload: { userId, costOfStay, startDate, endDate, farmId, numberOfGuests },
+  payload: { userId, costOfStay, startDate, endDate, farmId, numberOfGuests, nameOfFarm },
 });
 
 //thunks
@@ -56,7 +57,7 @@ export const getOneBooking = (id) => async (dispatch) => {
 };
 
 export const createOneBooking =
-  ({userId, costOfStay, startDate, endDate, farmId, numberOfGuests}) =>
+  ({userId, costOfStay, startDate, endDate, farmId, numberOfGuests, nameOfFarm}) =>
   async (dispatch) => {
     
     let newBooking = JSON.stringify({
@@ -66,6 +67,7 @@ export const createOneBooking =
       endDate,
       farmId,
       numberOfGuests,
+      nameOfFarm
     });
 // debugger
     const response = await fetch("/api/bookings/", {
@@ -81,7 +83,7 @@ export const createOneBooking =
       return;
     }
 
-    dispatch(createBooking(userId, costOfStay, startDate, endDate, farmId, numberOfGuests))
+    dispatch(createBooking(userId, costOfStay, startDate, endDate, farmId, numberOfGuests, nameOfFarm))
 
   };
 // initial state

@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import booking, db, Booking
+from app.models import db, Booking
 from app.forms import BookingForm, booking_form
 
 
@@ -11,6 +11,7 @@ booking_routes = Blueprint("bookings", __name__)
 @login_required
 def bookings():
     bookings = Booking.query.filter(Booking.userId == current_user.id).all()
+    print("BOOKINGS", {"bookings": [booking.to_dict() for booking in bookings]})
     return {"bookings": [booking.to_dict() for booking in bookings]}
 
 
@@ -41,6 +42,7 @@ def createBooking():
             end_day=new_booking["endDate"],
             farmId=new_booking["farmId"],
             number_of_guests=new_booking["numberOfGuests"],
+            name_of_farm=new_booking["nameOfFarm"]
         )
 
         db.session.add(booking)

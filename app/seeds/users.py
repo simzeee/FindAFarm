@@ -8,9 +8,11 @@ def seed_users():
 
     demo = User(username='Demo', email='demo@aa.io',
                 password='password', farmer=False)
-    demoFarmer = User(username='FarmerDemo', email='famer@aa.io', password='password', farmer=True)
+    dwight = User(username='Dwight Schrute', email='beets@gmail.com', password='password', farmer=True)
+    demoFarmer = User(username='Farmer Bill', email='demo@gmail.com', password='password', farmer=True)
 
     db.session.add(demo)
+    db.session.add(dwight)
     db.session.add(demoFarmer)
 
     db.session.commit()

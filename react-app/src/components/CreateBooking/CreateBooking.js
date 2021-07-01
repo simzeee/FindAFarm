@@ -12,6 +12,7 @@ export default function CreateBooking() {
 
   const { farmId } = useParams()
   const pricerPerDay = useSelector((state)=> state.farms[farmId].price_per_day)
+  const nameOfFarm = useSelector((state)=> state.farms[farmId].name)
   const userId = useSelector((state)=> state.session.user.id)
 
   
@@ -46,7 +47,8 @@ export default function CreateBooking() {
       startDate,
       endDate,
       farmId,
-      numberOfGuests
+      numberOfGuests,
+      nameOfFarm
     }
     console.log(payload)
     dispatch(createOneBooking(payload))

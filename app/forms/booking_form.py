@@ -9,6 +9,3 @@ class BookingForm(FlaskForm):
     startDate = StringField('startDate', validators=[DataRequired()])
     endDate = StringField('endDate', validators=[DataRequired()])
     numberOfGuests = IntegerField('numberOfGuests', validators=[DataRequired()])
-    # farmId = IntegerField('farmId')
-    # costOfStay: IntegerField('costOfStay')
-    # submit = SubmitField('Create Booking')

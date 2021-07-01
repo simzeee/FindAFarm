@@ -12,6 +12,7 @@ class Booking(db.Model):
     end_day = db.Column(db.String, nullable=False)
     farmId = db.Column(db.Integer, db.ForeignKey("farms.id"), nullable=False)
     number_of_guests = db.Column(db.Integer, nullable=False)
+    name_of_farm = db.Column(db.String, nullable=False)
 
     userBooking = db.relationship("User", back_populates="userBooked")
     farmBooked = db.relationship("Farm", back_populates="bookings")
@@ -24,5 +25,6 @@ class Booking(db.Model):
           "start_day": self.start_day,
           "end_day": self.end_day,
           "farmId": self.farmId,
-          "number_of_guests": self.number_of_guests
+          "number_of_guests": self.number_of_guests,
+          "name_of_farm": self.name_of_farm
         }

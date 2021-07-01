@@ -20,6 +20,8 @@ export default function Booking() {
       <div>Start Date: {booking.start_day}</div>
       <div>End Date: {booking.end_day}</div>
       <div>Cost: {booking.cost_of_stay}</div>
+      <div>Farm Name: {booking.name_of_farm}</div>
+      <div><button>Edit Your Stay</button></div>
     </div>
   );
 }
