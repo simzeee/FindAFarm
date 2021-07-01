@@ -6,7 +6,9 @@ from wtforms.validators import DataRequired
 
 class BookingForm(FlaskForm):
 
-    start_day = StringField('start_day', validators=[DataRequired()])
-    end_day = StringField('end_day', validators=[DataRequired()])
-    number_of_guests = IntegerField('number_of_guests', validators=[DataRequired()])
-    submit = SubmitField('Create Booking')
+    startDate = StringField('startDate', validators=[DataRequired()])
+    endDate = StringField('endDate', validators=[DataRequired()])
+    numberOfGuests = IntegerField('numberOfGuests', validators=[DataRequired()])
+    # farmId = IntegerField('farmId')
+    # costOfStay: IntegerField('costOfStay')
+    # submit = SubmitField('Create Booking')

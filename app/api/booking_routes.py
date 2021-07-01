@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import booking, db, Booking
-from app.forms import BookingForm
+from app.forms import BookingForm, booking_form
 
 
 booking_routes = Blueprint("bookings", __name__)
@@ -24,21 +24,27 @@ def one_booking(id):
 @booking_routes.route("/", methods=["POST"])
 @login_required
 def createBooking():
+    print("CREATEBOOKING")
 
-    # booking = BookingForm()
+    bookingForm = BookingForm()
+    print("FORM", request.get_json())
+    bookingForm['csrf_token'].data = request.cookies['csrf_token']
 
-    new_booking = request.json
-    new_booking = new_booking['userId']
-    print("MY BOOKING", new_booking)
-    booking = Booking(
-        userId=current_user.id,
-        cost_of_stay=new_booking["costOfStay"],
-        start_day=new_booking["startDate"],
-        end_day=new_booking["endDate"],
-        farmId=new_booking["farmId"],
-        number_of_guests=new_booking["numberOfGuests"],
-    )
+    if bookingForm.validate_on_submit():
+        new_booking = request.json
+        # new_booking = new_booking['userId']
+        print("MY BOOKING", new_booking)
+        booking = Booking(
+            userId=current_user.id,
+            cost_of_stay=new_booking["costOfStay"],
+            start_day=new_booking["startDate"],
+            end_day=new_booking["endDate"],
+            farmId=new_booking["farmId"],
+            number_of_guests=new_booking["numberOfGuests"],
+        )
 
-    # db.session.add(booking)
-    # db.session.commit()
-    return {"bookings": booking.to_dict()}
+        db.session.add(booking)
+        db.session.commit()
+        return {"bookings": booking.to_dict()}
+    print("ERRORRS EESRESR ", bookingForm.errors)
+    return {'errors': "error"}, 401

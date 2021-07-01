@@ -68,20 +68,20 @@ export default function CreateBooking() {
         <label htmlFor="start">Check-In:</label>
         <input
           type="date"
-          name="start_day"
+          name="startDate"
           value={startDate}
           onChange={updateStartDate}
         ></input>
         <label htmlFor="end">Check-Out:</label>
         <input
           type="date"
-          name="end_day"
+          name="endDate"
           value={endDate}
           onChange={updateEndDate}
         ></input>
         <input
           type="number"
-          name="number_of_guests"
+          name="numberDate"
           value={numberOfGuests}
           onChange={updateNumberOfGuests}
         ></input>

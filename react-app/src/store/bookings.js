@@ -19,13 +19,13 @@ const getBooking = (booking) => ({
 const createBooking = (
   userId,
   costOfStay,
-  startDay,
-  endDay,
+  startDate,
+  endDate,
   farmId,
   numberOfGuests
 ) => ({
   type: CREATE_BOOKING,
-  payload: { userId, costOfStay, startDay, endDay, farmId, numberOfGuests },
+  payload: { userId, costOfStay, startDate, endDate, farmId, numberOfGuests },
 });
 
 //thunks
@@ -56,18 +56,18 @@ export const getOneBooking = (id) => async (dispatch) => {
 };
 
 export const createOneBooking =
-  (userId, cost_of_stay, startDay, endDay, farmId, numberOfGuests) =>
+  ({userId, costOfStay, startDate, endDate, farmId, numberOfGuests}) =>
   async (dispatch) => {
     
     let newBooking = JSON.stringify({
       userId,
-      cost_of_stay,
-      startDay,
-      endDay,
+      costOfStay,
+      startDate,
+      endDate,
       farmId,
       numberOfGuests,
     });
-
+// debugger
     const response = await fetch("/api/bookings/", {
       method: "POST",
       headers: {
@@ -81,7 +81,7 @@ export const createOneBooking =
       return;
     }
 
-    dispatch(createBooking(userId, cost_of_stay, startDay, endDay, farmId, numberOfGuests))
+    dispatch(createBooking(userId, costOfStay, startDate, endDate, farmId, numberOfGuests))
 
   };
 // initial state

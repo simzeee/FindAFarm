@@ -10,9 +10,9 @@ export default function LoggedInHome(){
 
   const bookings = useSelector((state) => state.bookings)
 
-  useEffect(()=>{
-    dispatch(getAllBookings())
-  },[])
+  // useEffect(()=>{
+  //   dispatch(getAllBookings())
+  // },[])
 
   return (
     <>
