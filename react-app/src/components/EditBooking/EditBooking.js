@@ -22,7 +22,7 @@ export default function EditBooking() {
   const farmId = useSelector((state) => state.bookings[bookingId].farmId);
 
   const pricerPerDay = useSelector(
-    (state) => state.farms[farmId].price_per_day
+    (state) => state.farms[farmId].pricePerDay
   );
   const nameOfFarm = useSelector((state) => state.farms[farmId].name);
   const userId = useSelector((state) => state.session.user.id);

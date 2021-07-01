@@ -1,8 +1,8 @@
-"""booking includes farmName
+"""getting rid of underscores
 
-Revision ID: cca12e72e3b9
+Revision ID: 2d5770a53e8e
 Revises: 
-Create Date: 2021-07-01 11:05:16.405964
+Create Date: 2021-07-01 17:25:18.784357
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'cca12e72e3b9'
+revision = '2d5770a53e8e'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -31,7 +31,7 @@ def upgrade():
     op.create_table('farms',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(), nullable=False),
-    sa.Column('price_per_day', sa.Numeric(asdecimal=False), nullable=False),
+    sa.Column('pricePerDay', sa.Numeric(asdecimal=False), nullable=False),
     sa.Column('image', sa.String(), nullable=True),
     sa.Column('location', sa.String(), nullable=False),
     sa.Column('userId', sa.Integer(), nullable=False),
@@ -41,12 +41,12 @@ def upgrade():
     op.create_table('bookings',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('userId', sa.Integer(), nullable=False),
-    sa.Column('cost_of_stay', sa.Numeric(asdecimal=False), nullable=False),
-    sa.Column('start_day', sa.String(), nullable=False),
-    sa.Column('end_day', sa.String(), nullable=False),
+    sa.Column('costOfStay', sa.Numeric(asdecimal=False), nullable=False),
+    sa.Column('startDate', sa.String(), nullable=False),
+    sa.Column('endDate', sa.String(), nullable=False),
     sa.Column('farmId', sa.Integer(), nullable=False),
-    sa.Column('number_of_guests', sa.Integer(), nullable=False),
-    sa.Column('name_of_farm', sa.String(), nullable=False),
+    sa.Column('numberOfGuests', sa.Integer(), nullable=False),
+    sa.Column('nameOfFarm', sa.String(), nullable=False),
     sa.ForeignKeyConstraint(['farmId'], ['farms.id'], ),
     sa.ForeignKeyConstraint(['userId'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')

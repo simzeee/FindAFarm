@@ -20,7 +20,7 @@ export default function Farm() {
   return (
     <>
       <div>{farm.name}</div>
-      <div>Price Per Day: ${farm.price_per_day}</div>
+      <div>Price Per Day: ${farm.pricePerDay}</div>
       <div>
         <CreateBooking></CreateBooking>
       </div>

@@ -35,12 +35,12 @@ def createBooking():
         
         booking = Booking(
             userId=current_user.id,
-            cost_of_stay=new_booking["costOfStay"],
-            start_day=new_booking["startDate"],
-            end_day=new_booking["endDate"],
+            costOfStay=new_booking["costOfStay"],
+            startDate=new_booking["startDate"],
+            endDate=new_booking["endDate"],
             farmId=new_booking["farmId"],
-            number_of_guests=new_booking["numberOfGuests"],
-            name_of_farm=new_booking["nameOfFarm"]
+            numberOfGuests=new_booking["numberOfGuests"],
+            nameOfFarm=new_booking["nameOfFarm"]
         )
 
         db.session.add(booking)
@@ -64,12 +64,12 @@ def edit_one_booking(id):
 
         # booking.id = request.json["id"]
         booking.userId = request.json["userId"]
-        booking.cost_of_stay = request.json["costOfStay"]
-        booking.start_day = request.json["startDate"]
-        booking.end_day = request.json["endDate"]
+        booking.costOfStay = request.json["costOfStay"]
+        booking.startDate = request.json["startDate"]
+        booking.endDate = request.json["endDate"]
         booking.farmId = request.json["farmId"]
-        booking.number_of_guests = request.json["numberOfGuests"]
-        booking.name_of_farm = request.json["nameOfFarm"]
+        booking.numberOfGuests = request.json["numberOfGuests"]
+        booking.nameOfFarm = request.json["nameOfFarm"]
 
         db.session.commit()
         return {"bookings": booking.to_dict()}

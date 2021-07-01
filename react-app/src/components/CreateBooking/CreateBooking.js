@@ -12,7 +12,7 @@ export default function CreateBooking() {
   const [costOfStay, setCostOfStay] = useState(0)
 
   const { farmId } = useParams()
-  const pricerPerDay = useSelector((state)=> state.farms[farmId].price_per_day)
+  const pricerPerDay = useSelector((state)=> state.farms[farmId].pricePerDay)
   const nameOfFarm = useSelector((state)=> state.farms[farmId].name)
   const userId = useSelector((state)=> state.session.user.id)
 

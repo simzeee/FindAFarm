@@ -17,10 +17,10 @@ export default function Booking() {
 
   return (
     <div>
-      <div>Start Date: {booking.start_day}</div>
-      <div>End Date: {booking.end_day}</div>
-      <div>Cost: {booking.cost_of_stay}</div>
-      <div>Farm Name: {booking.name_of_farm}</div>
+      <div>Start Date: {booking.startDate}</div>
+      <div>End Date: {booking.endDate}</div>
+      <div>Cost: {booking.costOfStay}</div>
+      <div>Farm Name: {booking.nameOfFarm}</div>
       <div>
         <NavLink to={`/editBookings/${bookingId}`}>
         <button>Edit Your Stay</button>

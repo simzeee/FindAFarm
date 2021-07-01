@@ -7,7 +7,7 @@ class Farm(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
-    price_per_day = db.Column(db.Numeric(asdecimal=False), nullable=False)
+    pricePerDay = db.Column(db.Numeric(asdecimal=False), nullable=False)
     image = db.Column(db.String)
     location = db.Column(db.String, nullable=False)
     userId = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
@@ -20,7 +20,7 @@ class Farm(db.Model):
         return {
           "id": self.id,
           "name": self.name,
-          "price_per_day": self.price_per_day,
+          "pricePerDay": self.pricePerDay,
           "image": self.image,
           "location": self.location,
           "userId": self.userId,
