@@ -8,9 +8,7 @@ export default function GuestBooking(){
 
   const dispatch = useDispatch()
 
-  const bookings = useSelector((state) => ({...state.bookings}))
-  
-  
+  const bookings = useSelector((state) => Object.values(state.bookings))
   
   useEffect(()=>{
     dispatch(getAllBookings())
@@ -23,8 +21,7 @@ export default function GuestBooking(){
     <div><h1>Your Bookings:</h1></div>
     <div>
       {bookings&&Object.values(bookings).map((booking)=> (
-        <NavLink to={`/editBookings/${booking.id}`}>
-          {console.log("MAPPED BOOKING", booking.id)}
+        <NavLink to={`/editBookings/${booking.id? booking.id:booking.bookingId}`} key={booking.id? booking.id:booking.bookingId}>
           <div>{booking.nameOfFarm}</div>
           <div>{booking.startDate}-{booking.endDate}</div>
         </NavLink>

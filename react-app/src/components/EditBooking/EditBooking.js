@@ -7,8 +7,9 @@ export default function EditBooking() {
   const history = useHistory()
   const dispatch = useDispatch();
   const { bookingId } = useParams();
-  console.log("BOOKGINID", bookingId)
 
+  console.log(bookingId)
+  
   const currentBooking = useSelector((state) => state.bookings[bookingId]);
 
   const [startDate, setStartDate] = useState(currentBooking.startDate);
@@ -73,6 +74,8 @@ export default function EditBooking() {
   useEffect(() => {
     calculateTotal();
   }, [startDate, endDate, numberOfGuests]);
+
+  // if(!currentBooking) return null
 
   return (
     <>

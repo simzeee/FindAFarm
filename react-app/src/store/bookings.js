@@ -190,7 +190,7 @@ export const editOneBooking =
       endDate,
       farmId,
       numberOfGuests,
-      nameOfFarm))
+      nameOfFarm,bookingId))
 
   };
 
@@ -233,7 +233,11 @@ export default function reducer(state = initialState, action) {
     case CREATE_BOOKING: {
       const newState = { ...state };
       // console.log("ID", action.payload.bookingId)
-      console.log("PAYLOAD", action.payload)
+      newState[action.payload.bookingId] = action.payload;
+      return newState
+    }
+    case EDIT_BOOKING: {
+      const newState = {...state};
       newState[action.payload.bookingId] = action.payload;
       return newState
     }
