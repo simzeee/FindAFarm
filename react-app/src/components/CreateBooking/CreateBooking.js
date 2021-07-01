@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import {createOneBooking} from '../../store/bookings' 
 
 export default function CreateBooking() {
+  const history = useHistory()
   const dispatch = useDispatch();
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
@@ -48,6 +49,7 @@ export default function CreateBooking() {
     }
     console.log(payload)
     dispatch(createOneBooking(payload))
+    history.push('/bookings')
 
    
   };

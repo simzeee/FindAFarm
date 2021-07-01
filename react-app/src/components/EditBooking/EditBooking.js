@@ -1,27 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
+import { editOneBooking, deleteOneBooking } from '../../store/bookings';
 
 export default function EditBooking() {
+  const history = useHistory()
   const dispatch = useDispatch();
   const { bookingId } = useParams();
+  console.log("BOOKGINID", bookingId)
 
   const currentBooking = useSelector((state) => state.bookings[bookingId]);
 
-  const [startDate, setStartDate] = useState(currentBooking.start_day);
-  const [endDate, setEndDate] = useState(currentBooking.end_day);
+  const [startDate, setStartDate] = useState(currentBooking.startDate);
+  const [endDate, setEndDate] = useState(currentBooking.endDate);
   const [numberOfGuests, setNumberOfGuests] = useState(
-    currentBooking.number_of_guests
+    currentBooking.numberOfGuests
   );
   const [costOfStay, setCostOfStay] = useState(300);
-  
-  const farmId = useSelector((state) => state.bookings[bookingId].farmId)
 
-  const pricerPerDay = useSelector((state)=> state.farms[farmId].price_per_day)
-  const nameOfFarm = useSelector((state)=> state.farms[farmId].name)
-  const userId = useSelector((state)=> state.session.user.id)
+  const farmId = useSelector((state) => state.bookings[bookingId].farmId);
 
-
+  const pricerPerDay = useSelector(
+    (state) => state.farms[farmId].price_per_day
+  );
+  const nameOfFarm = useSelector((state) => state.farms[farmId].name);
+  const userId = useSelector((state) => state.session.user.id);
 
   const updateStartDate = (e) => {
     setStartDate(e.target.value);
@@ -52,9 +55,19 @@ export default function EditBooking() {
       farmId,
       numberOfGuests,
       nameOfFarm,
+      bookingId,
     };
     console.log(payload);
-    // dispatch(createOneBooking(payload));
+    dispatch(editOneBooking(payload));
+    history.push('/bookings')
+  };
+  
+  const handleDelete = (e) => {
+    const payload = { bookingId };
+    
+    dispatch(deleteOneBooking(payload));
+    history.push('/bookings')
+    
   };
 
   useEffect(() => {
@@ -64,7 +77,7 @@ export default function EditBooking() {
   return (
     <>
       <div>
-        <h3>Create Booking:</h3>
+        <h3>Edit Booking:</h3>
       </div>
       <form action="" onSubmit={(e) => handleSubmit(e)}>
         <label htmlFor="start">Check-In:</label>
@@ -94,6 +107,9 @@ export default function EditBooking() {
           <button type="submit">Book</button>
         </div>
       </form>
+      <div>
+        <button onClick={(e) => handleDelete(e)}>Cancel Your Stay</button>
+      </div>
       <div>{costOfStay ? `$${costOfStay}` : '$' + 0}</div>
     </>
   );

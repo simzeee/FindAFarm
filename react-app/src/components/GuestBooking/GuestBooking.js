@@ -8,21 +8,25 @@ export default function GuestBooking(){
 
   const dispatch = useDispatch()
 
-  const bookings = useSelector((state) => Object.values(state.bookings))
-
+  const bookings = useSelector((state) => ({...state.bookings}))
+  
+  
+  
   useEffect(()=>{
     dispatch(getAllBookings())
     dispatch(getAllFarms())
   },[])
 
+
   return(
     <>
     <div><h1>Your Bookings:</h1></div>
     <div>
-      {bookings.map((booking)=> (
-        <NavLink to={`/bookings/${booking.id}`} key={booking.id}>
-          <div>{booking.name_of_farm}</div>
-          <div>{booking.start_day}-{booking.end_day}</div>
+      {bookings&&Object.values(bookings).map((booking)=> (
+        <NavLink to={`/editBookings/${booking.id}`}>
+          {console.log("MAPPED BOOKING", booking.id)}
+          <div>{booking.nameOfFarm}</div>
+          <div>{booking.startDate}-{booking.endDate}</div>
         </NavLink>
       ))}
     </div>

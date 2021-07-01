@@ -2,7 +2,9 @@
 
 const GET_BOOKINGS = 'bookings/GET_BOOKINGS';
 const GET_ONE_BOOKING = 'booking/GET_ONE_BOOKING';
-const CREATE_BOOKING = 'cooking/CREATE_BOOKING';
+const CREATE_BOOKING = 'booking/CREATE_BOOKING';
+const EDIT_BOOKING = 'booking/EDIT_BOOKING';
+const DELETE_BOOKING ='booking/DELETE_BOOKING'
 
 // action creators
 
@@ -23,11 +25,50 @@ const createBooking = (
   endDate,
   farmId,
   numberOfGuests,
-  nameOfFarm
+  nameOfFarm,
+  bookingId
 ) => ({
   type: CREATE_BOOKING,
-  payload: { userId, costOfStay, startDate, endDate, farmId, numberOfGuests, nameOfFarm },
+  payload: {
+    userId,
+    costOfStay,
+    startDate,
+    endDate,
+    farmId,
+    numberOfGuests,
+    nameOfFarm,
+    bookingId
+  },
 });
+
+const editBooking = (
+  userId,
+  costOfStay,
+  startDate,
+  endDate,
+  farmId,
+  numberOfGuests,
+  nameOfFarm,
+  bookingId
+) => ({
+  type: EDIT_BOOKING,
+  payload: {
+    userId,
+    costOfStay,
+    startDate,
+    endDate,
+    farmId,
+    numberOfGuests,
+    nameOfFarm,
+    bookingId
+  },
+});
+
+const deleteBooking= (id) => 
+  ({
+    type: DELETE_BOOKING,
+    payload: id
+  })
 
 //thunks
 
@@ -57,9 +98,16 @@ export const getOneBooking = (id) => async (dispatch) => {
 };
 
 export const createOneBooking =
-  ({userId, costOfStay, startDate, endDate, farmId, numberOfGuests, nameOfFarm}) =>
+  ({
+    userId,
+    costOfStay,
+    startDate,
+    endDate,
+    farmId,
+    numberOfGuests,
+    nameOfFarm,
+  }) =>
   async (dispatch) => {
-    
     let newBooking = JSON.stringify({
       userId,
       costOfStay,
@@ -67,29 +115,104 @@ export const createOneBooking =
       endDate,
       farmId,
       numberOfGuests,
-      nameOfFarm
+      nameOfFarm,
     });
-// debugger
-    const response = await fetch("/api/bookings/", {
-      method: "POST",
+   
+    const response = await fetch('/api/bookings/', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: newBooking,
     });
 
     const data = await response.json();
-    if(data.errors) {
+    if (data.errors) {
+      return;
+    }
+    console.log("RESPONSE", data)
+    let bookingId = data.bookings.id
+    console.log("RESPONSE", bookingId)
+
+    dispatch(
+      createBooking(
+        userId,
+        costOfStay,
+        startDate,
+        endDate,
+        farmId,
+        numberOfGuests,
+        nameOfFarm,
+        bookingId
+      )
+    );
+  };
+
+export const editOneBooking =
+  ({
+    userId,
+    costOfStay,
+    startDate,
+    endDate,
+    farmId,
+    numberOfGuests,
+    nameOfFarm,
+    bookingId
+  }) =>
+  async (dispatch) => {
+    let editedBooking = JSON.stringify({
+      userId,
+      costOfStay,
+      startDate,
+      endDate,
+      farmId,
+      numberOfGuests,
+      nameOfFarm,
+      bookingId
+    });
+
+    const response = await fetch(`/api/bookings/${bookingId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: editedBooking,
+    });
+
+    const data = await response.json();
+    if (data.errors) {
       return;
     }
 
-    dispatch(createBooking(userId, costOfStay, startDate, endDate, farmId, numberOfGuests, nameOfFarm))
+    dispatch(editBooking(userId,
+      costOfStay,
+      startDate,
+      endDate,
+      farmId,
+      numberOfGuests,
+      nameOfFarm))
 
   };
+
+export const deleteOneBooking = (id) => async (dispatch) => {
+  id = id.bookingId
+  console.log("MY ID", id)
+  let data = await fetch(`/api/bookings/${id}`, {
+    method: 'DELETE',
+  })
+
+  data = await data.json();
+  if (data.errors){
+    return;
+  }
+
+  dispatch(deleteBooking(data))
+
+}
+
 // initial state
 
 let initialState = {};
-
 
 //reducer
 
@@ -108,8 +231,16 @@ export default function reducer(state = initialState, action) {
       return newState;
     }
     case CREATE_BOOKING: {
+      const newState = { ...state };
+      // console.log("ID", action.payload.bookingId)
+      console.log("PAYLOAD", action.payload)
+      newState[action.payload.bookingId] = action.payload;
+      return newState
+    }
+    case DELETE_BOOKING: {
       const newState = {...state};
-      newState[action.payload.id] = action.payload
+      delete newState[action.payload.id]
+      return newState
     }
     default:
       return state;
