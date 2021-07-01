@@ -10,6 +10,7 @@ import User from './components/User/User';
 import LoggedInUser from './components/LoggedInHome/LoggedInHome';
 import GuestBooking from './components/GuestBooking/GuestBooking';
 import Booking from './components/Booking/Booking';
+import EditBooking from './components/EditBooking/EditBooking';
 import AllFarms from './components/AllFarms/AllFarms';
 import Farm from './components/OneFarm/OneFarm';
 import { authenticate } from './store/session';
@@ -54,6 +55,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path="/bookings/:bookingId" exact={true}>
           <Booking />
+        </ProtectedRoute>
+        <ProtectedRoute path="/editBookings/:bookingId" exact={true}>
+          <EditBooking></EditBooking>
         </ProtectedRoute>
         <Route path="/farms" exact={true}>
           <AllFarms></AllFarms>

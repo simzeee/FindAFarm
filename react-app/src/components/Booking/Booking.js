@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, NavLink } from 'react-router-dom';
 import { getOneBooking } from '../../store/bookings';
 
 export default function Booking() {
@@ -21,7 +21,13 @@ export default function Booking() {
       <div>End Date: {booking.end_day}</div>
       <div>Cost: {booking.cost_of_stay}</div>
       <div>Farm Name: {booking.name_of_farm}</div>
-      <div><button>Edit Your Stay</button></div>
+      <div>
+        <NavLink to={`/editBookings/${bookingId}`}>
+        <button>Edit Your Stay</button>
+        </NavLink>
+    
+        </div>
+
     </div>
   );
 }

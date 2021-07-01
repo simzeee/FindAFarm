@@ -1,21 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import {createOneBooking} from '../../store/bookings' 
 
-export default function CreateBooking() {
+export default function EditBooking() {
   const dispatch = useDispatch();
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
-  const [numberOfGuests, setNumberOfGuests] = useState(1);
-  const [costOfStay, setCostOfStay] = useState(0)
+  const { bookingId } = useParams();
 
-  const { farmId } = useParams()
+  const currentBooking = useSelector((state) => state.bookings[bookingId]);
+
+  const [startDate, setStartDate] = useState(currentBooking.start_day);
+  const [endDate, setEndDate] = useState(currentBooking.end_day);
+  const [numberOfGuests, setNumberOfGuests] = useState(
+    currentBooking.number_of_guests
+  );
+  const [costOfStay, setCostOfStay] = useState(300);
+  
+  const farmId = useSelector((state) => state.bookings[bookingId].farmId)
+
   const pricerPerDay = useSelector((state)=> state.farms[farmId].price_per_day)
   const nameOfFarm = useSelector((state)=> state.farms[farmId].name)
   const userId = useSelector((state)=> state.session.user.id)
 
-  
+
+
   const updateStartDate = (e) => {
     setStartDate(e.target.value);
   };
@@ -29,14 +36,14 @@ export default function CreateBooking() {
   };
 
   const calculateTotal = () => {
-    const timeDifference = new Date(endDate) - new Date(startDate)
-    const totalDays = timeDifference/(1000*3600*24)
-    setCostOfStay((totalDays*pricerPerDay)*numberOfGuests)
-  }
+    const timeDifference = new Date(endDate) - new Date(startDate);
+    const totalDays = timeDifference / (1000 * 3600 * 24);
+    setCostOfStay(totalDays * pricerPerDay * numberOfGuests);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
- 
+
     const payload = {
       userId,
       costOfStay,
@@ -44,18 +51,15 @@ export default function CreateBooking() {
       endDate,
       farmId,
       numberOfGuests,
-      nameOfFarm
-    }
-    console.log(payload)
-    dispatch(createOneBooking(payload))
-
-   
+      nameOfFarm,
+    };
+    console.log(payload);
+    // dispatch(createOneBooking(payload));
   };
 
-  useEffect(()=>{
-    calculateTotal()
-  },[startDate, endDate, numberOfGuests])
-
+  useEffect(() => {
+    calculateTotal();
+  }, [startDate, endDate, numberOfGuests]);
 
   return (
     <>
@@ -90,7 +94,7 @@ export default function CreateBooking() {
           <button type="submit">Book</button>
         </div>
       </form>
-      <div>{costOfStay? `$${costOfStay}` : '$'+0}</div>
+      <div>{costOfStay ? `$${costOfStay}` : '$' + 0}</div>
     </>
   );
 }
