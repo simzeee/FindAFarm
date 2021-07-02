@@ -19,7 +19,7 @@ const UploadPicture = () => {
         console.log("FORM", formData)
         console.log("IMAGE", image)
 
-        const res = await fetch('/api/images', {
+        const res = await fetch('/api/images/', {
             method: "POST",
             body: formData,
         });

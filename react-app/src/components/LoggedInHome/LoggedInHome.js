@@ -1,7 +1,5 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllBookings } from '../../store/bookings'
-import CreateBooking from '../CreateBooking/CreateBooking'
 import UploadPicture from '../UploadPicture/UploadPicture'
 
 
