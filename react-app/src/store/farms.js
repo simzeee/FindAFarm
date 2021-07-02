@@ -45,7 +45,7 @@ export const getOneFarm = (id) => async (dispatch) => {
 };
 
 export const createOneFarm = (farm) => async (dispatch) => {
-  const { farmName, pricePerDay, location, description } = farm;
+  const { farmName, pricePerDay, location, description, formData } = farm;
 
   const response = await fetch('/api/farms/', {
     method: 'POST',
@@ -57,6 +57,7 @@ export const createOneFarm = (farm) => async (dispatch) => {
       pricePerDay,
       location,
       description,
+      formData
     }),
   });
   const data = await response.json();

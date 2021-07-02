@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import UploadPicture from '../UploadPicture/UploadPicture';
 import styles from './CreateFarm.module.css';
 import { createOneFarm } from '../../store/farms';
 
@@ -34,38 +33,43 @@ export default function CreateFarm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    const formData = new FormData();
+    formData.append('image', image);
 
     const payload = {
       farmName,
       pricePerDay,
       location,
       description,
+      formData
     };
     console.log(payload)
 
     dispatch(createOneFarm(payload))
 
-    const formData = new FormData();
-    formData.append('image', image);
 
     // aws uploads can be a bit slow—displaying
     // some sort of loading message is a good idea
     setImageLoading(true);
+    JSON.stringify(farmName)
+    console.log(farmName)
 
     const res = await fetch('/api/images/', {
       method: 'POST',
-      body: formData,
+      body: formData, farmName
     });
     if (res.ok) {
       await res.json();
       setImageLoading(false);
-      history.push('/farms');
+      // history.push('/farms');
     } else {
       setImageLoading(false);
       // a real app would probably use more advanced
       // error handling
       console.log('error');
     }
+
   };
 
   const updateImage = (e) => {
@@ -86,6 +90,7 @@ export default function CreateFarm() {
               type="text"
               value={farmName}
               onChange={updateFarmName}
+              required={true}
             ></input>
             <label>pricePerDay:</label>
             <input type="number" value={pricePerDay} onChange={updatePricePerDay}></input>
@@ -94,14 +99,16 @@ export default function CreateFarm() {
               type="text"
               value={location}
               onChange={updateLocation}
+              required={true}
             ></input>
             <label>Description:</label>
             <textarea
               form="farmForm"
               value={description}
               onChange={updateDescription}
+              required={true}
             ></textarea>
-            <input type="file" accept="image/*" onChange={updateImage} />
+            <input type="file" accept="image/*" onChange={updateImage} required={true}/>
             <button type="submit">Submit</button>
             {imageLoading && <p>Loading...</p>}
           </form>

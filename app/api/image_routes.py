@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from app.models import db, Image
+from app.models import db, Image, Farm
 from flask_login import current_user, login_required
 from app.s3_helpers import (
     upload_file_to_s3, allowed_file, get_unique_filename)
@@ -14,6 +14,7 @@ def upload_image():
         return {"errors": "image required"}, 400
 
     image = request.files["image"]
+    print("IMAGE REQUEST", request.json)
 
     if not allowed_file(image.filename):
         return {"errors": "file type not permitted"}, 400
@@ -31,6 +32,10 @@ def upload_image():
     url = upload["url"]
     # flask_login allows us to get the current user from the request
     new_image = Image(user=current_user.id, url=url)
+    farm = Farm.query.filter(Farm.userId == current_user.id).all()
+
+    farm[-1].image = url
+
     db.session.add(new_image)
     db.session.commit()
     return {"url": url}

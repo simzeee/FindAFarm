@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import booking, db, Farm
 
+
 farm_routes = Blueprint("farms", __name__)
 
 
@@ -18,10 +19,11 @@ def farm(id):
 
 
 @farm_routes.route('/', methods=["POST"])
+@login_required
 def createFarm():
 
     newFarm = request.json
-
+ 
     print("NEW FARM NEW FARM", newFarm)
 
     farm = Farm(

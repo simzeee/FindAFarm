@@ -1,8 +1,8 @@
-"""added image
+"""trying to get images
 
-Revision ID: 77a47e443c7a
+Revision ID: eace8e6c2fbe
 Revises: 
-Create Date: 2021-07-01 18:12:01.870944
+Create Date: 2021-07-02 16:10:55.497868
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '77a47e443c7a'
+revision = 'eace8e6c2fbe'
 down_revision = None
 branch_labels = None
 depends_on = None

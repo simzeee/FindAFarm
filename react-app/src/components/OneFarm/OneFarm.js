@@ -21,6 +21,7 @@ export default function Farm() {
     <>
       <div>{farm.name}</div>
       <div>Price Per Day: ${farm.pricePerDay}</div>
+      <div><img src={farm.image? farm.image:""}></img></div>
       <div>
         <CreateBooking></CreateBooking>
       </div>
