@@ -4,7 +4,7 @@ const GET_BOOKINGS = 'bookings/GET_BOOKINGS';
 const GET_ONE_BOOKING = 'booking/GET_ONE_BOOKING';
 const CREATE_BOOKING = 'booking/CREATE_BOOKING';
 const EDIT_BOOKING = 'booking/EDIT_BOOKING';
-const DELETE_BOOKING ='booking/DELETE_BOOKING'
+const DELETE_BOOKING = 'booking/DELETE_BOOKING';
 
 // action creators
 
@@ -37,7 +37,7 @@ const createBooking = (
     farmId,
     numberOfGuests,
     nameOfFarm,
-    bookingId
+    bookingId,
   },
 });
 
@@ -60,15 +60,14 @@ const editBooking = (
     farmId,
     numberOfGuests,
     nameOfFarm,
-    bookingId
+    bookingId,
   },
 });
 
-const deleteBooking= (id) => 
-  ({
-    type: DELETE_BOOKING,
-    payload: id
-  })
+const deleteBooking = (id) => ({
+  type: DELETE_BOOKING,
+  payload: id,
+});
 
 //thunks
 
@@ -117,7 +116,7 @@ export const createOneBooking =
       numberOfGuests,
       nameOfFarm,
     });
-   
+
     const response = await fetch('/api/bookings/', {
       method: 'POST',
       headers: {
@@ -130,9 +129,7 @@ export const createOneBooking =
     if (data.errors) {
       return;
     }
-    console.log("RESPONSE", data)
-    let bookingId = data.bookings.id
-    console.log("RESPONSE", bookingId)
+    let bookingId = data.bookings.id;
 
     dispatch(
       createBooking(
@@ -157,7 +154,7 @@ export const editOneBooking =
     farmId,
     numberOfGuests,
     nameOfFarm,
-    bookingId
+    bookingId,
   }) =>
   async (dispatch) => {
     let editedBooking = JSON.stringify({
@@ -168,7 +165,7 @@ export const editOneBooking =
       farmId,
       numberOfGuests,
       nameOfFarm,
-      bookingId
+      bookingId,
     });
 
     const response = await fetch(`/api/bookings/${bookingId}`, {
@@ -184,31 +181,34 @@ export const editOneBooking =
       return;
     }
 
-    dispatch(editBooking(userId,
-      costOfStay,
-      startDate,
-      endDate,
-      farmId,
-      numberOfGuests,
-      nameOfFarm,bookingId))
-
+    dispatch(
+      editBooking(
+        userId,
+        costOfStay,
+        startDate,
+        endDate,
+        farmId,
+        numberOfGuests,
+        nameOfFarm,
+        bookingId
+      )
+    );
   };
 
 export const deleteOneBooking = (id) => async (dispatch) => {
-  id = id.bookingId
-  console.log("MY ID", id)
+  id = id.bookingId;
+  console.log('MY ID', id);
   let data = await fetch(`/api/bookings/${id}`, {
     method: 'DELETE',
-  })
+  });
 
   data = await data.json();
-  if (data.errors){
+  if (data.errors) {
     return;
   }
 
-  dispatch(deleteBooking(data))
-
-}
+  dispatch(deleteBooking(data));
+};
 
 // initial state
 
@@ -234,17 +234,17 @@ export default function reducer(state = initialState, action) {
       const newState = { ...state };
       // console.log("ID", action.payload.bookingId)
       newState[action.payload.bookingId] = action.payload;
-      return newState
+      return newState;
     }
     case EDIT_BOOKING: {
-      const newState = {...state};
+      const newState = { ...state };
       newState[action.payload.bookingId] = action.payload;
-      return newState
+      return newState;
     }
     case DELETE_BOOKING: {
-      const newState = {...state};
-      delete newState[action.payload.id]
-      return newState
+      const newState = { ...state };
+      delete newState[action.payload.id];
+      return newState;
     }
     default:
       return state;
