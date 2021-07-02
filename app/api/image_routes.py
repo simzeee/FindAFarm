@@ -7,7 +7,7 @@ from app.s3_helpers import (
 image_routes = Blueprint("images", __name__)
 
 
-@image_routes.route("/", methods=["POST"])
+@image_routes.route("", methods=["POST"])
 @login_required
 def upload_image():
     print("SOMETHING")
