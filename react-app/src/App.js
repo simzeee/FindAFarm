@@ -13,6 +13,7 @@ import Booking from './components/Booking/Booking';
 import EditBooking from './components/EditBooking/EditBooking';
 import AllFarms from './components/AllFarms/AllFarms';
 import Farm from './components/OneFarm/OneFarm';
+import CreateFarm from './components/CreateFarm/CreateFarm';
 import { authenticate } from './store/session';
 
 function App() {
@@ -65,6 +66,10 @@ function App() {
         <Route path="/farms/:farmId" exact={true}>
           <Farm></Farm>
         </Route>
+        <ProtectedRoute path="/createFarm" exact={true}>
+          <CreateFarm></CreateFarm>
+
+        </ProtectedRoute>
       </Switch>
     </BrowserRouter>
   );
