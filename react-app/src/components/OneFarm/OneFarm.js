@@ -9,7 +9,10 @@ export default function Farm() {
   const { farmId } = useParams();
 
   const farm = useSelector((state) => state.farms[farmId]);
+  const userId = useSelector((state) => state.session.user.id)
+  const farmerId = useSelector((state) => state.farms[farmId].userId)
   
+
 
   useEffect(() => {
     dispatch(getOneFarm(farmId));
@@ -21,10 +24,11 @@ export default function Farm() {
     <>
       <div>{farm.name}</div>
       <div>Price Per Day: ${farm.pricePerDay}</div>
-      <div><img src={farm.image? farm.image:""}></img></div>
+      <div><img src={farm.primaryImage? farm.primaryImage:""}></img></div>
       <div>
         <CreateBooking></CreateBooking>
       </div>
+      <div>{farmerId===userId? <NavLink to={`/editFarm/${farmId}`}>Test</NavLink>:"" }</div>
     </>
   );
 }

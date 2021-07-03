@@ -14,6 +14,7 @@ import EditBooking from './components/EditBooking/EditBooking';
 import AllFarms from './components/AllFarms/AllFarms';
 import Farm from './components/OneFarm/OneFarm';
 import CreateFarm from './components/CreateFarm/CreateFarm';
+import EditFarm from './components/EditFarm/EditFarm';
 import { authenticate } from './store/session';
 
 function App() {
@@ -68,7 +69,9 @@ function App() {
         </Route>
         <ProtectedRoute path="/createFarm" exact={true}>
           <CreateFarm></CreateFarm>
-
+        </ProtectedRoute>
+        <ProtectedRoute path="/editFarm/:farmId" exact={true}>
+          <EditFarm></EditFarm>
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

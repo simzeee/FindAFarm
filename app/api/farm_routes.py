@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import booking, db, Farm
+from app.models import booking, db, Farm, Image
 
 
 farm_routes = Blueprint("farms", __name__)
@@ -23,12 +23,23 @@ def farm(id):
 def createFarm():
 
     newFarm = request.json
+
+    imageFarmName = newFarm["farmName"]
  
     print("NEW FARM NEW FARM", newFarm)
+
+    farmImages = Image.query.filter(Image.farmName == imageFarmName).first()
+
+    print("FARM IMAGES", farmImages.primaryImage)
 
     farm = Farm(
         name=newFarm["farmName"],
         pricePerDay=newFarm["pricePerDay"],
+        primaryImage=farmImages.primaryImage,
+        secondImage=farmImages.secondImage,
+        thirdImage=farmImages.thirdImage,
+        fourthImage=farmImages.fourthImage,
+        fifthImage=farmImages.fifthImage,
         location=newFarm["location"],
         userId=current_user.id
     )

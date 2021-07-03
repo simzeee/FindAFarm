@@ -1,8 +1,8 @@
-"""trying to get images
+"""image and farm models updated
 
-Revision ID: eace8e6c2fbe
+Revision ID: afd0c1f647c9
 Revises: 
-Create Date: 2021-07-02 16:10:55.497868
+Create Date: 2021-07-02 21:56:50.053302
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'eace8e6c2fbe'
+revision = 'afd0c1f647c9'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -21,7 +21,12 @@ def upgrade():
     op.create_table('images',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user', sa.Integer(), nullable=False),
-    sa.Column('url', sa.String(), nullable=False),
+    sa.Column('primaryImage', sa.String(), nullable=False),
+    sa.Column('secondImage', sa.String(), nullable=True),
+    sa.Column('thirdImage', sa.String(), nullable=True),
+    sa.Column('fourthImage', sa.String(), nullable=True),
+    sa.Column('fifthImage', sa.String(), nullable=True),
+    sa.Column('farmName', sa.String(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('users',
@@ -38,7 +43,11 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(), nullable=False),
     sa.Column('pricePerDay', sa.Numeric(asdecimal=False), nullable=False),
-    sa.Column('image', sa.String(), nullable=True),
+    sa.Column('primaryImage', sa.String(), nullable=False),
+    sa.Column('secondImage', sa.String(), nullable=True),
+    sa.Column('thirdImage', sa.String(), nullable=True),
+    sa.Column('fourthImage', sa.String(), nullable=True),
+    sa.Column('fifthImage', sa.String(), nullable=True),
     sa.Column('location', sa.String(), nullable=False),
     sa.Column('userId', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['userId'], ['users.id'], ),
