@@ -32,7 +32,7 @@ def createBooking():
     if bookingForm.validate_on_submit():
         new_booking = request.json
         # new_booking = new_booking['userId']
-        
+
         booking = Booking(
             userId=current_user.id,
             costOfStay=new_booking["costOfStay"],
@@ -46,7 +46,6 @@ def createBooking():
         db.session.add(booking)
         db.session.commit()
         return {"bookings": booking.to_dict()}
-    print("ERRORRS EESRESR ", bookingForm.errors)
     return {'errors': "error"}, 401
 
 
@@ -85,4 +84,3 @@ def delete_one_booking(id):
     db.session.delete(booking)
     db.session.commit()
     return {"id": id}
-    

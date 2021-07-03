@@ -85,4 +85,5 @@ def upload_image():
 
     db.session.add(new_image)
     db.session.commit()
-    return {"url": url}
+    return {"urlPrimary": urlPrimary, "urlSecond": urlSecond, "urlThird": urlThird,
+    "urlFourth": urlFourth, "urlFifth": urlFifth}

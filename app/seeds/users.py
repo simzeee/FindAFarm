@@ -10,10 +10,12 @@ def seed_users():
                 password='password', farmer=False)
     dwight = User(username='Dwight Schrute', email='beets@gmail.com', password='password', farmer=True)
     demoFarmer = User(username='Farmer Bill', email='demo@gmail.com', password='password', farmer=True)
+    farmerPaul = User(username='Farmer Paul', email='sacred@gmail.com', password='password', farmer=True)
 
     db.session.add(demo)
     db.session.add(dwight)
     db.session.add(demoFarmer)
+    db.session.add(farmerPaul)
 
     db.session.commit()
 
