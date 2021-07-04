@@ -8,7 +8,7 @@ const NavBar = () => {
     <nav>
       <div className={styles.navContainer}>
         <div>
-          <NavLink to="/" exact={true} activeClassName="active">
+          <NavLink to="/userHome" exact={true} activeClassName="active">
             Home
           </NavLink>
         </div>
