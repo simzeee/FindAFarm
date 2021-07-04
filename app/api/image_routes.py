@@ -15,7 +15,7 @@ def upload_image():
         return {"errors": "image required"}, 400
 
     print("FILES FILES", len(request.files))
-
+    
     farmName = request.form["farmName"]
 
     if len(request.files) == 1:
@@ -175,16 +175,16 @@ def upload_image():
 @image_routes.route('/', methods=["PUT"])
 @login_required
 def edit_image():
-    print('YOU REACHED EDIT')
-    print("FORM", request.form)
-    print(len(request.files))
-
-    farmName = request.form["farmName"]
+    # print('YOU REACHED EDIT')
+    # print("FORM", request.form)
+    # print(len(request.files))
+    
     farmId = request.form["farmId"]
     imageToUpdate = Image.query.filter(Image.farmId == farmId).first()
     print("IMAGE IS RIGHT HERE", imageToUpdate.farmName)
 
     if len(request.files) == 0:
+        #They didn't want to change their photos
         return imageToUpdate.to_dict()
     elif len(request.files) == 1:
         image = request.files["primaryImage"] 
@@ -196,8 +196,10 @@ def edit_image():
             return upload, 400
         urlPrimary = upload["url"]
         imageToUpdate.primaryImage = urlPrimary
-        # new_image = Image(user=current_user.id, primaryImage=urlPrimary, farmName=farmName)
-        # db.session.add(new_image)
+        imageToUpdate.secondImage = None
+        imageToUpdate.thirdImage = None
+        imageToUpdate.fourthImage = None
+        imageToUpdate.fifthImage = None
         db.session.commit()
         return {"urlPrimary": urlPrimary}
     elif len(request.files) == 2:
@@ -219,6 +221,9 @@ def edit_image():
         urlSecond = upload2["url"]
         imageToUpdate.primaryImage = urlPrimary
         imageToUpdate.secondImage = urlSecond
+        imageToUpdate.thirdImage = None
+        imageToUpdate.fourthImage = None
+        imageToUpdate.fifthImage = None
     #     new_image = Image(user=current_user.id, primaryImage=urlPrimary,
     # secondImage=urlSecond, farmName=farmName)
     #     db.session.add(new_image)
@@ -252,6 +257,8 @@ def edit_image():
         imageToUpdate.primaryImage = urlPrimary
         imageToUpdate.secondImage = urlSecond
         imageToUpdate.thirdImage = urlThird
+        imageToUpdate.fourthImage = None
+        imageToUpdate.fifthImage = None
     #     new_image = Image(user=current_user.id, primaryImage=urlPrimary,
     # secondImage=urlSecond, thirdImage=urlThird, farmName=farmName)
     #     db.session.add(new_image)
@@ -295,6 +302,7 @@ def edit_image():
         imageToUpdate.secondImage = urlSecond
         imageToUpdate.thirdImage = urlThird
         imageToUpdate.fourthImage = urlFourth
+        imageToUpdate.fifthImage = None
 
     #     new_image = Image(user=current_user.id, primaryImage=urlPrimary,
     # secondImage=urlSecond, thirdImage=urlThird, fourthImage=urlFourth, farmName=farmName)
