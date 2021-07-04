@@ -11,13 +11,10 @@ export default function EditFarm(){
   const dispatch = useDispatch();
   const { farmId } = useParams()
 
-  console.log(farmId)
 
- const currentFarm = useSelector((state) => state.farms[farmId])
+  const currentFarm = useSelector((state) => state.farms[farmId])
 
   //current values
-
-  // if(!currentFarm) return null
 
   const [primaryImage, setPrimaryImage] = useState(currentFarm.primaryImage);
   const [secondImage, setSecondImage] = useState(currentFarm.secondImage)
@@ -57,6 +54,7 @@ export default function EditFarm(){
     formData.append('fourthImage', fourthImage)
     formData.append('fifthImage', fifthImage)
     formData.append('farmName', farmName)
+    formData.append('farmId', farmId)
     
 
     // aws uploads can be a bit slow—displaying
@@ -86,7 +84,7 @@ export default function EditFarm(){
       description,
     };
 
-    dispatch(createOneFarm(payload))
+    // dispatch(createOneFarm(payload))
 
   };
 
@@ -162,7 +160,7 @@ export default function EditFarm(){
               required={true}
             ></textarea>
             <label>Select your Primary Image:</label>
-            <input type="file" accept="image/*" onChange={updateImage} required={true}/>
+            <input type="file" accept="image/*" onChange={updateImage}/>
             <label>Select Up to Four more Images</label>
             <input type="file" accept="image/*" multiple onChange={updateSupplementalImages}></input>
             <button id="farmSubmit" type="submit">Submit</button>

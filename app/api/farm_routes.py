@@ -30,7 +30,7 @@ def createFarm():
 
     farmImages = Image.query.filter(Image.farmName == imageFarmName).first()
 
-    print("FARM IMAGES", farmImages.primaryImage)
+    # print("FARM IMAGES", farmImages.primaryImage)
 
     farm = Farm(
         name=newFarm["farmName"],
@@ -47,4 +47,9 @@ def createFarm():
 
     db.session.add(farm)
     db.session.commit()
+
+    farmImages.farmId = farm.id
+    db.session.commit()
+
+    print("WHAT IS THE NEW FARM'S ID?", farm.id)
     return {"farm": farm.to_dict()}
