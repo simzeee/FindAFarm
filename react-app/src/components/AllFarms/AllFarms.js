@@ -9,9 +9,11 @@ export default function AllFarms() {
   const farms = useSelector((state) => Object.values(state.farms));
   const currentUser = useSelector((state) => state.session.user)
 
+  console.log(farms.length)
+
   useEffect(() => {
     dispatch(getAllFarms());
-  }, []);
+  }, [dispatch, farms.length]);
 
   if (!farms) return null;
 

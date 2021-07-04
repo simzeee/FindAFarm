@@ -15,7 +15,7 @@ def upload_image():
         return {"errors": "image required"}, 400
 
     print("FILES FILES", len(request.files))
-    
+
     farmName = request.form["farmName"]
 
     if len(request.files) == 1:
@@ -183,10 +183,7 @@ def edit_image():
     imageToUpdate = Image.query.filter(Image.farmId == farmId).first()
     print("IMAGE IS RIGHT HERE", imageToUpdate.farmName)
 
-    if len(request.files) == 0:
-        #They didn't want to change their photos
-        return imageToUpdate.to_dict()
-    elif len(request.files) == 1:
+    if len(request.files) == 1:
         image = request.files["primaryImage"] 
         if not allowed_file(image.filename):
             return {"errors": "file type not permitted"}, 400

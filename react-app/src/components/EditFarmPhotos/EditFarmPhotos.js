@@ -75,7 +75,6 @@ export default function EditFarmPhotos() {
     if (res.ok) {
       await res.json();
       setImageLoading(false);
-      console.log('WE GOOD');
       // history.push('/farms');
     } else {
       setImageLoading(false);
@@ -93,12 +92,13 @@ export default function EditFarmPhotos() {
     };
 
     dispatch(editOneFarm(payload));
+    history.push(`/farms/${farmId}`);
   };
 
   const handleDelete = (e) => {
     const payload = { farmId };
     dispatch(deleteOneFarm(payload));
-    history.push('/farms');
+    history.push('/farms')
   };
 
   return (
