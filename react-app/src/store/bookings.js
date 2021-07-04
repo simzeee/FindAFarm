@@ -197,7 +197,7 @@ export const editOneBooking =
 
 export const deleteOneBooking = (id) => async (dispatch) => {
   id = id.bookingId;
-  console.log('MY ID', id);
+  
   let data = await fetch(`/api/bookings/${id}`, {
     method: 'DELETE',
   });

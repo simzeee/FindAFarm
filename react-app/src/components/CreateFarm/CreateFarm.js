@@ -45,6 +45,7 @@ export default function CreateFarm() {
     formData.append('fourthImage', fourthImage)
     formData.append('fifthImage', fifthImage)
     formData.append('farmName', farmName)
+    formData.append('farmId', '')
     
 
     // aws uploads can be a bit slow—displaying
@@ -59,7 +60,7 @@ export default function CreateFarm() {
     if (res.ok) {
       await res.json();
       setImageLoading(false);
-      // history.push('/farms');
+
     } else {
       setImageLoading(false);
       // a real app would probably use more advanced
@@ -75,6 +76,7 @@ export default function CreateFarm() {
     };
 
     dispatch(createOneFarm(payload))
+    history.push('/farms');
 
   };
 

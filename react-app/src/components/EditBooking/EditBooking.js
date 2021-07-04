@@ -7,8 +7,6 @@ export default function EditBooking() {
   const history = useHistory()
   const dispatch = useDispatch();
   const { bookingId } = useParams();
-
-  console.log(bookingId)
   
   const currentBooking = useSelector((state) => state.bookings[bookingId]);
 

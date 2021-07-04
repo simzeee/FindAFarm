@@ -3,6 +3,8 @@
 const GET_FARMS = 'farms/GET_FARMS';
 const GET_ONE_FARM = 'farms/GET_ONE_FARM';
 const CREATE_FARM = 'farms/CREATE_FARM';
+const EDIT_FARM = 'farms/EDIT_FARM'
+const DELETE_FARM = 'farms/DELETE_FARM'
 
 //action creators
 
@@ -20,6 +22,16 @@ const createFarm = (farm) => ({
   type: CREATE_FARM,
   payload: farm,
 });
+
+const editFarm = (farm) => ({
+  type: EDIT_FARM,
+  payload: farm
+})
+
+const deleteFarm = (id) => ({
+  type: DELETE_FARM,
+  payload: id
+})
 
 //thunks
 
@@ -64,12 +76,51 @@ export const createOneFarm = (farm) => async (dispatch) => {
   if (data.errors) {
     return;
   }
-  console.log("DATA/RESPONSE", data)
 
   dispatch(createFarm(data))
-
-  
 };
+
+export const editOneFarm = (farm) => async (dispatch) => {
+  const { farmName, pricePerDay, location, description, farmId } = farm;
+  console.log("WE DISPATCHED")
+
+  const response = await fetch('/api/farms/', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      farmName,
+      pricePerDay,
+      location,
+      description,
+      farmId
+    })
+  })
+  const data = await response.json();
+  if (data.errors) {
+    return;
+  }
+
+  dispatch(editFarm(data))
+}
+
+export const deleteOneFarm = (payload) => async (dispatch) => {
+  console.log("PAYLOAD IN THUNK", payload)
+  const {farmId} = payload
+
+  let data = await fetch(`/api/farms/${farmId}`, {
+    method: "DELETE",
+  })
+
+  data = await data.json();
+  if (data.errors) {
+    return
+  }
+
+  dispatch(deleteFarm(data))
+
+} 
 
 let initialState = {};
 
@@ -93,6 +144,18 @@ export default function reducer(state = initialState, action) {
       const newState = {...state};
       newState[action.payload.farm.id] = action.payload
       return newState;
+    }
+    case EDIT_FARM: {
+      const newState = {...state};
+      newState[action.payload.farm.id] = action.payload.farm
+      return newState
+    }
+    case DELETE_FARM: {
+      const newState = {...state};
+      console.log("ACTION PAYLOAD HERE DELETE", action.payload)
+      console.log("STATE STUFF", newState[action.payload.id])
+      delete newState[action.payload.id]
+      return newState
     }
     default:
       return state;

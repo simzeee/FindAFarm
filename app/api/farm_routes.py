@@ -44,12 +44,51 @@ def createFarm():
         description=newFarm["description"],
         userId=current_user.id
     )
-
     db.session.add(farm)
     db.session.commit()
 
     farmImages.farmId = farm.id
     db.session.commit()
-
-    print("WHAT IS THE NEW FARM'S ID?", farm.id)
     return {"farm": farm.to_dict()}
+
+@farm_routes.route('/', methods=["PUT"])
+@login_required
+def editFarm():
+
+    editedFarm = request.json
+
+    imageFarmId = editedFarm["farmId"]
+
+    farmImages = Image.query.filter(Image.farmId == imageFarmId).first()
+
+    farmToEdit = Farm.query.get(imageFarmId)
+
+    farmToEdit.name = editedFarm["farmName"]
+    farmToEdit.pricePerDay = editedFarm["pricePerDay"]
+    farmToEdit.primaryImage = farmImages.primaryImage
+    farmToEdit.secondImage = farmImages.secondImage
+    farmToEdit.thirdImage = farmImages.thirdImage
+    farmToEdit.fourthImage = farmImages.fourthImage
+    farmToEdit.fifthImage = farmImages.fifthImage
+    farmToEdit.location = editedFarm["location"]
+    farmToEdit.description = editedFarm["description"]
+    farmToEdit.userId = current_user.id
+
+    db.session.commit()
+
+    return {"farm": farmToEdit.to_dict()}
+
+
+@farm_routes.route('/<int:id>', methods=["DELETE"])
+@login_required
+def deleteFarm(id):
+    print("ID HERE", id)
+
+    farmToDelete = Farm.query.get(id)
+    imageToDelete = Image.query.filter(Image.farmId == id).first()
+
+    db.session.delete(farmToDelete)
+    db.session.delete(imageToDelete)
+    db.session.commit()
+    return {"id": id}
+

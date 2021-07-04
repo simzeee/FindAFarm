@@ -14,11 +14,11 @@ export default function Farm() {
   
 
 
-  useEffect(() => {
-    dispatch(getOneFarm(farmId));
-  }, [farmId]);
+  // useEffect(() => {
+  //   dispatch(getOneFarm(farmId));
+  // }, [farmId]);
 
-  if (!farm) return null;
+  // if (!farm) return null;
 
   return (
     <>

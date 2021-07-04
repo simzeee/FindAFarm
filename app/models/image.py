@@ -19,7 +19,7 @@ class Image(db.Model):
         return {
           "id": self.id,
           "user": self.user,
-          "primaryImage": self.url,
+          "primaryImage": self.primaryImage,
           "secondImage": self.secondImage,
           "thirdImage": self.thirdImage,
           "fourthImage": self.fourthImage,
