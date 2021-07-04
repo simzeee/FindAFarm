@@ -118,6 +118,8 @@ export const deleteOneFarm = (payload) => async (dispatch) => {
     return
   }
 
+  console.log("DATA AFTER RESPONSE", data)
+
   dispatch(deleteFarm(data))
 
 } 
@@ -152,8 +154,9 @@ export default function reducer(state = initialState, action) {
     }
     case DELETE_FARM: {
       const newState = {...state};
-      console.log("ACTION PAYLOAD HERE DELETE", action.payload)
-      console.log("STATE STUFF", newState[action.payload.id])
+      // console.log("NEW STATE", newState)
+      // console.log("ACTION PAYLOAD HERE DELETE", action.payload)
+      // console.log("STATE STUFF", newState[action.payload.id])
       delete newState[action.payload.id]
       return newState
     }
