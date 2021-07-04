@@ -21,6 +21,11 @@ def upload_image():
     fourthImage = request.files["fourthImage"]
     fifthImage = request.files["fifthImage"]
     farmName = request.form["farmName"]
+
+    farmExists = Image.query.filter(Image.farmName == farmName)
+
+    if farmExists:
+        print("THAT FARM EXISTS")
     
     if not allowed_file(image.filename):
         return {"errors": "file type not permitted"}, 400

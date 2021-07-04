@@ -13,6 +13,7 @@ class Image(db.Model):
     fourthImage = db.Column(db.String)
     fifthImage = db.Column(db.String)
     farmName = db.Column(db.String)
+    farmId = db.Column(db.Integer)
 
     def to_dict(self):
         return {
@@ -24,4 +25,5 @@ class Image(db.Model):
           "fourthImage": self.fourthImage,
           "fifthImage": self.fifthImage,
           "farmName": self.farmName,
+          "farmId": self.farmId
         }

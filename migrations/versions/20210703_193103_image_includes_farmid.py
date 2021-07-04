@@ -1,8 +1,8 @@
-"""added farm description
+"""image includes farmId
 
-Revision ID: 009b13c55a0f
+Revision ID: e7fa17a6a7e1
 Revises: 
-Create Date: 2021-07-03 18:41:26.612217
+Create Date: 2021-07-03 19:31:03.733616
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '009b13c55a0f'
+revision = 'e7fa17a6a7e1'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -27,6 +27,7 @@ def upgrade():
     sa.Column('fourthImage', sa.String(), nullable=True),
     sa.Column('fifthImage', sa.String(), nullable=True),
     sa.Column('farmName', sa.String(), nullable=True),
+    sa.Column('farmId', sa.Integer(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('users',
