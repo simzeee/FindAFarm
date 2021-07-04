@@ -8,6 +8,7 @@ class Farm(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
     pricePerDay = db.Column(db.Numeric(asdecimal=False), nullable=False)
+    description = db.Column(db.String, nullable=False)
     primaryImage = db.Column(db.String, nullable=False)
     secondImage = db.Column(db.String)
     thirdImage = db.Column(db.String)
@@ -32,4 +33,5 @@ class Farm(db.Model):
           "fifthImage": self.fifthImage,
           "location": self.location,
           "userId": self.userId,
+          "description": self.description,
         }

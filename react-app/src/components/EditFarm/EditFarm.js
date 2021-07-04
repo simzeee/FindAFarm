@@ -1,19 +1,35 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
+import { useDispatch, useSelector} from 'react-redux';
 import styles from './EditFarm.module.css'
+import { createOneFarm } from '../../store/farms';
+import {getAllFarms, getOneFarm} from '../../store/farms'
 
 export default function EditFarm(){
 
   const history = useHistory();
   const dispatch = useDispatch();
+  const { farmId } = useParams()
 
-  const [image, setImage] = useState(null);
+  console.log(farmId)
+
+ const currentFarm = useSelector((state) => state.farms[farmId])
+
+  //current values
+
+  // if(!currentFarm) return null
+
+  const [primaryImage, setPrimaryImage] = useState(currentFarm.primaryImage);
+  const [secondImage, setSecondImage] = useState(currentFarm.secondImage)
+  const [thirdImage, setThirdImage] = useState(currentFarm.thirdImage)
+  const [fourthImage, setFourthImage] = useState(currentFarm.fourthImage)
+  const [fifthImage, setFifthImage] = useState(currentFarm.fifthImage)
+  const [farmName, setFarmName] = useState(currentFarm.name);
+  const [pricePerDay, setPricePerDay] = useState(currentFarm.pricePerDay);
+  const [location, setLocation] = useState(currentFarm.location);
+  const [description, setDescription] = useState(currentFarm.description);
   const [imageLoading, setImageLoading] = useState(false);
-  const [farmName, setFarmName] = useState('');
-  const [pricePerDay, setPricePerDay] = useState(0);
-  const [location, setLocation] = useState('');
-  const [description, setDescription] = useState('');
+
 
   const updateFarmName = (e) => {
     setFarmName(e.target.value);
@@ -35,29 +51,22 @@ export default function EditFarm(){
     e.preventDefault();
     
     const formData = new FormData();
-    formData.append('image', image);
-
-    const payload = {
-      farmName,
-      pricePerDay,
-      location,
-      description,
-      formData
-    };
-    console.log(payload)
-
-    // dispatch(createOneFarm(payload))
-
+    formData.append('primaryImage', primaryImage);
+    formData.append('secondImage', secondImage)
+    formData.append('thirdImage', thirdImage)
+    formData.append('fourthImage', fourthImage)
+    formData.append('fifthImage', fifthImage)
+    formData.append('farmName', farmName)
+    
 
     // aws uploads can be a bit slow—displaying
     // some sort of loading message is a good idea
     setImageLoading(true);
-    JSON.stringify(farmName)
-    console.log(farmName)
+   
 
     const res = await fetch('/api/images/', {
       method: 'POST',
-      body: formData, farmName
+      body: formData
     });
     if (res.ok) {
       await res.json();
@@ -70,22 +79,63 @@ export default function EditFarm(){
       console.log('error');
     }
 
+    const payload = {
+      farmName,
+      pricePerDay,
+      location,
+      description,
+    };
+
+    dispatch(createOneFarm(payload))
+
   };
 
   const updateImage = (e) => {
     const file = e.target.files[0];
-    setImage(file);
+
+    setPrimaryImage(file);
   };
 
+  const updateSupplementalImages = (e) => {
+    const files = e.target.files;
+    const keysArray=Object.keys(files)
 
-  
+    const submitButton = document.getElementById('farmSubmit')
+
+    if(keysArray.length>4){
+
+      alert("No more than 4 photos.")
+      submitButton.disabled=true
+      return
+    }
+    submitButton.disabled=false
+    console.log(files[0])
+    setSecondImage(files[0])
+    console.log(files[1])
+    setThirdImage(files[1])
+    console.log(files[2])
+    setFourthImage(files[2])
+    console.log(files[3])
+    setFifthImage(files[3])
+  }
+
+
+    useEffect(()=>{
+      console.log("Use Effect went off")
+    dispatch(getOneFarm(farmId))
+  }, [dispatch, farmId])
+
+  console.log(currentFarm)
+
+  if(!currentFarm) return null
+
+
   return (
     <>
-    <h1>Hi</h1>
       <div className={styles.farmFormContainer}>
         <div>
           <div>
-            <h3>Edit Your Farm:</h3>
+            <h3>Your Farm:</h3>
           </div>
           <form action="" id="farmForm" onSubmit={(e) => handleSubmit(e)}>
             <label>Farm Name:</label>
@@ -111,8 +161,11 @@ export default function EditFarm(){
               onChange={updateDescription}
               required={true}
             ></textarea>
+            <label>Select your Primary Image:</label>
             <input type="file" accept="image/*" onChange={updateImage} required={true}/>
-            <button type="submit">Submit</button>
+            <label>Select Up to Four more Images</label>
+            <input type="file" accept="image/*" multiple onChange={updateSupplementalImages}></input>
+            <button id="farmSubmit" type="submit">Submit</button>
             {imageLoading && <p>Loading...</p>}
           </form>
         </div>

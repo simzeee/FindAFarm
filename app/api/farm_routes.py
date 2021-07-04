@@ -41,6 +41,7 @@ def createFarm():
         fourthImage=farmImages.fourthImage,
         fifthImage=farmImages.fifthImage,
         location=newFarm["location"],
+        description=newFarm["description"],
         userId=current_user.id
     )
 

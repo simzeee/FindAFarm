@@ -28,7 +28,9 @@ export default function Farm() {
       <div>
         <CreateBooking></CreateBooking>
       </div>
-      <div>{farmerId===userId? <NavLink to={`/editFarm/${farmId}`}>Test</NavLink>:"" }</div>
+      <div>{farmerId===userId? <NavLink to={`/editFarm/${farmId}`}>
+      <button>Edit Your Farm</button>
+      </NavLink>:"" }</div>
     </>
   );
 }
