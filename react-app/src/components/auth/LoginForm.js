@@ -22,6 +22,18 @@ const LoginForm = () => {
     }
   };
 
+  const guestDemoLogin = () => {
+    setEmail('demo@aa.io');
+    setPassword('password');
+    login(email,password)
+  }
+
+  const guestFarmerLogin = () => {
+    setEmail('beets@gmail.com');
+    setPassword('password');
+    login(email,password)
+  }
+
   const updateEmail = (e) => {
     setEmail(e.target.value);
   };
@@ -61,6 +73,10 @@ const LoginForm = () => {
           onChange={updatePassword}
         />
         <button type="submit">Login</button>
+      </div>
+      <div>
+        <button type="submit" onClick={guestDemoLogin}>Demo Guest Login</button>
+        <button type="submit" onClick={guestFarmerLogin}>Demo Farmer Login</button>
       </div>
     </form>
   );
