@@ -46,6 +46,22 @@ def login():
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
+@auth_routes.route('/login', methods=['PUT'])
+def make_a_farmer():
+    """
+    Makes the user a farmer
+    """
+    print("PUT ROUTE HERE")
+    toBeFarmer = User.query.get(current_user.id)
+    print("USERNAME HERE", toBeFarmer.username)
+    toBeFarmer.farmer = True
+    print("ARE WE A FARMER", toBeFarmer.farmer)
+    
+    db.session.commit()
+
+    return {'id': current_user.id}
+
+
 @auth_routes.route('/logout')
 def logout():
     """

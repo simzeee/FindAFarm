@@ -11,7 +11,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
-    farmer = db.Column(db.Boolean, nullable=False)
+    farmer = db.Column(db.Boolean)
 
     userBooked = db.relationship("Booking", back_populates="userBooking")
     farms = db.relationship("Farm", back_populates="user")
