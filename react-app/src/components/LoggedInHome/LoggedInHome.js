@@ -15,8 +15,9 @@ export default function LoggedInHome() {
   const makeFarmer = (e) => {
 
     let selectValue = document.querySelector('#checkbox');
+    // let selectValue = document.querySelector('#farmSelect');
     let farmSubmit = document.getElementById('farmSubmit');
-    // debugger
+    
     if ((selectValue.value = 'yes' && farmSubmit.disabled === true)) {
       farmSubmit.disabled = false;
     }
@@ -58,18 +59,10 @@ export default function LoggedInHome() {
     );
   }
 
-  // const bookings = useSelector((state) => state.bookings)
-
-  // useEffect(()=>{
-  //   dispatch(getAllBookings())
-  // },[])
   else {
     return (
       <>
         <h1>You are a logged in Farmer</h1>
-        <div>
-          <UploadPicture></UploadPicture>
-        </div>
       </>
     );
   }

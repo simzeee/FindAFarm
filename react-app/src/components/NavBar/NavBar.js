@@ -1,9 +1,13 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import styles from './NavBar.module.css'
 
-const NavBar = () => {
+export default function NavBar(){
+
+  const currentUser = useSelector((state)=>state.session.user)
+
   return (
     <nav>
       <div className={styles.navContainer}>
@@ -38,12 +42,12 @@ const NavBar = () => {
             Farms
           </NavLink>
         </div>
-        <div>
+        {!currentUser ? "" : <div>
           <LogoutButton />
-        </div>
+        </div>}
       </div>
     </nav>
   );
 };
 
-export default NavBar;
+

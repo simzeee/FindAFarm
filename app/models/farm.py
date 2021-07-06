@@ -20,6 +20,7 @@ class Farm(db.Model):
     # This is the farmer who made the farm
     user = db.relationship("User", back_populates="farms")
     bookings = db.relationship("Booking", back_populates="farmBooked")
+    farmAmenities = db.relationship("Amenity", back_populates="amenities")
 
     def to_dict(self):
         return {
