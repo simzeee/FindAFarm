@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import UploadPicture from '../UploadPicture/UploadPicture';
+import SearchAmenities from '../SearchAmenities/SearchAmenities';
 import { becomeFarmer } from '../../store/session';
 import { useHistory } from 'react-router-dom';
 
@@ -63,6 +64,10 @@ export default function LoggedInHome() {
     return (
       <>
         <h1>You are a logged in Farmer</h1>
+        <div>
+          <h1>Hello</h1>
+          <SearchAmenities></SearchAmenities>
+        </div>
       </>
     );
   }

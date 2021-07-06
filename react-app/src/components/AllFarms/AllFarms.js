@@ -15,7 +15,7 @@ export default function AllFarms() {
     dispatch(getAllAmenities())
   }, [dispatch, farms.length]);
 
-  if (!farms) return null;
+  if (!farms.length) return null;
   
 
   if (!currentUser) {
