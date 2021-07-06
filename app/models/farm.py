@@ -15,6 +15,7 @@ class Farm(db.Model):
     fourthImage = db.Column(db.String)
     fifthImage = db.Column(db.String)
     location = db.Column(db.String, nullable=False)
+    amenityId = db.Column(db.Integer)
     userId = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
 
     # This is the farmer who made the farm
@@ -35,4 +36,5 @@ class Farm(db.Model):
           "location": self.location,
           "userId": self.userId,
           "description": self.description,
+          "amenityId": self.amenityId,
         }

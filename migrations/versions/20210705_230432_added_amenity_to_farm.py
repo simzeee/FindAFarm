@@ -1,8 +1,8 @@
-"""added amenities
+"""added amenity to farm
 
-Revision ID: 8e477eebb783
+Revision ID: 0932f6697771
 Revises: 
-Create Date: 2021-07-05 19:56:40.281522
+Create Date: 2021-07-05 23:04:32.887611
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '8e477eebb783'
+revision = '0932f6697771'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -51,6 +51,7 @@ def upgrade():
     sa.Column('fourthImage', sa.String(), nullable=True),
     sa.Column('fifthImage', sa.String(), nullable=True),
     sa.Column('location', sa.String(), nullable=False),
+    sa.Column('amenityId', sa.Integer(), nullable=True),
     sa.Column('userId', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['userId'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')

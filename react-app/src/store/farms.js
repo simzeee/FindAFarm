@@ -53,7 +53,7 @@ export const getOneFarm = (id) => async (dispatch) => {
   if (data.errors) {
     return;
   }
-  dispatch(getFarm);
+  dispatch(getFarm(data));
 };
 
 export const createOneFarm = (farm) => async (dispatch) => {
@@ -81,7 +81,7 @@ export const createOneFarm = (farm) => async (dispatch) => {
 };
 
 export const editOneFarm = (farm) => async (dispatch) => {
-  const { farmName, pricePerDay, location, description, farmId } = farm;
+  const { farmName, pricePerDay, location, description, farmId, goatYoga, pigRoast, tableMaking, amenityId } = farm;
   console.log("WE DISPATCHED")
 
   const response = await fetch('/api/farms/', {
@@ -94,7 +94,11 @@ export const editOneFarm = (farm) => async (dispatch) => {
       pricePerDay,
       location,
       description,
-      farmId
+      farmId,
+      goatYoga,
+      tableMaking,
+      pigRoast,
+      amenityId
     })
   })
   const data = await response.json();
@@ -106,7 +110,6 @@ export const editOneFarm = (farm) => async (dispatch) => {
 }
 
 export const deleteOneFarm = (payload) => async (dispatch) => {
-  console.log("PAYLOAD IN THUNK", payload)
   const {farmId} = payload
 
   let data = await fetch(`/api/farms/${farmId}`, {
@@ -117,8 +120,6 @@ export const deleteOneFarm = (payload) => async (dispatch) => {
   if (data.errors) {
     return
   }
-
-  console.log("DATA AFTER RESPONSE", data)
 
   dispatch(deleteFarm(data))
 

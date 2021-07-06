@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { getAllFarms } from '../../store/farms';
+import { getAllAmenities } from '../../store/amenities';
 
 export default function AllFarms() {
   const dispatch = useDispatch();
@@ -11,6 +12,7 @@ export default function AllFarms() {
 
   useEffect(() => {
     dispatch(getAllFarms());
+    dispatch(getAllAmenities())
   }, [dispatch, farms.length]);
 
   if (!farms) return null;

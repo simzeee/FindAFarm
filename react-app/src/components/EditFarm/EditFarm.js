@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './EditFarm.module.css';
-import { editOneFarm, deleteOneFarm } from '../../store/farms';
+import { editOneFarm, deleteOneFarm, getAllFarms } from '../../store/farms';
+import { deleteOneAmenity, getAllAmenities } from '../../store/amenities';
 
 export default function EditFarm() {
   const history = useHistory();
@@ -10,6 +11,9 @@ export default function EditFarm() {
   const { farmId } = useParams();
 
   const currentFarm = useSelector((state) => state.farms[farmId]);
+  const amenityId = currentFarm.amenityId
+
+  console.log("AMENITY ID IN EDIT FARM", amenityId)
 
   //current values
 
@@ -18,6 +22,9 @@ export default function EditFarm() {
   const [pricePerDay, setPricePerDay] = useState(currentFarm.pricePerDay);
   const [location, setLocation] = useState(currentFarm.location);
   const [description, setDescription] = useState(currentFarm.description);
+  const [goatYoga, setGoatYoga] = useState(false);
+  const [tableMaking, setTableMaking] = useState(false);
+  const [pigRoast, setPigRoast] = useState(false);
 
   const updateFarmName = (e) => {
     setFarmName(e.target.value);
@@ -35,6 +42,40 @@ export default function EditFarm() {
     setDescription(e.target.value);
   };
 
+
+  const updateGoatYoga = (e) => {
+    const goatInput = document.querySelector('#goatYoga');
+
+    if (goatInput.checked === true) {
+      setGoatYoga(true);
+    }
+    if (goatInput.checked === false) {
+      setGoatYoga(false);
+    }
+  };
+
+  const updateTableMaking = (e) => {
+    const tableMakingInput = document.querySelector('#tableMaking');
+
+    if (tableMakingInput.checked === true) {
+      setTableMaking(true);
+    }
+    if (tableMakingInput.checked === false) {
+      setTableMaking(false);
+    }
+  };
+
+  const updatePigRoast = (e) => {
+    const pigRoast = document.querySelector('#pigRoast');
+
+    if (pigRoast.checked === true) {
+      setPigRoast(true);
+    }
+    if (pigRoast.checked === false) {
+      setPigRoast(false);
+    }
+  };
+
   const handleSubmit = async (e) => {
 
     const payload = {
@@ -43,15 +84,23 @@ export default function EditFarm() {
       location,
       description,
       farmId,
+      goatYoga,
+      tableMaking,
+      pigRoast,
+      amenityId
     };
 
     dispatch(editOneFarm(payload));
+    dispatch(getAllAmenities())
     history.push(`/farms/${farmId}`)
   };
 
 const handleDelete = (e) => {
   const payload = {farmId}
   dispatch(deleteOneFarm(payload))
+  dispatch(deleteOneAmenity({amenityId}))
+  dispatch(getAllAmenities())
+  dispatch(getAllFarms())
   history.push('/farms')
 }
 
@@ -90,6 +139,29 @@ const handleDelete = (e) => {
               onChange={updateDescription}
               required={true}
             ></textarea>
+            <div>
+              <label>Goat Yoga</label>
+              <input
+                type="checkbox"
+                id="goatYoga"
+                value={goatYoga}
+                onClick={updateGoatYoga}
+              ></input>
+              <label>Table Making</label>
+              <input
+                type="checkbox"
+                id="tableMaking"
+                value={tableMaking}
+                onClick={updateTableMaking}
+              ></input>
+              <label>Pig Roast</label>
+              <input
+                type="checkbox"
+                id="pigRoast"
+                value={pigRoast}
+                onClick={updatePigRoast}
+              ></input>
+            </div>
              <button id="farmSubmit" type="submit">
               Submit
             </button>

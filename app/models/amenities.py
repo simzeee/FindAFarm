@@ -17,8 +17,8 @@ class Amenity(db.Model):
       
         return {
           "id": self.id,
-          "goatYoga": self.goatYoga,
-          "pigRoast": self.pigRoast,
-          "tableMaking": self.tableMaking,
+          "Goat Yoga": self.goatYoga,
+          "Pig Roast": self.pigRoast,
+          "Table Making": self.tableMaking,
           "farmId": self.farmId
         }

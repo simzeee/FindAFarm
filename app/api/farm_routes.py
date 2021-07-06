@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import booking, db, Farm, Image
+from app.models import db, Farm, Image, Amenity
 
 
 farm_routes = Blueprint("farms", __name__)
@@ -26,7 +26,7 @@ def createFarm():
 
     imageFarmName = newFarm["farmName"]
  
-    print("NEW FARM NEW FARM", newFarm)
+    # print("NEW FARM NEW FARM", newFarm)
 
     farmImages = Image.query.filter(Image.farmName == imageFarmName).first()
 
@@ -57,6 +57,8 @@ def editFarm():
 
     editedFarm = request.json
 
+    print("EDITED INFORATION", editedFarm)
+
     imageFarmId = editedFarm["farmId"]
 
     farmImages = Image.query.filter(Image.farmId == imageFarmId).first()
@@ -74,6 +76,12 @@ def editFarm():
     farmToEdit.description = editedFarm["description"]
     farmToEdit.userId = current_user.id
 
+    amenityToEdit = Amenity.query.get(editedFarm["amenityId"])
+
+    amenityToEdit.goatYoga = editedFarm["goatYoga"]
+    amenityToEdit.tableMaking = editedFarm["tableMaking"]
+    amenityToEdit.pigRoast = editedFarm["pigRoast"]
+
     db.session.commit()
 
     return {"farm": farmToEdit.to_dict()}
@@ -86,9 +94,11 @@ def deleteFarm(id):
 
     farmToDelete = Farm.query.get(id)
     imageToDelete = Image.query.filter(Image.farmId == id).first()
+    amenityToDelete = Amenity.query.filter(Amenity.farmId == id).first()
 
     db.session.delete(farmToDelete)
     db.session.delete(imageToDelete)
+    db.session.delete(amenityToDelete)
     db.session.commit()
     return {"id": id}
 

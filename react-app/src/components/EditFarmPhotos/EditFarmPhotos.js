@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './EditFarmPhotos.module.css';
-import { editOneFarm, deleteOneFarm } from '../../store/farms';
+import { editOneFarm, deleteOneFarm, getAllFarms } from '../../store/farms';
+import { getAllAmenities, deleteOneAmenity } from '../../store/amenities';
 
 export default function EditFarmPhotos() {
   const history = useHistory();
@@ -10,7 +11,9 @@ export default function EditFarmPhotos() {
   const { farmId } = useParams();
 
   const currentFarm = useSelector((state) => state.farms[farmId]);
+  const amenityId = currentFarm.amenityId
 
+  console.log("AMENITY ID IN EDIT FARM PHOTOS", amenityId)
   //current values
 
   const [primaryImage, setPrimaryImage] = useState(currentFarm.primaryImage);
@@ -96,8 +99,12 @@ export default function EditFarmPhotos() {
   };
 
   const handleDelete = (e) => {
+    console.log("IN HANDLE DELETE", amenityId)
     const payload = { farmId };
     dispatch(deleteOneFarm(payload));
+    dispatch(deleteOneAmenity({amenityId}))
+    dispatch(getAllAmenities())
+    dispatch(getAllFarms())
     history.push('/farms')
   };
 
