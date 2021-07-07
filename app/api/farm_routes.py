@@ -51,7 +51,7 @@ def createFarm():
     farmImages.farmId = farm.id
     db.session.commit()
 
-    array = newFarm["amenities"].items()
+    array = newFarm["stateAmenities"].items()
     trueValues = []
 
     for key, value in array:
@@ -92,18 +92,6 @@ def editFarm():
     farmToEdit.location = editedFarm["location"]
     farmToEdit.description = editedFarm["description"]
     farmToEdit.userId = current_user.id
-
-    array = farmToEdit["amenities"].items()
-    trueValues = []
-
-    for key, value in array:
-        if value is True:
-            trueValues.append(key)
-    
-    amenities = Amenity.query.filter(Amenity.amenityName.in_(trueValues)).all()
-    farmToEdit.amenities.extend(amenities)
-
-    db.session.commit()
 
     return {"farm": farmToEdit.to_dict()}
 

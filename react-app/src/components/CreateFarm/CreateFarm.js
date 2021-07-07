@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './CreateFarm.module.css';
 import { createOneFarm } from '../../store/farms';
 import { createOneAmenity } from '../../store/amenities';
+import { getAllFarms } from '../../store/farms';
+import { getAllAmenities } from '../../store/amenities';
 
 export default function CreateFarm() {
   const history = useHistory();
   const dispatch = useDispatch();
+
+  const allAmenities = useSelector((state) => state.amenities);
 
   const [primaryImage, setPrimaryImage] = useState(null);
   const [secondImage, setSecondImage] = useState(null);
@@ -19,9 +23,45 @@ export default function CreateFarm() {
   const [pricePerDay, setPricePerDay] = useState(0);
   const [location, setLocation] = useState('');
   const [description, setDescription] = useState('');
-  const [goatYoga, setGoatYoga] = useState(false);
-  const [tableMaking, setTableMaking] = useState(false);
-  const [pigRoast, setPigRoast] = useState(false);
+  const [checkedState, setCheckedState] = useState(false);
+
+  const initialStateSetter = (all) => {
+    const stateObject = {};
+    all &&
+      Object.values(all).forEach((amenity) => {
+        stateObject[amenity.amenityName] = false;
+      });
+    return stateObject;
+  };
+
+  const [stateAmenities, setStateAmenities] = useState(
+    initialStateSetter(allAmenities)
+  );
+
+  const changeSubmit = (someState) => {
+    const submitButton = document.querySelector('#farmSubmit');
+    if (Object.values(someState).includes(true)) {
+      submitButton.disabled = false;
+    } else {
+      submitButton.disabled = true;
+    }
+  };
+
+  const updateAmenityState = (e, amenityName, amenityValue) => {
+    console.log(e.target.id);
+
+    setStateAmenities((oldState) => {
+      console.log(amenityName);
+      console.log('VALUE', e.target.id.checked, amenityValue);
+      if (e.target.id.checked === false) {
+        setCheckedState(true);
+      }
+
+      let result = { ...oldState, [amenityName]: Boolean(amenityValue) };
+      changeSubmit(result);
+      return result;
+    });
+  };
 
   const updateFarmName = (e) => {
     setFarmName(e.target.value);
@@ -39,38 +79,6 @@ export default function CreateFarm() {
     setDescription(e.target.value);
   };
 
-  const updateGoatYoga = (e) => {
-    const goatInput = document.querySelector('#goatYoga');
-
-    if (goatInput.checked === true) {
-      setGoatYoga(true);
-    }
-    if (goatInput.checked === false) {
-      setGoatYoga(false);
-    }
-  };
-
-  const updateTableMaking = (e) => {
-    const tableMakingInput = document.querySelector('#tableMaking');
-
-    if (tableMakingInput.checked === true) {
-      setTableMaking(true);
-    }
-    if (tableMakingInput.checked === false) {
-      setTableMaking(false);
-    }
-  };
-
-  const updatePigRoast = (e) => {
-    const pigRoast = document.querySelector('#pigRoast');
-
-    if (pigRoast.checked === true) {
-      setPigRoast(true);
-    }
-    if (pigRoast.checked === false) {
-      setPigRoast(false);
-    }
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -107,11 +115,9 @@ export default function CreateFarm() {
       pricePerDay,
       location,
       description,
-      amenities:
-      {'Goat Yoga': goatYoga,
-      'Table Making': tableMaking,
-      'Pig Roast': pigRoast}
+      stateAmenities
     };
+    console.log(payload)
 
     dispatch(createOneFarm(payload))
     
@@ -144,6 +150,11 @@ export default function CreateFarm() {
     setFourthImage(files[2]);
     setFifthImage(files[3]);
   };
+
+  useEffect(() => {
+    dispatch(getAllAmenities());
+    dispatch(getAllFarms());
+  }, []);
 
   return (
     <>
@@ -181,31 +192,20 @@ export default function CreateFarm() {
               required={true}
             ></textarea>
             <label>
-              <h4>Amenities:</h4>
-            </label>
-            <div>
-              <label>Goat Yoga</label>
-              <input
-                type="checkbox"
-                id="goatYoga"
-                value={goatYoga}
-                onClick={updateGoatYoga}
-              ></input>
-              <label>Table Making</label>
-              <input
-                type="checkbox"
-                id="tableMaking"
-                value={tableMaking}
-                onClick={updateTableMaking}
-              ></input>
-              <label>Pig Roast</label>
-              <input
-                type="checkbox"
-                id="pigRoast"
-                value={pigRoast}
-                onClick={updatePigRoast}
-              ></input>
-            </div>
+          <h4>Available Amenities:</h4>
+        </label>
+        {Object.values(allAmenities)?.map((amenity) => (
+          <div key={amenity.id}>
+            <label>{amenity.amenityName}</label>
+            <input
+              type="checkbox"
+              id={amenity.amenityName}
+              value={!!stateAmenities[amenity.amenityName]}
+              onClick={(e) => updateAmenityState(e, e.target.id, e.target.value)}
+            ></input>
+          </div>
+        ))}
+        
             <label>Select your Primary Image:</label>
             <input
               type="file"
