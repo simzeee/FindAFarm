@@ -138,7 +138,7 @@ export default function reducer(state = initialState, action) {
     }
     case CREATE_FARM: {
       const newState = {...state};
-      console.log("Payload from create farm", action.payload)
+      // console.log("Payload from create farm", action.payload)
       newState[action.payload.farm.id] = action.payload.farm
       return newState;
     }

@@ -13,7 +13,7 @@ export default function Amenity({amenities}){
     amenities.forEach((amenity)=>{
       amenitiesState[amenity.id] = {...allAmenities[amenity.id],selected:true}
     })
-
+    
     return amenitiesState
   }
 
@@ -25,13 +25,13 @@ export default function Amenity({amenities}){
   return (
     <>
     <div>
-      {Object.values(allAmenities)?.map((amenity)=>(
-        <div>
           <label>
             <h4>
-            Amenities:
+            Available Amenities:
               </h4>
             </label>
+      {Object.values(allAmenities)?.map((amenity)=>(
+        <div>
             <label>
             {amenity.amenityName}
               </label>

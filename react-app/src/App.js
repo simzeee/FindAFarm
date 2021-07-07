@@ -17,7 +17,9 @@ import Farm from './components/OneFarm/OneFarm';
 import CreateFarm from './components/CreateFarm/CreateFarm';
 import EditFarm from './components/EditFarm/EditFarm';
 import EditFarmPhotos from './components/EditFarmPhotos/EditFarmPhotos';
+import SearchResults from './components/SearchResults/SearchResults';
 import { authenticate } from './store/session';
+
 
 function App() {
   // const [authenticated, setAuthenticated] = useState(false);
@@ -81,6 +83,9 @@ function App() {
         <ProtectedRoute path="/editFarmPhotos/:farmId" exact={true}>
           <EditFarmPhotos></EditFarmPhotos>
         </ProtectedRoute>
+        <Route path="/searchResults" exact={true}>
+          <SearchResults></SearchResults>
+        </Route>
       </Switch>
     </BrowserRouter>
   );

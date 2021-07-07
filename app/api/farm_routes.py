@@ -1,3 +1,4 @@
+from app.api.amenity_routes import amenities
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import db, Farm, Image, Amenity
@@ -59,6 +60,7 @@ def createFarm():
     
     amenities = Amenity.query.filter(Amenity.amenityName.in_(trueValues)).all()
     farm.amenities.extend(amenities)  
+    
     #This is in the database after commit
 
     db.session.commit()
@@ -91,11 +93,21 @@ def editFarm():
     farmToEdit.description = editedFarm["description"]
     farmToEdit.userId = current_user.id
 
-    amenityToEdit = Amenity.query.get(editedFarm["amenityId"])
+    array = farmToEdit["amenities"].items()
+    trueValues = []
 
-    amenityToEdit.goatYoga = editedFarm["goatYoga"]
-    amenityToEdit.tableMaking = editedFarm["tableMaking"]
-    amenityToEdit.pigRoast = editedFarm["pigRoast"]
+    for key, value in array:
+        if value is True:
+            trueValues.append(key)
+    
+    amenities = Amenity.query.filter(Amenity.amenityName.in_(trueValues)).all()
+    farmToEdit.amenities.extend(amenities)
+
+    # amenityToEdit = Amenity.query.get(editedFarm["amenityId"])
+
+    # amenityToEdit.goatYoga = editedFarm["goatYoga"]
+    # amenityToEdit.tableMaking = editedFarm["tableMaking"]
+    # amenityToEdit.pigRoast = editedFarm["pigRoast"]
 
     db.session.commit()
 
@@ -109,11 +121,11 @@ def deleteFarm(id):
 
     farmToDelete = Farm.query.get(id)
     imageToDelete = Image.query.filter(Image.farmId == id).first()
-    amenityToDelete = Amenity.query.filter(Amenity.farmId == id).first()
+    # amenityToDelete = Amenity.query.filter(Amenity.farmId == id).first()
 
     db.session.delete(farmToDelete)
     db.session.delete(imageToDelete)
-    db.session.delete(amenityToDelete)
+    # db.session.delete(amenityToDelete)
     db.session.commit()
     return {"id": id}
 

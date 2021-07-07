@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { searchAllFarms } from '../../store/search';
+import { Redirect, useHistory } from 'react-router';
 
 export default function SearchAmenities() {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const [goatYoga, setGoatYoga] = useState(false);
   const [tableMaking, setTableMaking] = useState(false);
@@ -11,33 +13,41 @@ export default function SearchAmenities() {
 
   const updateGoatYoga = (e) => {
     const goatInput = document.querySelector('#goatYoga');
-
+    const searchButton = document.querySelector('#farmSubmit');
     if (goatInput.checked === true) {
       setGoatYoga(true);
+      searchButton.disabled = false;
     }
     if (goatInput.checked === false) {
       setGoatYoga(false);
+      searchButton.disabled = true;
     }
   };
 
   const updateTableMaking = (e) => {
     const tableMakingInput = document.querySelector('#tableMaking');
+    const searchButton = document.querySelector('#farmSubmit');
 
     if (tableMakingInput.checked === true) {
       setTableMaking(true);
+      searchButton.disabled = false;
     }
     if (tableMakingInput.checked === false) {
       setTableMaking(false);
+      searchButton.disabled = true;
     }
   };
 
   const updatePigRoast = (e) => {
     const pigRoast = document.querySelector('#pigRoast');
+    const searchButton = document.querySelector('#farmSubmit');
 
     if (pigRoast.checked === true) {
       setPigRoast(true);
+      searchButton.disabled = false;
     }
     if (pigRoast.checked === false) {
+      searchButton.disabled = true;
       setPigRoast(false);
     }
   };
@@ -52,6 +62,8 @@ export default function SearchAmenities() {
     };
 
     dispatch(searchAllFarms(payload));
+
+    history.push('/searchResults');
   };
 
   return (
@@ -82,8 +94,8 @@ export default function SearchAmenities() {
               onClick={updatePigRoast}
             ></input>
           </div>
-          <button id="farmSubmit" type="submit">
-            Submit
+          <button id="farmSubmit" type="submit" disabled={true}>
+            Search
           </button>
         </form>
       </div>
