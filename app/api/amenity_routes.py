@@ -26,18 +26,23 @@ def amenities():
     farmId = newFarm.id
     print("THE ID", farmId)
 
-    amenity = Amenity(
-        farmId=farmId,
-        goatYoga=newAmenities["goatYoga"],
-        tableMaking=newAmenities["tableMaking"],
-        pigRoast=newAmenities["pigRoast"]
-    )
+    trueList = []
+    for key, value in newAmenities.items():
+        if value is True:
+            trueList.append(key)
+        
+    farm = Farm.query.get(farmId)
 
-    db.session.add(amenity)
+    amenities = Amenity.query.filter(Amenity.amenityName.in_(trueList)).all()
+
+    for a in farm.amenities:
+        farm.amenities.remove(a)
+
+    for a in amenities:
+        farm.amenities.append(a)  #amenities comes from backref
+
     db.session.commit()
+    print("WHAT WE ARE SENDING", farm.to_dict())
+    print("AMENITIES", farm["farmAmenities"])
 
-    newFarm.amenityId = amenity.id
-    
-    db.session.commit()
-
-    return {"amenity": amenity.to_dict()}
+    return farm.to_dict()

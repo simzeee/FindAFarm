@@ -33,24 +33,21 @@ export const getAllAmenities = () => async (dispatch) => {
 };
 
 export const createOneAmenity = (amenity) => async (dispatch) => {
-  const { pigRoast, goatYoga, tableMaking, farmName } = amenity;
 
   let data = await fetch('/api/amenities/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({
-      pigRoast,
-      goatYoga,
-      tableMaking,
-      farmName,
-    }),
+    body: JSON.stringify(
+      amenity
+    ),
   });
   data = await data.json();
   if (data.errors) {
     return;
   }
+  console.log("OUR DATA HERE", data)
   dispatch(createAmenity(data));
 };
 
@@ -78,7 +75,8 @@ export default function reducer(state = initialState, action) {
     }
     case CREATE_AMENITY: {
       const newState = { ...state };
-      newState[action.payload.amenity.id] = action.payload.amenity;
+      console.log("Our New State", newState)
+      newState[action.payload.id] = action.payload.farmAmenities
       return newState;
     }
     case DELETE_AMENITY: {

@@ -26,7 +26,7 @@ def createFarm():
 
     imageFarmName = newFarm["farmName"]
  
-    # print("NEW FARM NEW FARM", newFarm)
+    print("NEW FARM NEW FARM", newFarm)
 
     farmImages = Image.query.filter(Image.farmName == imageFarmName).first()
 
@@ -49,7 +49,22 @@ def createFarm():
 
     farmImages.farmId = farm.id
     db.session.commit()
+
+    array = newFarm["amenities"].items()
+    trueValues = []
+
+    for key, value in array:
+        if value is True:
+            trueValues.append(key)
+    
+    amenities = Amenity.query.filter(Amenity.amenityName.in_(trueValues)).all()
+    farm.amenities.extend(amenities)  
+    #This is in the database after commit
+
+    db.session.commit()
+
     return {"farm": farm.to_dict()}
+
 
 @farm_routes.route('/', methods=["PUT"])
 @login_required

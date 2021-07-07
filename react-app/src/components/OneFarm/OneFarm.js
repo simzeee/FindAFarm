@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, NavLink } from 'react-router-dom';
 import CreateBooking from '../CreateBooking/CreateBooking';
 import styles from './OneFarm.module.css';
-import { getAllFarms} from '../../store/farms';
+import { getAllFarms } from '../../store/farms';
 import { useEffect } from 'react';
 import { getAllAmenities } from '../../store/amenities';
+import Amenity from '../EditAmenity/EditAmenity';
 
 export default function Farm() {
   const { farmId } = useParams();
@@ -14,15 +15,15 @@ export default function Farm() {
 
   const farm = useSelector((state) => state.farms[farmId]);
   const user = useSelector((state) => state.session.user);
-  const amenityId = useSelector((state) => state.farms[farmId]?.amenityId);
+  // const amenityId = useSelector((state) => state.farms[farmId]?.amenityId);
 
-  const amenities = useSelector((state) => state.amenities[amenityId]);
+  const amenities = useSelector((state) => state.farms[farmId]?.farmAmenities);
 
-  let amenitiesArray = [];
+  // let amenitiesArray = [];
 
-  for (const key in amenities) {
-    if (amenities[key] === true) amenitiesArray.push(key);
-  }
+  // for (const key in amenities) {
+  //   if (amenities[key] === true) amenitiesArray.push(key);
+  // }
 
   useEffect(() => {
     dispatch(getAllFarms());
@@ -61,9 +62,7 @@ export default function Farm() {
           )}
         </div>
         <div>
-          {amenitiesArray?.map((amenity) => (
-            <div>{amenity}</div>
-          ))}
+          <Amenity amenities={amenities}></Amenity>
         </div>
 
         <div>
@@ -120,8 +119,8 @@ export default function Farm() {
           <div>
             <h3>Amenities:</h3>
           </div>
-          {amenitiesArray?.map((amenity) => (
-            <div>{amenity}</div>
+          {amenities?.map((amenity) => (
+            <div>{amenity.amenityName}</div>
           ))}
         </div>
         <div>

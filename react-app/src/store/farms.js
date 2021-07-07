@@ -57,26 +57,19 @@ export const getOneFarm = (id) => async (dispatch) => {
 };
 
 export const createOneFarm = (farm) => async (dispatch) => {
-  const { farmName, pricePerDay, location, description, formData } = farm;
 
   const response = await fetch('/api/farms/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({
-      farmName,
-      pricePerDay,
-      location,
-      description,
-      formData
-    }),
+    body: JSON.stringify(farm),
   });
   const data = await response.json();
   if (data.errors) {
     return;
   }
-
+  console.log("FROM BACKEND CREATE FARM", data)
   dispatch(createFarm(data))
 };
 
@@ -145,7 +138,8 @@ export default function reducer(state = initialState, action) {
     }
     case CREATE_FARM: {
       const newState = {...state};
-      newState[action.payload.farm.id] = action.payload
+      console.log("Payload from create farm", action.payload)
+      newState[action.payload.farm.id] = action.payload.farm
       return newState;
     }
     case EDIT_FARM: {

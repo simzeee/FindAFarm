@@ -107,18 +107,17 @@ export default function CreateFarm() {
       pricePerDay,
       location,
       description,
+      amenities:
+      {'Goat Yoga': goatYoga,
+      'Table Making': tableMaking,
+      'Pig Roast': pigRoast}
     };
 
-    const amenities = {
-      goatYoga,
-      tableMaking,
-      pigRoast,
-      farmName,
-    };
+    dispatch(createOneFarm(payload))
+    
+    // .then(()=>dispatch(createOneAmenity(amenities)))
 
-    dispatch(createOneFarm(payload)).then(()=>dispatch(createOneAmenity(amenities)))
-
-    // history.push('/farms');
+    history.push('/farms');
   };
 
   const updateImage = (e) => {

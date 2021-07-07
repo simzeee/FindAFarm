@@ -4,12 +4,14 @@ import session from './session';
 import bookings from './bookings';
 import farms from './farms'
 import amenities from './amenities'
+import searchResults from './search'
 
 const rootReducer = combineReducers({
     session,
     bookings,
     farms,
-    amenities
+    amenities,
+    searchResults
 });
 
 let enhancer;
