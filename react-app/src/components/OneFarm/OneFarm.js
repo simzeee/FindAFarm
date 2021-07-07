@@ -62,10 +62,6 @@ export default function Farm() {
           )}
         </div>
         <div>
-          <Amenity amenities={amenities}></Amenity>
-        </div>
-
-        <div>
           {farm?.userId === user?.id ? (
             <NavLink to={`/editFarm/${farmId}`}>
               <button>Edit Your Farm</button>
@@ -120,8 +116,15 @@ export default function Farm() {
             <h3>Amenities:</h3>
           </div>
           {amenities?.map((amenity) => (
-            <div>{amenity.amenityName}</div>
+            <div key={amenity.id}>{amenity.amenityName}</div>
           ))}
+        </div>
+        <div>
+          {farm?.userId === user.id ? (
+            <NavLink to={`/editAmenities/${farmId}`}>
+              <button>Edit Your Amenities</button>
+            </NavLink>
+          ): ('')}
         </div>
         <div>
           <CreateBooking></CreateBooking>

@@ -103,14 +103,51 @@ def editFarm():
     amenities = Amenity.query.filter(Amenity.amenityName.in_(trueValues)).all()
     farmToEdit.amenities.extend(amenities)
 
-    # amenityToEdit = Amenity.query.get(editedFarm["amenityId"])
-
-    # amenityToEdit.goatYoga = editedFarm["goatYoga"]
-    # amenityToEdit.tableMaking = editedFarm["tableMaking"]
-    # amenityToEdit.pigRoast = editedFarm["pigRoast"]
-
     db.session.commit()
 
+    return {"farm": farmToEdit.to_dict()}
+
+
+@farm_routes.route('/amenities/', methods=["PATCH"])
+@login_required
+def editFarmAmenities():
+    print("PATCH ROUTE")
+    editedFarm = request.json
+    print("EDITED FARM 121", editedFarm)
+
+    farmId = editedFarm["farmId"]
+
+    farmToEdit = Farm.query.get(farmId)
+
+    print("FARM TO EDIT", farmToEdit)
+
+    array = editedFarm["stateAmenities"].items()
+    trueValues = []
+    
+    for key, value in array:
+        if value is True:
+            trueValues.append(key)
+    
+    print("TRUE VALUES", trueValues)
+
+    amenities = Amenity.query.filter(Amenity.amenityName.in_(trueValues)).all()
+    # farmToEdit.amenities.extend(amenities)
+
+    for a in amenities:
+        print("HERE IS PRINT", a.amenityName)
+
+    print(farmToEdit.amenities, "RIGHT HERE RIGHT HERE")
+
+    for a in farmToEdit.amenities:
+        print(a)
+        farmToEdit.amenities.remove(a)
+    
+    print("AFTER CLEAR", farmToEdit.amenities)
+
+    for a in amenities:
+        farmToEdit.amenities.append(a)
+
+    db.session.commit()
     return {"farm": farmToEdit.to_dict()}
 
 

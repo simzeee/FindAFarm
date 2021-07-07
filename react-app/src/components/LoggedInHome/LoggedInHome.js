@@ -38,6 +38,9 @@ export default function LoggedInHome() {
   if (!currentUser.farmer) {
     return (
       <>
+      <div>
+        <SearchAmenities></SearchAmenities>
+      </div>
         <div>Are you a farmer?</div>
         <form action="" onSubmit={goMakeFarm}>
           {/* <select id="farmSelect" onInput={makeFarmer}>

@@ -3,8 +3,9 @@
 const GET_FARMS = 'farms/GET_FARMS';
 const GET_ONE_FARM = 'farms/GET_ONE_FARM';
 const CREATE_FARM = 'farms/CREATE_FARM';
-const EDIT_FARM = 'farms/EDIT_FARM'
-const DELETE_FARM = 'farms/DELETE_FARM'
+const EDIT_FARM = 'farms/EDIT_FARM';
+const DELETE_FARM = 'farms/DELETE_FARM';
+const EDIT_FARM_AMENITIES = 'farms/EDIT_FARM_AMENITIES';
 
 //action creators
 
@@ -25,13 +26,18 @@ const createFarm = (farm) => ({
 
 const editFarm = (farm) => ({
   type: EDIT_FARM,
-  payload: farm
-})
+  payload: farm,
+});
 
 const deleteFarm = (id) => ({
   type: DELETE_FARM,
-  payload: id
-})
+  payload: id,
+});
+
+const editFarmAmenities = (amenities) => ({
+  type: EDIT_FARM_AMENITIES,
+  payload: amenities,
+});
 
 //thunks
 
@@ -57,7 +63,6 @@ export const getOneFarm = (id) => async (dispatch) => {
 };
 
 export const createOneFarm = (farm) => async (dispatch) => {
-
   const response = await fetch('/api/farms/', {
     method: 'POST',
     headers: {
@@ -69,13 +74,23 @@ export const createOneFarm = (farm) => async (dispatch) => {
   if (data.errors) {
     return;
   }
-  console.log("FROM BACKEND CREATE FARM", data)
-  dispatch(createFarm(data))
+  console.log('FROM BACKEND CREATE FARM', data);
+  dispatch(createFarm(data));
 };
 
 export const editOneFarm = (farm) => async (dispatch) => {
-  const { farmName, pricePerDay, location, description, farmId, goatYoga, pigRoast, tableMaking, amenityId } = farm;
-  console.log("WE DISPATCHED")
+  const {
+    farmName,
+    pricePerDay,
+    location,
+    description,
+    farmId,
+    goatYoga,
+    pigRoast,
+    tableMaking,
+    amenityId,
+  } = farm;
+  console.log('WE DISPATCHED');
 
   const response = await fetch('/api/farms/', {
     method: 'PUT',
@@ -91,32 +106,52 @@ export const editOneFarm = (farm) => async (dispatch) => {
       goatYoga,
       tableMaking,
       pigRoast,
-      amenityId
-    })
-  })
+      amenityId,
+    }),
+  });
   const data = await response.json();
   if (data.errors) {
     return;
   }
 
-  dispatch(editFarm(data))
-}
+  dispatch(editFarm(data));
+};
+
+export const editOneFarmAmenities = (payload) => async (dispatch) => {
+  console.log('EDIT ONE FARM AMENITY');
+
+  const response = await fetch('/api/farms/amenities/', {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  });
+
+  const data = await response.json();
+  if (data.errors) {
+    return;
+  }
+
+  console.log('DATA', data);
+
+  dispatch(editFarmAmenities(data));
+};
 
 export const deleteOneFarm = (payload) => async (dispatch) => {
-  const {farmId} = payload
+  const { farmId } = payload;
 
   let data = await fetch(`/api/farms/${farmId}`, {
-    method: "DELETE",
-  })
+    method: 'DELETE',
+  });
 
   data = await data.json();
   if (data.errors) {
-    return
+    return;
   }
 
-  dispatch(deleteFarm(data))
-
-} 
+  dispatch(deleteFarm(data));
+};
 
 let initialState = {};
 
@@ -137,22 +172,27 @@ export default function reducer(state = initialState, action) {
       return newState;
     }
     case CREATE_FARM: {
-      const newState = {...state};
+      const newState = { ...state };
       // console.log("Payload from create farm", action.payload)
-      newState[action.payload.farm.id] = action.payload.farm
+      newState[action.payload.farm.id] = action.payload.farm;
       return newState;
     }
     case EDIT_FARM: {
-      const newState = {...state};
-      newState[action.payload.farm.id] = action.payload.farm
-      return newState
+      const newState = { ...state };
+      newState[action.payload.farm.id] = action.payload.farm;
+      return newState;
     }
     case DELETE_FARM: {
-      const newState = {...state};
+      const newState = { ...state };
       // console.log("NEW STATE", newState)
       // console.log("ACTION PAYLOAD HERE DELETE", action.payload)
       // console.log("STATE STUFF", newState[action.payload.id])
-      delete newState[action.payload.id]
+      delete newState[action.payload.id];
+      return newState;
+    }
+    case EDIT_FARM_AMENITIES: {
+      const newState = { ...state };
+      newState[action.payload.farm.id].farmAmenities = action.payload.farm.farmAmenities
       return newState
     }
     default:

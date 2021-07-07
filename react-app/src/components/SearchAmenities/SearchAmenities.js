@@ -1,77 +1,100 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { searchAllFarms } from '../../store/search';
-import { Redirect, useHistory } from 'react-router';
+import { useHistory } from 'react-router';
+import { getAllAmenities } from '../../store/amenities';
 
 export default function SearchAmenities() {
   const dispatch = useDispatch();
   const history = useHistory();
-
-  const [goatYoga, setGoatYoga] = useState(false);
-  const [tableMaking, setTableMaking] = useState(false);
-  const [pigRoast, setPigRoast] = useState(false);
-
-  const updateGoatYoga = (e) => {
-    const goatInput = document.querySelector('#goatYoga');
-    const searchButton = document.querySelector('#farmSubmit');
-    if (goatInput.checked === true) {
-      setGoatYoga(true);
-      searchButton.disabled = false;
-    }
-    if (goatInput.checked === false) {
-      setGoatYoga(false);
-      searchButton.disabled = true;
-    }
+  
+  const [checkedState, setCheckedState] = useState(false)
+  
+  const allAmenities = useSelector((state) => state.amenities);
+  
+  const initialStateSetter = (all) => {
+    const stateObject = {};
+    all && Object.values(all).forEach((amenity) => {
+      
+      stateObject[amenity.amenityName] = false;
+    });
+    return stateObject;
   };
 
-  const updateTableMaking = (e) => {
-    const tableMakingInput = document.querySelector('#tableMaking');
-    const searchButton = document.querySelector('#farmSubmit');
+  const [stateAmenities, setStateAmenities] = useState(initialStateSetter(allAmenities));
+  
+  const changeSubmit = (someState) => {
+    const submitButton = document.querySelector("#searchSubmit")
+      if(Object.values(someState).includes(true)){
+        submitButton.disabled = false
+      }
+      else{
+        submitButton.disabled = true
+      }
+      console.log(someState)
+  }
 
-    if (tableMakingInput.checked === true) {
-      setTableMaking(true);
-      searchButton.disabled = false;
-    }
-    if (tableMakingInput.checked === false) {
-      setTableMaking(false);
-      searchButton.disabled = true;
-    }
+  const updateAmenityState = (e, amenityName, amenityValue) => {
+    console.log(e.target.id)
+
+    setStateAmenities((oldState) => {
+      console.log(amenityName)
+      console.log("VALUE", e.target.id.checked, amenityValue)
+      if(e.target.id.checked === false){
+        setCheckedState(true)
+      }
+      
+      
+      let result = { ...oldState, [amenityName]: Boolean(amenityValue) };
+      changeSubmit(result)
+      return result
+      
+    });
   };
 
-  const updatePigRoast = (e) => {
-    const pigRoast = document.querySelector('#pigRoast');
-    const searchButton = document.querySelector('#farmSubmit');
+ 
+  
+  // console.log('STATE AMENITIES', stateAmenities)
 
-    if (pigRoast.checked === true) {
-      setPigRoast(true);
-      searchButton.disabled = false;
-    }
-    if (pigRoast.checked === false) {
-      searchButton.disabled = true;
-      setPigRoast(false);
-    }
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(goatYoga, tableMaking, pigRoast);
-    let payload = {
-      'Goat Yoga': goatYoga,
-      'Table Making': tableMaking,
-      'Pig Roast': pigRoast,
-    };
-
-    dispatch(searchAllFarms(payload));
+ 
+    dispatch(searchAllFarms(stateAmenities));
 
     history.push('/searchResults');
   };
+
+  useEffect(() => {
+    dispatch(getAllAmenities());
+  }, []);
 
   return (
     <>
       <div>
         <form action="" id="farmForm" onSubmit={(e) => handleSubmit(e)}>
           <label>Search:</label>
-          <div>
+          {Object.values(allAmenities)?.map((amenity) => (
+            <div key={amenity.id}>
+              <label>{amenity.amenityName}</label>
+              <input
+                type="checkbox"
+                id={amenity.amenityName}
+                value={!!stateAmenities[amenity.amenityName]}
+                onClick={(e) => updateAmenityState(e, e.target.id, e.target.value)}
+              ></input>
+            </div>
+          ))}
+          <button id="searchSubmit" type="submit" disabled={true}>
+            Search
+          </button>
+        </form>
+      </div>
+    </>
+  );
+}
+{
+  /* <div>
             <label>Goat Yoga</label>
             <input
               type="checkbox"
@@ -93,12 +116,5 @@ export default function SearchAmenities() {
               value={pigRoast}
               onClick={updatePigRoast}
             ></input>
-          </div>
-          <button id="farmSubmit" type="submit" disabled={true}>
-            Search
-          </button>
-        </form>
-      </div>
-    </>
-  );
+          </div> */
 }
