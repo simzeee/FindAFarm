@@ -4,6 +4,8 @@ import { searchAllFarms } from '../../store/search';
 import { useHistory } from 'react-router';
 import { getAllAmenities } from '../../store/amenities';
 
+import styles from './SearchAmenities.module.css'
+
 export default function SearchAmenities() {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -38,14 +40,14 @@ export default function SearchAmenities() {
     console.log(e.target.id)
 
     setStateAmenities((oldState) => {
-      console.log(amenityName)
-      console.log("VALUE", e.target.id.checked, amenityValue)
+      // console.log(amenityName)
+      console.log("VALUE", e.target.id.checked, amenityValue, e.target.checked)
       if(e.target.id.checked === false){
         setCheckedState(true)
       }
       
       
-      let result = { ...oldState, [amenityName]: Boolean(amenityValue) };
+      let result = { ...oldState, [amenityName]: e.target.checked };
       changeSubmit(result)
       return result
       
@@ -53,13 +55,10 @@ export default function SearchAmenities() {
   };
 
  
-  
-  // console.log('STATE AMENITIES', stateAmenities)
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
- 
+    console.log('STATE AMENITIES', stateAmenities)
+    
     dispatch(searchAllFarms(stateAmenities));
 
     history.push('/searchResults');
@@ -71,24 +70,27 @@ export default function SearchAmenities() {
 
   return (
     <>
-      <div>
-        <form action="" id="farmForm" onSubmit={(e) => handleSubmit(e)}>
-          <label>Search:</label>
+      <div className={styles.searchContainer}>
+          <div><label>Search:</label></div>
+        <form action="" id="farmForm" className={styles.searchForm} onSubmit={(e) => handleSubmit(e)}> 
           {Object.values(allAmenities)?.map((amenity) => (
-            <div key={amenity.id}>
+            <div key={amenity.id} className={styles.amenityDiv}>
               <label>{amenity.amenityName}</label>
+              <div className={styles.amenityInput}>
               <input
                 type="checkbox"
                 id={amenity.amenityName}
                 value={!!stateAmenities[amenity.amenityName]}
                 onClick={(e) => updateAmenityState(e, e.target.id, e.target.value)}
               ></input>
+              </div>
             </div>
           ))}
-          <button id="searchSubmit" type="submit" disabled={true}>
+        </form>
+          <div><button id="searchSubmit" type="submit" disabled={true}>
             Search
           </button>
-        </form>
+          </div>
       </div>
     </>
   );

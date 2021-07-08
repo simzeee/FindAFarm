@@ -1,0 +1,43 @@
+.rootContainer {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  box-sizing: border-box;
+  /* width: 100%; */
+  border: 1px solid red;
+  /* margin: 15vh; */
+  /* justify-content: space-around; */
+  min-height: 100vh;
+}
+
+.gardenImage { 
+width: 59%;
+height: 50vh;
+padding: 20px;
+margin-top: 5vh;
+/* margin-bottom: 20px; */
+}
+
+#one {
+  height: 100%;
+  width: 100%;
+  border-radius: 24px;
+  margin-top: 7vh;
+}
+
+.header{
+  margin-top: 10vh;
+  font-family: Calibre, Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 72px;
+  line-height: 80px;
+  color:rgba(40, 64, 12);
+}
+
+.searchComponent {
+  position: absolute;
+  margin-left: 1.6vw; 
+  /* margin-top: 2.5vh; */
+  display: flex;
+  width: 70vw;
+}

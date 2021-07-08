@@ -12,6 +12,19 @@ export default function Amenity({ amenities }) {
 
   const currentFarm = useSelector((state) => state.farms[farmId]);
   const allAmenities = useSelector((state) => state.amenities);
+  const farmAmenitiesObject = useSelector((state)=> state.farms[farmId]?.farmAmenities ? Object.values(state.farms[farmId]?.farmAmenities) : "")
+
+  console.log("THIS FARM", typeof(farmAmenitiesObject), farmAmenitiesObject[0])
+
+  let idsArray = []
+  
+  for (const key in farmAmenitiesObject) {
+    console.log(farmAmenitiesObject[key])
+    idsArray.push(farmAmenitiesObject[key].id)
+  }
+
+  console.log("IDS ARRAY", idsArray)
+
 
   const [checkedState, setCheckedState] = useState(false);
 
@@ -19,6 +32,13 @@ export default function Amenity({ amenities }) {
     const stateObject = {};
     all &&
       Object.values(all).forEach((amenity) => {
+
+        let amChecked = document.querySelector(`#${amenity.amenityName}`)
+        console.log(amenity.amenityName)
+        if(amChecked){
+          console.log("EVER HAPPENING?")
+          stateObject[amenity.amenityName] = amChecked.checked || false;  
+        }
         stateObject[amenity.amenityName] = false;
       });
     return stateObject;
@@ -48,7 +68,7 @@ export default function Amenity({ amenities }) {
         setCheckedState(true);
       }
 
-      let result = { ...oldState, [amenityName]: Boolean(amenityValue) };
+      let result = { ...oldState, [amenityName]: e.target.checked };
       changeSubmit(result);
       return result;
     });
@@ -59,7 +79,7 @@ export default function Amenity({ amenities }) {
     const payload = {stateAmenities,farmId}
     console.log("PAYLOAD", payload)
     dispatch(editOneFarmAmenities(payload))
-    // dispatch(getAllFarms())
+    dispatch(getAllFarms())
     history.push(`/farms/${farmId}`)
   }
 
@@ -83,6 +103,8 @@ export default function Amenity({ amenities }) {
               id={amenity.amenityName}
               value={!!stateAmenities[amenity.amenityName]}
               onClick={(e) => updateAmenityState(e, e.target.id, e.target.value)}
+              // checked={idsArray.includes(amenity.id)}
+              // defaultChecked={idsArray.includes(amenity.id)}
             ></input>
           </div>
         ))}

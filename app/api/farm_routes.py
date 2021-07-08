@@ -130,9 +130,11 @@ def editFarmAmenities():
 
     print(farmToEdit.amenities, "RIGHT HERE RIGHT HERE")
 
-    for a in farmToEdit.amenities:
-        print(a)
-        farmToEdit.amenities.remove(a)
+    i = len(farmToEdit.amenities)-1
+
+    while i >= 0:
+        farmToEdit.amenities.pop(i)
+        i -= 1
     
     print("AFTER CLEAR", farmToEdit.amenities)
 

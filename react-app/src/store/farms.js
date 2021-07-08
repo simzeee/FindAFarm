@@ -119,6 +119,7 @@ export const editOneFarm = (farm) => async (dispatch) => {
 
 export const editOneFarmAmenities = (payload) => async (dispatch) => {
   console.log('EDIT ONE FARM AMENITY');
+  console.log('PAYLOAD IN THUNK', payload)
 
   const response = await fetch('/api/farms/amenities/', {
     method: 'PATCH',

@@ -57,7 +57,7 @@ export default function CreateFarm() {
         setCheckedState(true);
       }
 
-      let result = { ...oldState, [amenityName]: Boolean(amenityValue) };
+      let result = { ...oldState, [amenityName]: e.target.checked };
       changeSubmit(result);
       return result;
     });
@@ -82,7 +82,7 @@ export default function CreateFarm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+ 
     const formData = new FormData();
     formData.append('primaryImage', primaryImage);
     formData.append('secondImage', secondImage);

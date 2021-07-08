@@ -1,5 +1,18 @@
 .navContainer {
   display: flex;
+  align-items: center;
   width: 100%;
   justify-content: space-around;
+  height: 5.5vh;
+  background-color: rgb(2 196 133);
+  font-size: 18px;
+  letter-spacing: 0.22px;
+  font-family: Calibre, Arial, Helvetica, sans-serif;
+  padding-bottom: 7px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  font-weight: 100;
 }
