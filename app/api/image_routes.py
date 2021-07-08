@@ -174,9 +174,9 @@ def upload_image():
 @image_routes.route('/', methods=["PUT"])
 @login_required
 def edit_image():
-    # print('YOU REACHED EDIT')
-    # print("FORM", request.form)
-    # print(len(request.files))
+    print('YOU REACHED EDIT')
+    print("FORM", request.form)
+    print(len(request.files))
     
     farmId = request.form["farmId"]
     imageToUpdate = Image.query.filter(Image.farmId == farmId).first()
