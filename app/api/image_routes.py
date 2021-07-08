@@ -177,6 +177,7 @@ def edit_image():
     print('YOU REACHED EDIT')
     print("FORM", request.form)
     print(len(request.files))
+    print("FILES PRIMARY IMAGE", request.files['primaryImage'])
     
     farmId = request.form["farmId"]
     imageToUpdate = Image.query.filter(Image.farmId == farmId).first()

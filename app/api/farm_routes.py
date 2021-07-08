@@ -93,6 +93,10 @@ def editFarm():
     farmToEdit.description = editedFarm["description"]
     farmToEdit.userId = current_user.id
 
+    print("RETURN VALUE", {"farm": farmToEdit.to_dict()})
+
+    db.session.commit()
+
     return {"farm": farmToEdit.to_dict()}
 
 

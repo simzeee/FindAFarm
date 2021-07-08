@@ -67,6 +67,7 @@ export default function EditFarmPhotos() {
     formData.append('fifthImage', fifthImage);
     formData.append('farmId', farmId);
 
+    console.log(formData)
     // aws uploads can be a bit slow—displaying
     // some sort of loading message is a good idea
     setImageLoading(true);
