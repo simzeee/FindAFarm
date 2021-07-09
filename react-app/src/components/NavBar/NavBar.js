@@ -12,7 +12,7 @@ export default function NavBar(){
     <nav>
       <div className={styles.navContainer}>
         <div>
-          <NavLink to="/userHome" exact={true} activeClassName="active">
+          <NavLink to="/" exact={true} activeClassName="active">
             Home
           </NavLink>
         </div>
@@ -27,11 +27,11 @@ export default function NavBar(){
             Sign Up
           </NavLink>
        </div>
-        <div>
+        {/* <div>
           <NavLink to="/users" exact={true} activeClassName="active">
             Users
           </NavLink>
-        </div>
+        </div> */}
         <div>
           <NavLink to="/bookings" exact={true} activeClassName="active">
             Bookings

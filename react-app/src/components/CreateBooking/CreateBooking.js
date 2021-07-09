@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import {createOneBooking} from '../../store/bookings' 
 
+import styles from './CreateBooking.module.css'
+
 export default function CreateBooking() {
   const history = useHistory()
   const dispatch = useDispatch();
@@ -12,7 +14,7 @@ export default function CreateBooking() {
   const [costOfStay, setCostOfStay] = useState(0)
 
   const { farmId } = useParams()
-  const pricerPerDay = useSelector((state)=> state.farms[farmId].pricePerDay)
+  const pricePerDay = useSelector((state)=> state.farms[farmId].pricePerDay)
   const nameOfFarm = useSelector((state)=> state.farms[farmId].name)
   const userId = useSelector((state)=> state.session.user.id)
 
@@ -32,7 +34,7 @@ export default function CreateBooking() {
   const calculateTotal = () => {
     const timeDifference = new Date(endDate) - new Date(startDate)
     const totalDays = timeDifference/(1000*3600*24)
-    setCostOfStay((totalDays*pricerPerDay)*numberOfGuests)
+    setCostOfStay((totalDays*pricePerDay)*numberOfGuests)
   }
 
   const handleSubmit = (e) => {
@@ -61,10 +63,11 @@ export default function CreateBooking() {
 
   return (
     <>
+    <div className={styles.bookingRootContainer}>
       <div>
         <h3>Create Booking:</h3>
       </div>
-      <form action="" onSubmit={(e) => handleSubmit(e)}>
+      <form className={styles.bookingForm} action="" onSubmit={(e) => handleSubmit(e)}>
         <label htmlFor="start">Check-In:</label>
         <input
           type="date"
@@ -88,11 +91,13 @@ export default function CreateBooking() {
           onChange={updateNumberOfGuests}
           required={true}
         ></input>
+      <div>Price Per Day: ${pricePerDay}</div>
+      <div>{costOfStay? `$${costOfStay}` : '$'+0}</div>
         <div>
           <button type="submit">Book</button>
         </div>
       </form>
-      <div>{costOfStay? `$${costOfStay}` : '$'+0}</div>
+      </div>
     </>
   );
 }

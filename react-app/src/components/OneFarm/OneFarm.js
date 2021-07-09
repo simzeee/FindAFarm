@@ -35,7 +35,6 @@ export default function Farm() {
     return (
       <>
         <div>{farm?.name}</div>
-        <div>Price Per Day: ${farm?.pricePerDay}</div>
         <div className={styles.imageContainer}>
           <div className={styles.oneImage}>
             <img src={farm?.primaryImage ? farm?.primaryImage : ''}></img>
@@ -160,7 +159,6 @@ export default function Farm() {
           </div>
           <div className={styles.infoRight}>
           <div>
-            <div>Price Per Day: ${farm?.pricePerDay}</div>
             <CreateBooking></CreateBooking>
           </div>
           </div>
