@@ -5,6 +5,8 @@ import SearchAmenities from '../SearchAmenities/SearchAmenities';
 
 import styles from './SplashPage.module.css';
 import gardenImage from './VegetableGarden.jpeg';
+import cutePigs from './cutePigs.jpeg'
+import cuteCow from './cuteCow.png'
 
 export default function SplashPage() {
   // const dispatch = useDispatch();
@@ -24,6 +26,14 @@ export default function SplashPage() {
           <SearchAmenities />
         </div>
         <img id={styles.one} src={gardenImage} />
+      </div>
+      <div className={styles.farmAnimalContainer}>
+        <div className={styles.pigs}>
+          <img id={styles.cutePigs} src={cutePigs}/>
+        </div>
+        <div className={styles.cow}>
+          <img id={styles.cuteCow} src={cuteCow}/>
+        </div>
       </div>
     </div>
   );

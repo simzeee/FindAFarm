@@ -104,7 +104,7 @@ export default function Amenity({ amenities }) {
               value={!!stateAmenities[amenity.amenityName]}
               onClick={(e) => updateAmenityState(e, e.target.id, e.target.value)}
               // checked={idsArray.includes(amenity.id)}
-              // defaultChecked={idsArray.includes(amenity.id)}
+              defaultChecked={idsArray.includes(amenity.id)}
             ></input>
           </div>
         ))}

@@ -2,9 +2,10 @@
   width: 75%;
   display: flex;
   flex-direction: column;
-  background-color: rgba(255, 255, 255, 0.872);
-  padding: 10px 20px 0px 20px;
+  background-color: rgba(255, 255, 255, 0.851);
+  padding: 10px 20px 10px 20px;
   border-radius: 24px;
+  box-shadow: rgb(0 0 0 / 8%) 0px 2px 4px 0px;
 }
 
 .searchForm {
@@ -17,11 +18,36 @@
 
 .amenityDiv {
   display: flex;
-  justify-content: space-evenly;
   align-items: center;
-  /* padding: 5px; */
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10pt;
+  box-shadow: rgb(0 0 0 / 8%) 0px 2px 4px 0px;
+  border-radius: 5px;
+  padding: 3px;
+  background-color: rgba(255, 255, 255, 0.577);
+  margin: 3px;
+}
+
+.amenityDiv:hover {
+  background-color: rgb(218, 218, 218);
 }
 
 .amenityInput{
+  display: flex;
   padding: 5px;
+  border-radius: 5px;
+}
+
+.searchButtonContainer{
+  display: flex;
+  justify-content: center;
+}
+
+.searchButton{
+  background-color: rgb(0, 197, 133);
+  border: 2px solid rgb(0, 197, 133);
+  border-radius: 50%;
+  color: rgb(255, 255, 255);
+  padding: 5px;
+  cursor: pointer;
 }

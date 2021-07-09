@@ -3,30 +3,26 @@
   flex-flow: column wrap;
   align-items: center;
   box-sizing: border-box;
-  /* width: 100%; */
-  border: 1px solid red;
-  /* margin: 15vh; */
-  /* justify-content: space-around; */
   min-height: 100vh;
 }
 
 .gardenImage { 
-width: 59%;
-height: 50vh;
+width: 69%;
+height: 59vh;
 padding: 20px;
 margin-top: 5vh;
-/* margin-bottom: 20px; */
 }
 
 #one {
   height: 100%;
   width: 100%;
   border-radius: 24px;
-  margin-top: 7vh;
+  margin-top: 13vh;
 }
 
 .header{
   margin-top: 10vh;
+  margin-bottom: 2vh;
   font-family: Calibre, Helvetica, Arial, sans-serif;
   font-weight: 700;
   font-size: 72px;
@@ -36,8 +32,39 @@ margin-top: 5vh;
 
 .searchComponent {
   position: absolute;
-  margin-left: 1.6vw; 
-  /* margin-top: 2.5vh; */
+  margin-left: 2.8vw; 
   display: flex;
-  width: 70vw;
+  width: 80vw;
+}
+
+.farmAnimalContainer {
+  display: flex;
+  justify-content: space-evenly;
+  height: 40vh;
+  width: 69%;
+  margin-top: 21vh;
+  margin-bottom: 25vh;
+}
+
+.pigs{
+  height: 100%;
+  width: 50%;
+  margin-right: 1%;
+}
+
+#cutePigs {
+  height: 100%;
+  width: 100%;
+  border-radius: 24px;
+}
+
+#cuteCow {
+  height: 100%;
+  width: 100%;
+  border-radius: 24px;
+}
+
+.cow{
+  height: 100%;
+  width: 50%;
 }
