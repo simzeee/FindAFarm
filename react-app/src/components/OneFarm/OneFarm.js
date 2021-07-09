@@ -61,55 +61,47 @@ export default function Farm() {
             </div>
           )}
         </div>
-        <div>
-          {farm?.userId === user?.id ? (
-            <NavLink to={`/editFarm/${farmId}`}>
-              <button>Edit Your Farm</button>
-            </NavLink>
-          ) : (
-            ''
-          )}
-        </div>
-        <div>
-          {farm?.userId === user?.id ? (
-            <NavLink to={`/editFarmPhotos/${farmId}`}>
-              <button>Edit Your Farm's Photos</button>
-            </NavLink>
-          ) : (
-            ''
-          )}
-        </div>
       </>
     );
   } else {
     return (
       <>
+      <div className={styles.oneFarmRootContainer}>
         <div>{farm?.name}</div>
         <div>Price Per Day: ${farm?.pricePerDay}</div>
         <div className={styles.imageContainer}>
-          <div className={styles.oneImage}>
-            <img src={farm?.primaryImage ? farm?.primaryImage : ''}></img>
+          <div className={styles.primaryImageContainer}>
+            <img id={styles.primaryImage} src={farm?.primaryImage ? farm?.primaryImage : ''}></img>
           </div>
+          <div className={styles.additionalImages}>
           {farm?.secondImage && (
             <div className={styles.oneImage}>
-              <img src={farm.secondImage ? farm.secondImage : ''}></img>
+             
+              <img className={styles.actualImage} src={farm.secondImage ? farm.secondImage : ''}></img>
             </div>
           )}
           {farm.thirdImage && (
             <div className={styles.oneImage}>
-              <img src={farm.thirdImage ? farm.thirdImage : ''}></img>
+              <img className={styles.actualImage} src={farm.thirdImage ? farm.thirdImage : ''}></img>
             </div>
           )}
           {farm.fourthImage && (
             <div className={styles.oneImage}>
-              <img src={farm.fourthImage ? farm.fourthImage : ''}></img>
+              <img className={styles.actualImage} src={farm.fourthImage ? farm.fourthImage : ''}></img>
             </div>
           )}
           {farm.fifthImage && (
             <div className={styles.oneImage}>
-              <img src={farm.fifthImage ? farm.fifthImage : ''}></img>
+              <img className={styles.actualImage} src={farm.fifthImage ? farm.fifthImage : ''}></img>
             </div>
           )}
+        </div>
+        </div>
+        <div>
+          <div>
+            <h3>About:</h3>
+            <div> {farm?.description}</div>
+          </div>
         </div>
         <div>
           <div>
@@ -124,7 +116,9 @@ export default function Farm() {
             <NavLink to={`/editAmenities/${farmId}`}>
               <button>Edit Your Amenities</button>
             </NavLink>
-          ): ('')}
+          ) : (
+            ''
+          )}
         </div>
         <div>
           <CreateBooking></CreateBooking>
@@ -146,6 +140,7 @@ export default function Farm() {
           ) : (
             ''
           )}
+        </div>
         </div>
       </>
     );
