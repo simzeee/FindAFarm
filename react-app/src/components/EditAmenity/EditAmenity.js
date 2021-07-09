@@ -5,6 +5,8 @@ import { useParams, useHistory } from 'react-router-dom';
 import { getAllFarms } from '../../store/farms';
 import { editOneFarmAmenities } from '../../store/farms';
 
+import styles from './EditAmenity.module.css'
+
 export default function Amenity({ amenities }) {
   const history = useHistory();
   const { farmId } = useParams();
@@ -26,21 +28,22 @@ export default function Amenity({ amenities }) {
   console.log("IDS ARRAY", idsArray)
 
 
-  const [checkedState, setCheckedState] = useState(false);
-
   const initialStateSetter = (all) => {
     const stateObject = {};
     all &&
       Object.values(all).forEach((amenity) => {
 
-        let amChecked = document.querySelector(`#${amenity.amenityName}`)
-        console.log(amenity.amenityName)
+        let amChecked = document.getElementById(`${amenity.amenityName}`)
+
+        console.log("INITIAL SETTER", amenity.amenityName)
+
         if(amChecked){
           console.log("EVER HAPPENING?")
-          stateObject[amenity.amenityName] = amChecked.checked || false;  
+          stateObject[amenity.amenityName] = amChecked.checked;  
         }
-        stateObject[amenity.amenityName] = false;
+        stateObject[amenity.amenityName] = amChecked?.checked;
       });
+      console.log("STATE OBJECT", stateObject)
     return stateObject;
   };
 
@@ -50,7 +53,7 @@ export default function Amenity({ amenities }) {
 
   const changeSubmit = (someState) => {
     const submitButton = document.querySelector('#editSubmit');
-    if (Object.values(someState).includes(true)) {
+    if (Object.values(someState)?.includes(true)) {
       submitButton.disabled = false;
     } else {
       submitButton.disabled = true;
@@ -58,15 +61,15 @@ export default function Amenity({ amenities }) {
     console.log(someState);
   };
 
+  console.log("ETHER STATE AMENITIES", stateAmenities)
   const updateAmenityState = (e, amenityName, amenityValue) => {
     console.log(e.target.id);
+    console.log("STATE AMENITIES IN UPDATE", stateAmenities)
 
     setStateAmenities((oldState) => {
       console.log(amenityName);
       console.log('VALUE', e.target.id.checked, amenityValue);
-      if (e.target.id.checked === false) {
-        setCheckedState(true);
-      }
+      console.log("OLD STATE", oldState)
 
       let result = { ...oldState, [amenityName]: e.target.checked };
       changeSubmit(result);
@@ -78,6 +81,7 @@ export default function Amenity({ amenities }) {
     e.preventDefault()
     const payload = {stateAmenities,farmId}
     console.log("PAYLOAD", payload)
+    // debugger
     dispatch(editOneFarmAmenities(payload))
     dispatch(getAllFarms())
     history.push(`/farms/${farmId}`)
@@ -86,19 +90,23 @@ export default function Amenity({ amenities }) {
   useEffect(() => {
     dispatch(getAllAmenities());
     dispatch(getAllFarms());
+    setStateAmenities(initialStateSetter(allAmenities))
+    // changeSubmit(stateAmenities)
   }, []);
 
   return (
     <>
-      <div>
-        <form action="" id="farmForm" onSubmit={(e) => handleSubmit(e)}>
+      <div className={styles.editAmenityRootContainer}>
+        <form className={styles.editAmenityForm} action="" id="farmForm" onSubmit={(e) => handleSubmit(e)}>
         <label>
           <h4>Available Amenities:</h4>
         </label>
         {Object.values(allAmenities)?.map((amenity) => (
-          <div key={amenity.id}>
+          <div key={amenity.id} className={styles.editAmenityInputs}>
+            <div className={styles.amenityLabel}>
             <label>{amenity.amenityName}</label>
-            <input
+            </div>
+            <input 
               type="checkbox"
               id={amenity.amenityName}
               value={!!stateAmenities[amenity.amenityName]}

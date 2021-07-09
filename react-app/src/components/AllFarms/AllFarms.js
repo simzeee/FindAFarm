@@ -4,6 +4,8 @@ import { NavLink } from 'react-router-dom';
 import { getAllFarms } from '../../store/farms';
 import { getAllAmenities } from '../../store/amenities';
 
+import styles from './AllFarms.module.css';
+
 export default function AllFarms() {
   const dispatch = useDispatch();
 
@@ -12,11 +14,10 @@ export default function AllFarms() {
 
   useEffect(() => {
     dispatch(getAllFarms());
-    dispatch(getAllAmenities())
+    dispatch(getAllAmenities());
   }, [dispatch, farms.length]);
 
   if (!farms.length) return null;
-  
 
   if (!currentUser) {
     return (
@@ -36,18 +37,25 @@ export default function AllFarms() {
   } else if (currentUser.farmer) {
     return (
       <>
-        <div>
+        <div className={styles.allFarmsTitle}>
           <h1>All Farms:</h1>
         </div>
-        <div>
+        <div className={styles.allFarmsContainer}>
           {farms.map((farm) => (
-            <NavLink to={`/farms/${farm.id}`} key={farm.id}>
-              <div>{farm.name}</div>
-            </NavLink>
+            <div className={styles.farmImageContainer}>
+              <NavLink to={`/farms/${farm.id}`} key={farm.id}>
+                <img
+                  className={styles.actualFarmImage}
+                  src={farm.primaryImage}
+                ></img>
+              </NavLink>
+            </div>
           ))}
         </div>
-        <div>
-          <NavLink to="/createFarm">Share Your Farm</NavLink>
+        <div className={styles.shareButton}>
+          <button>
+            <NavLink to="/createFarm">Share Your Farm</NavLink>
+          </button>
         </div>
       </>
     );
