@@ -16,17 +16,18 @@ export default function NavBar(){
             Home
           </NavLink>
         </div>
+        {!currentUser &&
         <div>
 
           <NavLink to="/login" exact={true} activeClassName="active">
             Login
           </NavLink>
-        </div>
-        <div>
+        </div>}
+        {!currentUser && <div>
           <NavLink to="/sign-up" exact={true} activeClassName="active">
             Sign Up
           </NavLink>
-       </div>
+       </div>}
         {/* <div>
           <NavLink to="/users" exact={true} activeClassName="active">
             Users
