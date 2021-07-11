@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, NavLink } from 'react-router-dom';
 import { getOneBooking } from '../../store/bookings';
 
+import styles from './Booking.module.css'
+
 export default function Booking() {
   const dispatch = useDispatch();
   const { bookingId } = useParams();
@@ -16,7 +18,7 @@ export default function Booking() {
   if (!booking) return null;
 
   return (
-    <div>
+    <div className={styles.bookingsContainer}>
       <div>Start Date: {booking.startDate}</div>
       <div>End Date: {booking.endDate}</div>
       <div>Cost: {booking.costOfStay}</div>

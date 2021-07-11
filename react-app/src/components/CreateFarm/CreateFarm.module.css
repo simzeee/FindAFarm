@@ -1,19 +1,51 @@
 .farmFormContainer {
+  font-family: Arial, Helvetica, sans-serif;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  /* justify-content: center; */
   align-items: center;
   width: 100%;
-  height: 500px
+  height: 100vh;
+  
+  /* background-color: slateblue; */
+  /* border-radius: 24px; */
 }
 
-form {
+
+.formTitle {
+  display: flex;
+  justify-content: center;
+  /* background-color: steelblue; */
+  /* margin-top: 25%; */
+  /* margin-bottom: 5%; */
+}
+
+.newFarmForm {
+  margin-top: 5%;
+  border-radius: 24px;
   display: flex;
   flex-direction: column;
-  width: 200px;
+  justify-content: space-evenly;
+  background-color: rgba(255, 255, 255, 0.851);
+  height: 85%;
+  padding: 15px 50px 15px 50px;
+  box-shadow: rgb(0 0 0 / 8%) 0px 2px 4px 0px;
 }
+
+form label {
+  padding-right: 3px;
+}
+
+.newFarmActualForm{
+  display: flex;
+  justify-content: space-evenly;
+  height: 100%;
+  /* background-color: tomato; */
+}
+
 textarea {
   display: flex;
   flex-direction: column;
   width: 200px;
+  min-height: 18%;
 }

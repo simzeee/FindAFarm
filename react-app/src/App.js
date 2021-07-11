@@ -8,7 +8,7 @@ import NavBar from './components/NavBar/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/User/UsersList';
 import User from './components/User/User';
-import LoggedInUser from './components/LoggedInHome/LoggedInHome';
+import MakeAFarmer from './components/MakeAFarmer/MakeAFarmer';
 import GuestBooking from './components/GuestBooking/GuestBooking';
 import Booking from './components/Booking/Booking';
 import EditBooking from './components/EditBooking/EditBooking';
@@ -58,7 +58,7 @@ function App() {
           <User />
         </ProtectedRoute>
         <ProtectedRoute path="/userHome" exact={true}>
-          <LoggedInUser></LoggedInUser>
+          <MakeAFarmer></MakeAFarmer>
         </ProtectedRoute>
         <ProtectedRoute path="/bookings" exact={true}>
           <GuestBooking></GuestBooking>

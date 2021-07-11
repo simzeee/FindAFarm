@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
-import { editOneBooking, deleteOneBooking } from '../../store/bookings';
+import { editOneBooking, deleteOneBooking, getAllBookings } from '../../store/bookings';
+
+import styles from './EditBooking.module.css'
 
 export default function EditBooking() {
   const history = useHistory()
@@ -9,20 +11,22 @@ export default function EditBooking() {
   const { bookingId } = useParams();
   
   const currentBooking = useSelector((state) => state.bookings[bookingId]);
+  console.log("current", currentBooking)
 
-  const [startDate, setStartDate] = useState(currentBooking.startDate);
-  const [endDate, setEndDate] = useState(currentBooking.endDate);
+  
+  const [startDate, setStartDate] = useState(currentBooking?.startDate);
+  const [endDate, setEndDate] = useState(currentBooking?.endDate);
   const [numberOfGuests, setNumberOfGuests] = useState(
-    currentBooking.numberOfGuests
+    currentBooking?.numberOfGuests
   );
   const [costOfStay, setCostOfStay] = useState(300);
 
-  const farmId = useSelector((state) => state.bookings[bookingId].farmId);
+  const farmId = useSelector((state) => state.bookings[bookingId]?.farmId);
 
   const pricerPerDay = useSelector(
-    (state) => state.farms[farmId].pricePerDay
+    (state) => state.farms[farmId]?.pricePerDay
   );
-  const nameOfFarm = useSelector((state) => state.farms[farmId].name);
+  const nameOfFarm = useSelector((state) => state.farms[farmId]?.name);
   const userId = useSelector((state) => state.session.user.id);
 
   const updateStartDate = (e) => {
@@ -68,6 +72,14 @@ export default function EditBooking() {
     history.push('/bookings')
     
   };
+  
+    useEffect(()=>{
+      console.log("INNER BOOKING")
+      dispatch(getAllBookings()).then(()=>{
+        setStartDate(startDate)
+      })
+      // setStartDate(startDate)
+    },[])
 
   useEffect(() => {
     calculateTotal();
@@ -77,10 +89,12 @@ export default function EditBooking() {
 
   return (
     <>
+    <div className={styles.editBookingRootContainer}>
+      <div className={styles.formContainer}>
       <div>
         <h3>Edit Booking:</h3>
       </div>
-      <form action="" onSubmit={(e) => handleSubmit(e)}>
+      <form className={styles.actualForm} action="" onSubmit={(e) => handleSubmit(e)}>
         <label htmlFor="start">Check-In:</label>
         <input
           type="date"
@@ -97,6 +111,7 @@ export default function EditBooking() {
           onChange={updateEndDate}
           required={true}
         ></input>
+        <label>Number of Guests:</label>
         <input
           type="number"
           name="numberDate"
@@ -112,6 +127,8 @@ export default function EditBooking() {
         <button onClick={(e) => handleDelete(e)}>Cancel Your Stay</button>
       </div>
       <div>{costOfStay ? `$${costOfStay}` : '$' + 0}</div>
+      </div>
+      </div>
     </>
   );
 }

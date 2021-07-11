@@ -1,0 +1,30 @@
+.bookingRootContainer {
+  /* background-color: red; */
+  height: 75vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.bookingTitle{
+  font-family: Calibre, Helvetica, Arial, sans-serif;
+  color:rgba(40, 64, 12);
+}
+
+.bookingsContainer {
+  /* background-color: royalblue; */
+  width: 50%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  margin-bottom: 3%;
+}
+
+.oneBooking {
+  font-family: Calibre, Helvetica, Arial, sans-serif;
+  background-color: rgba(139, 69, 19, 0.673);
+  padding: 10px 20px 10px 20px;
+  border-radius: 24px;
+  margin-bottom: 2%;
+}

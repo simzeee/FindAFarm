@@ -159,11 +159,11 @@ export default function CreateFarm() {
   return (
     <>
       <div className={styles.farmFormContainer}>
-        <div>
-          <div>
-            <h3>Your Farm:</h3>
+        <div className={styles.newFarmForm}>
+          <div className={styles.formTitle}>
+            <h3>Your New Farm:</h3>
           </div>
-          <form action="" id="farmForm" onSubmit={(e) => handleSubmit(e)}>
+          <form className={styles.newFarmActualForm} action="" id="farmForm" onSubmit={(e) => handleSubmit(e)}>
             <label>Farm Name:</label>
             <input
               type="text"
@@ -171,7 +171,7 @@ export default function CreateFarm() {
               onChange={updateFarmName}
               required={true}
             ></input>
-            <label>pricePerDay:</label>
+            <label>Price Per Day:</label>
             <input
               type="number"
               value={pricePerDay}
