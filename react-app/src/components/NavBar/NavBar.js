@@ -18,7 +18,6 @@ export default function NavBar(){
         </div>
         {!currentUser &&
         <div>
-
           <NavLink to="/login" exact={true} activeClassName="active">
             Login
           </NavLink>
@@ -33,11 +32,11 @@ export default function NavBar(){
             Users
           </NavLink>
         </div> */}
-        <div>
+        {currentUser && <div>
           <NavLink to="/bookings" exact={true} activeClassName="active">
             Bookings
           </NavLink>
-        </div>
+        </div>}
         <div>
           <NavLink to="/farms" exact={true} activeClassName="active">
             Farms

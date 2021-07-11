@@ -22,14 +22,19 @@ export default function AllFarms() {
   if (!currentUser) {
     return (
       <>
-        <div>
+        <div className={styles.allFarmsTitle}>
           <h1>All Farms:</h1>
         </div>
-        <div>
+        <div className={styles.allFarmsContainer}>
           {farms.map((farm) => (
+            <div className={styles.farmImageContainer}>
             <NavLink to={`/farms/${farm.id}`} key={farm.id}>
-              <div>{farm.name}</div>
+            <img
+                  className={styles.actualFarmImage}
+                  src={farm.primaryImage}
+                ></img>
             </NavLink>
+            </div>
           ))}
         </div>
       </>

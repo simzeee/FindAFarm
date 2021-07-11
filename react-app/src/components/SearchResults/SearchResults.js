@@ -5,6 +5,8 @@ import { getAllFarms } from '../../store/farms';
 import { getAllAmenities } from '../../store/amenities';
 import { clearSearchResults } from '../../store/search';
 
+import styles from './SearchResults.module.css'
+
 export default function SearchResults() {
   const dispatch = useDispatch();
 
@@ -14,8 +16,6 @@ export default function SearchResults() {
   let ids = farms.map((farm)=>{
     return farm.id
   })
-
-  console.log("IDS ARE HERE", ids)
 
   const clearSearch = () => {
     dispatch(clearSearchResults({ids}))
@@ -30,14 +30,20 @@ export default function SearchResults() {
   
     return (
       <>
-        <div>
+        <div className={styles.allFarmsTitle}>
           <h1>Results</h1>
         </div>
-        <div>
+        <div className={styles.allFarmsContainer}>
           {farms.map((farm) => (
+          <div className={styles.farmImageContainer}>
             <NavLink to={`/farms/${farm.id}`} key={farm.id}>
               <div onClick={clearSearch}>{farm.name}</div>
+            <img onClick={clearSearch}
+                  className={styles.actualFarmImage}
+                  src={farm.primaryImage}
+                ></img>
             </NavLink>
+            </div>
           ))}
         </div>
       </>
