@@ -1,5 +1,4 @@
 .farmFormContainer {
-  /* background-color: tomato; */
   font-family: Calibre, Helvetica, Arial, sans-serif;
   height: 60vh;
   display: flex;
@@ -13,7 +12,6 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  /* background-color: teal; */
   background-color: rgba(255, 255, 255, 0.851);
   box-shadow: rgb(0 0 0 / 8%) 0px 2px 4px 0px;
   height: 40%;
@@ -31,7 +29,6 @@
   margin-top: 10px;
   width: 20%;
   padding: 15px 20px 15px 20px;
-  /* background-color: tomato; */
   border-radius: 24px;
   background-color: rgba(255, 255, 255, 0.851);
   box-shadow: rgb(0 0 0 / 8%) 0px 2px 4px 0px;

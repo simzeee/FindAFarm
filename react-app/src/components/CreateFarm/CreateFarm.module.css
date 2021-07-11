@@ -39,6 +39,7 @@ form label {
 .newFarmActualForm{
   display: flex;
   justify-content: space-evenly;
+  flex-direction: column;
   height: 100%;
   /* background-color: tomato; */
 }
