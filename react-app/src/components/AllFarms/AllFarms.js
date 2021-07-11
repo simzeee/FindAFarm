@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { getAllFarms } from '../../store/farms';
 import { getAllAmenities } from '../../store/amenities';
-import LoggedInHome from '../LoggedInHome/LoggedInHome';
+import LoggedInHome from '../MakeAFarmer/MakeAFarmer';
 
 import styles from './AllFarms.module.css';
 

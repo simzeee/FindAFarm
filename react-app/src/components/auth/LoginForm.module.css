@@ -9,14 +9,14 @@
 
 .loginForm {
   font-family: Arial, Helvetica, sans-serif;
-
+  margin-top: 10%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
   background-color: rgba(255, 255, 255, 0.851);
   height: 50%;
-  width: 20%;
+  width: 12%;
   padding-bottom: 20px;
   border-radius: 24px;
 }
