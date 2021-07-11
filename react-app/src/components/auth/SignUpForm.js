@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
 
+import styles from './SignUpForm.module.css'
+
 
 const SignUpForm = () => {
   const dispatch = useDispatch()
@@ -16,6 +18,9 @@ const SignUpForm = () => {
     e.preventDefault();
     if (password === repeatPassword) {
       const data = await dispatch(signUp(username, email, password));
+    }
+    else {
+      alert("Passwords Do Not Match")
     }
   };
 
@@ -40,9 +45,10 @@ const SignUpForm = () => {
   }
 
   return (
-    <form onSubmit={onSignUp}>
+    <div className={styles.signUpFormContainer}>
+    <form className={styles.signUpForm} onSubmit={onSignUp}>
+        <label>User Name:</label>
       <div>
-        <label>User Name</label>
         <input
           type="text"
           name="username"
@@ -50,8 +56,8 @@ const SignUpForm = () => {
           value={username}
         ></input>
       </div>
+        <label>Email:</label>
       <div>
-        <label>Email</label>
         <input
           type="text"
           name="email"
@@ -59,8 +65,8 @@ const SignUpForm = () => {
           value={email}
         ></input>
       </div>
+        <label>Password:</label>
       <div>
-        <label>Password</label>
         <input
           type="password"
           name="password"
@@ -68,8 +74,8 @@ const SignUpForm = () => {
           value={password}
         ></input>
       </div>
+        <label>Repeat Password:</label>
       <div>
-        <label>Repeat Password</label>
         <input
           type="password"
           name="repeat_password"
@@ -80,6 +86,7 @@ const SignUpForm = () => {
       </div>
       <button type="submit">Sign Up</button>
     </form>
+    </div>
   );
 };
 

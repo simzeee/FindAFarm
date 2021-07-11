@@ -5,6 +5,8 @@ import SearchAmenities from '../SearchAmenities/SearchAmenities';
 import { becomeFarmer } from '../../store/session';
 import { useHistory } from 'react-router-dom';
 
+import styles from './MakeAFarmer.module.css'
+
 export default function LoggedInHome() {
 
   const history = useHistory()
@@ -38,17 +40,15 @@ export default function LoggedInHome() {
   if (!currentUser.farmer) {
     return (
       <>
-      <div>
-        <SearchAmenities></SearchAmenities>
-      </div>
+      <div className={styles.makeFarmerContainer}>
         <div>Are you a farmer?</div>
-        <form action="" onSubmit={goMakeFarm}>
+        <form className={styles.makeFarmerForm} action="" onSubmit={goMakeFarm}>
           {/* <select id="farmSelect" onInput={makeFarmer}>
             <option value="no">No</option>
             <option value="yes">Yes</option>
           </select> */}
-          <div>
-          <label>Yes</label>
+          <div className={styles.makeFarmerLabelContainer}>
+          <label className={styles.actualLabel}>Yes</label>
           <input type="checkbox" id="checkbox" onInput={makeFarmer}></input>
           </div>
           <button
@@ -59,6 +59,7 @@ export default function LoggedInHome() {
             Go List Your Farm!
           </button>
         </form>
+      </div>
       </>
     );
   }

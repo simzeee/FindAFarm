@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { getAllFarms } from '../../store/farms';
 import { getAllAmenities } from '../../store/amenities';
+import LoggedInHome from '../LoggedInHome/LoggedInHome';
 
 import styles from './AllFarms.module.css';
 
@@ -28,12 +29,12 @@ export default function AllFarms() {
         <div className={styles.allFarmsContainer}>
           {farms.map((farm) => (
             <div className={styles.farmImageContainer}>
-            <NavLink to={`/farms/${farm.id}`} key={farm.id}>
-            <img
+              <NavLink to={`/farms/${farm.id}`} key={farm.id}>
+                <img
                   className={styles.actualFarmImage}
                   src={farm.primaryImage}
                 ></img>
-            </NavLink>
+              </NavLink>
             </div>
           ))}
         </div>
@@ -64,20 +65,28 @@ export default function AllFarms() {
         </div>
       </>
     );
-  } else {
-    return (
-      <>
-        <div>
-          <h1>All Farms:</h1>
-        </div>
-        <div>
-          {farms.map((farm) => (
-            <NavLink to={`/farms/${farm.id}`} key={farm.id}>
-              <div>{farm.name}</div>
-            </NavLink>
-          ))}
-        </div>
-      </>
-    );
+  }
+  else {return (
+     <>
+     <div className={styles.loggedInHomeContainer}>
+     <LoggedInHome/>
+     </div>
+  <div className={styles.allFarmsTitle}>
+  <h1>All Farms:</h1>
+</div>
+<div className={styles.allFarmsContainer}>
+  {farms.map((farm) => (
+    <div className={styles.farmImageContainer}>
+      <NavLink to={`/farms/${farm.id}`} key={farm.id}>
+        <img
+          className={styles.actualFarmImage}
+          src={farm.primaryImage}
+        ></img>
+      </NavLink>
+    </div>
+  ))}
+</div>
+</>
+  )
   }
 }

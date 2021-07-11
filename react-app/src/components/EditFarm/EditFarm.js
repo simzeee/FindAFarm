@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './EditFarm.module.css';
@@ -11,17 +11,17 @@ export default function EditFarm() {
   const { farmId } = useParams();
 
   const currentFarm = useSelector((state) => state.farms[farmId]);
-  const amenityId = currentFarm.amenityId
+  const amenityId = currentFarm?.amenityId
 
-  console.log("AMENITY ID IN EDIT FARM", amenityId)
+  console.log(currentFarm)
 
   //current values
 
   
-  const [farmName, setFarmName] = useState(currentFarm.name);
-  const [pricePerDay, setPricePerDay] = useState(currentFarm.pricePerDay);
-  const [location, setLocation] = useState(currentFarm.location);
-  const [description, setDescription] = useState(currentFarm.description);
+  const [farmName, setFarmName] = useState(currentFarm?.name);
+  const [pricePerDay, setPricePerDay] = useState(currentFarm?.pricePerDay);
+  const [location, setLocation] = useState(currentFarm?.location);
+  const [description, setDescription] = useState(currentFarm?.description);
   const [goatYoga, setGoatYoga] = useState(false);
   const [tableMaking, setTableMaking] = useState(false);
   const [pigRoast, setPigRoast] = useState(false);
@@ -43,39 +43,6 @@ export default function EditFarm() {
   };
 
 
-  const updateGoatYoga = (e) => {
-    const goatInput = document.querySelector('#goatYoga');
-
-    if (goatInput.checked === true) {
-      setGoatYoga(true);
-    }
-    if (goatInput.checked === false) {
-      setGoatYoga(false);
-    }
-  };
-
-  const updateTableMaking = (e) => {
-    const tableMakingInput = document.querySelector('#tableMaking');
-
-    if (tableMakingInput.checked === true) {
-      setTableMaking(true);
-    }
-    if (tableMakingInput.checked === false) {
-      setTableMaking(false);
-    }
-  };
-
-  const updatePigRoast = (e) => {
-    const pigRoast = document.querySelector('#pigRoast');
-
-    if (pigRoast.checked === true) {
-      setPigRoast(true);
-    }
-    if (pigRoast.checked === false) {
-      setPigRoast(false);
-    }
-  };
-
   const handleSubmit = async (e) => {
 
     const payload = {
@@ -84,10 +51,6 @@ export default function EditFarm() {
       location,
       description,
       farmId,
-      goatYoga,
-      tableMaking,
-      pigRoast,
-      amenityId
     };
 
     dispatch(editOneFarm(payload));
@@ -104,14 +67,18 @@ const handleDelete = (e) => {
   history.push('/farms')
 }
 
+useEffect(()=>{
+dispatch(getAllFarms())
+},[])
+
   return (
     <>
       <div className={styles.farmFormContainer}>
-        <div>
-          <div>
+        <div className={styles.farmFormActualContainer}>
+          <div className={styles.farmFormTitle}>
             <h3>Your Farm:</h3>
           </div>
-          <form action="" id="farmForm" onSubmit={(e) => handleSubmit(e)}>
+          <form className={styles.editFarmForm} action="" id="farmForm" onSubmit={(e) => handleSubmit(e)}>
             <label>Farm Name:</label>
             <input
               type="text"
@@ -119,7 +86,7 @@ const handleDelete = (e) => {
               onChange={updateFarmName}
               required={true}
             ></input>
-            <label>pricePerDay:</label>
+            <label>Price Per Day:</label>
             <input
               type="number"
               value={pricePerDay}
@@ -139,38 +106,15 @@ const handleDelete = (e) => {
               onChange={updateDescription}
               required={true}
             ></textarea>
-            <div>
-              <label>Goat Yoga</label>
-              <input
-                type="checkbox"
-                id="goatYoga"
-                value={goatYoga}
-                onClick={updateGoatYoga}
-              ></input>
-              <label>Table Making</label>
-              <input
-                type="checkbox"
-                id="tableMaking"
-                value={tableMaking}
-                onClick={updateTableMaking}
-              ></input>
-              <label>Pig Roast</label>
-              <input
-                type="checkbox"
-                id="pigRoast"
-                value={pigRoast}
-                onClick={updatePigRoast}
-              ></input>
-            </div>
              <button id="farmSubmit" type="submit">
               Submit
             </button>
           </form>
-        </div>
-      </div>
-      <div>
+      <div className={styles.deleteFarm}>
         <h3>Would you like to remove your farm?</h3>
         <div><button onClick={(e) => handleDelete(e)}>Remove Your Farm</button></div>
+      </div>
+        </div>
       </div>
     </>
   );

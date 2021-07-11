@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { login } from "../../store/session";
 
+import styles from './LoginForm.module.css'
+
 const LoginForm = () => {
   const dispatch = useDispatch()
   const user = useSelector(state => state.session.user)
@@ -47,14 +49,15 @@ const LoginForm = () => {
   }
 
   return (
-    <form onSubmit={onLogin}>
+    <div className={styles.loginFormContainer}>
+    <form className={styles.loginForm} onSubmit={onLogin}>
       <div>
         {errors.map((error) => (
           <div>{error}</div>
         ))}
       </div>
+        <label htmlFor="email">Email:</label>
       <div>
-        <label htmlFor="email">Email</label>
         <input
           name="email"
           type="text"
@@ -63,8 +66,8 @@ const LoginForm = () => {
           onChange={updateEmail}
         />
       </div>
+        <label htmlFor="password">Password:</label>
       <div>
-        <label htmlFor="password">Password</label>
         <input
           name="password"
           type="password"
@@ -72,13 +75,14 @@ const LoginForm = () => {
           value={password}
           onChange={updatePassword}
         />
-        <button type="submit">Login</button>
       </div>
-      <div>
+        <button type="submit">Login</button>
+      
         <button type="submit" onClick={guestDemoLogin}>Demo Guest Login</button>
         <button type="submit" onClick={guestFarmerLogin}>Demo Farmer Login</button>
-      </div>
+      
     </form>
+    </div>
   );
 };
 

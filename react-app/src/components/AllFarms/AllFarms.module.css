@@ -1,14 +1,20 @@
+.loggedInHomeContainer{
+  /* background-color: red; */
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-end;
+}
+
 .allFarmsTitle {
-  margin: 5% 10% 5% 10%;
+  /* background-color: red; */
+  font-family: Calibre, Helvetica, Arial, sans-serif;
+  color:rgba(40, 64, 12);
+  margin: 2% 10% 3% 10%;
 }
 
 .allFarmsContainer {
-  margin: 5% 10% 1% 10%;
+  margin: 0 10% 0 12%;
   display: flex;
-  /* flex-direction: column; */
-  /* background-color: rebeccapurple; */
-  /* justify-content: space-between; */
-  /* align-items: center; */
   height: 50vh;
   width: 75vw;
 }
@@ -16,7 +22,6 @@
 .farmImageContainer {
   height: 75%;
   width: 75%;
-  /* background-color: red; */
   margin-left: 1.5%;
 }
 
@@ -27,7 +32,6 @@
 }
 
 .shareButton {
-  /* background-color: red; */
   display: flex;
   justify-content: flex-end;
 }

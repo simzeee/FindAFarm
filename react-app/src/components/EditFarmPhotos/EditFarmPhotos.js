@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import styles from './EditFarmPhotos.module.css';
 import { editOneFarm, deleteOneFarm, getAllFarms } from '../../store/farms';
 import { getAllAmenities, deleteOneAmenity } from '../../store/amenities';
+import { useEffect } from 'react';
+
+import styles from './EditFarmPhotos.module.css';
 
 export default function EditFarmPhotos() {
   const history = useHistory();
@@ -11,22 +13,22 @@ export default function EditFarmPhotos() {
   const { farmId } = useParams();
 
   const currentFarm = useSelector((state) => state.farms[farmId]);
-  const amenityId = currentFarm.amenityId
+  const amenityId = currentFarm?.amenityId
 
   console.log("AMENITY ID IN EDIT FARM PHOTOS", amenityId)
-  //current values
+  console.log("current farm", currentFarm)
 
-  const [primaryImage, setPrimaryImage] = useState(currentFarm.primaryImage);
-  const [secondImage, setSecondImage] = useState(currentFarm.secondImage);
-  const [thirdImage, setThirdImage] = useState(currentFarm.thirdImage);
-  const [fourthImage, setFourthImage] = useState(currentFarm.fourthImage);
-  const [fifthImage, setFifthImage] = useState(currentFarm.fifthImage);
+  const [primaryImage, setPrimaryImage] = useState(currentFarm?.primaryImage);
+  const [secondImage, setSecondImage] = useState(currentFarm?.secondImage);
+  const [thirdImage, setThirdImage] = useState(currentFarm?.thirdImage);
+  const [fourthImage, setFourthImage] = useState(currentFarm?.fourthImage);
+  const [fifthImage, setFifthImage] = useState(currentFarm?.fifthImage);
   const [imageLoading, setImageLoading] = useState(false);
 
-  const [farmName, setFarmName] = useState(currentFarm.name);
-  const [pricePerDay, setPricePerDay] = useState(currentFarm.pricePerDay);
-  const [location, setLocation] = useState(currentFarm.location);
-  const [description, setDescription] = useState(currentFarm.description);
+  const [farmName, setFarmName] = useState(currentFarm?.name);
+  const [pricePerDay, setPricePerDay] = useState(currentFarm?.pricePerDay);
+  const [location, setLocation] = useState(currentFarm?.location);
+  const [description, setDescription] = useState(currentFarm?.description);
 
   const updateImage = (e) => {
     const file = e.target.files[0];
@@ -109,14 +111,17 @@ export default function EditFarmPhotos() {
     history.push('/farms')
   };
 
+  useEffect (()=>{
+    dispatch(getAllFarms())
+  },[])
+
   return (
     <>
       <div className={styles.farmFormContainer}>
-        <div>
-          <form action="" id="farmForm" onSubmit={(e) => handleSubmit(e)}>
+          <form className={styles.editPhotosForm} action="" id="farmForm" onSubmit={(e) => handleSubmit(e)}>
             <label>Select your Primary Image:</label>
             <input type="file" accept="image/*" onChange={updateImage} required={true} />
-            <label>Select Up to Four more Images</label>
+            <label>Select Up to Four more Images:</label>
             <input
               type="file"
               accept="image/*"
@@ -128,13 +133,13 @@ export default function EditFarmPhotos() {
             </button>
             {imageLoading && <p>Loading...</p>}
           </form>
-        </div>
-      </div>
-      <div>
-        <h3>Would you like to remove your farm?</h3>
+        
+      <div className={styles.deleteFarmContainer}>
+        <h4>Would you like to remove your farm?</h4>
         <div>
           <button onClick={(e) => handleDelete(e)}>Remove Your Farm</button>
         </div>
+      </div>
       </div>
     </>
   );
