@@ -8,7 +8,7 @@ FindAFarm is a one-stop-shop for the agro-tourism enthusiast. Allows individuals
 
 ## Index
 
-- [API Documentation](https://github.com/simzeee/FindAFarm/wiki/API-Routes)
+- [API Documentation](https://github.com/simzeee/FindAFarm/wiki/API-Documentation)
 - [Database Schema](https://github.com/simzeee/FindAFarm/wiki/Database-Schema)
 - [Frontend Routes](https://github.com/simzeee/FindAFarm/wiki/Frontend-Routes)
 - [MVP Feature List](https://github.com/simzeee/FindAFarm/wiki/MVP-List)
