@@ -21,6 +21,7 @@ def upload_image():
     print("ALL FILES", request.files)
 
     if len(request.files) == 1:
+        print("ONE FILE")
         image = request.files["primaryImage"] 
         if not allowed_file(image.filename):
             return {"errors": "file type not permitted"}, 400
@@ -28,6 +29,7 @@ def upload_image():
         upload = upload_file_to_s3(image)
         if "url" not in upload:
             return upload, 400
+        print("BEFORE UPLOAD")
         urlPrimary = upload["url"]
         new_image = Image(user=current_user.id, primaryImage=urlPrimary, farmName=farmName)
         print("A NEW IMAGE", new_image)
