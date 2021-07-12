@@ -17,6 +17,8 @@ def upload_image():
     farmName = request.form["farmName"]
 
     print("farmName RIGHT HERE", farmName)
+    print("PRIMARY IMAGE", request.files["primaryImage"])
+    print("ALL FILES", request.files)
 
     if len(request.files) == 1:
         image = request.files["primaryImage"] 
