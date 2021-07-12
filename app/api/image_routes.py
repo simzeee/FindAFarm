@@ -30,6 +30,7 @@ def upload_image():
             return upload, 400
         urlPrimary = upload["url"]
         new_image = Image(user=current_user.id, primaryImage=urlPrimary, farmName=farmName)
+        print("A NEW IMAGE", new_image)
         db.session.add(new_image)
         db.session.commit()
         return {"urlPrimary": urlPrimary}
