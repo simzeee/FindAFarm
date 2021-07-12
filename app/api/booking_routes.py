@@ -62,7 +62,7 @@ def edit_one_booking(id):
         booking = Booking.query.get(request.json['bookingId'])
 
         # booking.id = request.json["id"]
-        booking.userId = request.json["userId"]
+        booking.userId = current_user.id
         booking.costOfStay = request.json["costOfStay"]
         booking.startDate = request.json["startDate"]
         booking.endDate = request.json["endDate"]
