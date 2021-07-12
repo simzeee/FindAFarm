@@ -59,7 +59,7 @@ def make_a_farmer():
     
     db.session.commit()
 
-    return {'id': current_user.id}
+    return toBeFarmer.to_dict()
 
 
 @auth_routes.route('/logout')

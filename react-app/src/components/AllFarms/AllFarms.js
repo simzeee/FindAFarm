@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { getAllFarms } from '../../store/farms';
 import { getAllAmenities } from '../../store/amenities';
-import LoggedInHome from '../MakeAFarmer/MakeAFarmer';
+import MakeAFarmer from '../MakeAFarmer/MakeAFarmer';
 
 import styles from './AllFarms.module.css';
 
@@ -69,7 +69,7 @@ export default function AllFarms() {
   else {return (
      <>
      <div className={styles.loggedInHomeContainer}>
-     <LoggedInHome/>
+     <MakeAFarmer currentUser={currentUser}/>
      </div>
   <div className={styles.allFarmsTitle}>
   <h1>All Farms:</h1>

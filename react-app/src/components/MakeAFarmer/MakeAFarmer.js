@@ -7,7 +7,9 @@ import { useHistory } from 'react-router-dom';
 
 import styles from './MakeAFarmer.module.css'
 
-export default function LoggedInHome() {
+export default function LoggedInHome(thisUser) {
+
+  console.log("THIS USER", thisUser)
 
   const history = useHistory()
   const dispatch = useDispatch()
@@ -29,9 +31,11 @@ export default function LoggedInHome() {
     }
   };
 
+  console.log("CURRENT USER", currentUser)
+
   const goMakeFarm = (e) => {
     e.preventDefault()
-    const userId = currentUser.id
+    const userId = thisUser.currentUser.id
     dispatch(becomeFarmer(userId))
     history.push('/farms')
     
@@ -67,11 +71,11 @@ export default function LoggedInHome() {
   else {
     return (
       <>
-        <h1>You are a logged in Farmer</h1>
+        {/* <h1>You are a logged in Farmer</h1>
         <div>
           <h1>Hello</h1>
           <SearchAmenities></SearchAmenities>
-        </div>
+        </div> */}
       </>
     );
   }
