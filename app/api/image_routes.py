@@ -41,6 +41,7 @@ def upload_image():
         db.session.commit()
         return {"urlPrimary": urlPrimary}
     elif len(request.files) == 2:
+        print("TWO FILES")
         image = request.files["primaryImage"]
         secondImage = request.files["secondImage"]
         if not allowed_file(image.filename):
@@ -49,8 +50,10 @@ def upload_image():
             return {"errors": "file type not permitted"}, 400
         image.filename = get_unique_filename(image.filename)
         secondImage.filename = get_unique_filename(secondImage.filename)
+        print("BEFORE UPLOAD", image.filename, secondImage.filename)
         upload = upload_file_to_s3(image)
         upload2 = upload_file_to_s3(secondImage)
+        print("AFTER UPLOAD", upload, upload2)
         if "url" not in upload:
             return upload, 400
         if "url" not in upload2:
