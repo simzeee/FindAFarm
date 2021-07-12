@@ -29,6 +29,8 @@ export default function EditBooking() {
   const nameOfFarm = useSelector((state) => state.farms[farmId]?.name);
   const userId = useSelector((state) => state.session.user.id);
 
+  console.log("USER ID", userId)
+
   const updateStartDate = (e) => {
     setStartDate(e.target.value);
   };
