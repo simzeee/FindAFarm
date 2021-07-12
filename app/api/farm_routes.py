@@ -28,10 +28,11 @@ def createFarm():
     imageFarmName = newFarm["farmName"]
  
     print("NEW FARM NEW FARM", newFarm)
+    print("NEW FAR NAME", imageFarmName)
 
     farmImages = Image.query.filter(Image.farmName == imageFarmName).first()
 
-    print("FARM IMAGES", farmImages.primaryImage)
+    print("FARM IMAGES", farmImages, "FARM PRIMARY", farmImages.primaryImage)
 
     farm = Farm(
         name=newFarm["farmName"],
