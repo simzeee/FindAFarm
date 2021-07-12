@@ -14,8 +14,9 @@ def upload_image():
     if "primaryImage" not in request.files:
         return {"errors": "image required"}, 400
 
-
     farmName = request.form["farmName"]
+
+    print("farmName RIGHT HERE", farmName)
 
     if len(request.files) == 1:
         image = request.files["primaryImage"] 
