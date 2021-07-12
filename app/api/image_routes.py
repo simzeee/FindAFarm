@@ -23,10 +23,14 @@ def upload_image():
     if len(request.files) == 1:
         print("ONE FILE")
         image = request.files["primaryImage"] 
+        print("IMAGE", image)
         if not allowed_file(image.filename):
             return {"errors": "file type not permitted"}, 400
+        print("fiLE ALLOWEd")
         image.filename = get_unique_filename(image.filename)
+        print("image filename", image.filename)
         upload = upload_file_to_s3(image)
+        print("UPLOAD", upload)
         if "url" not in upload:
             return upload, 400
         print("BEFORE UPLOAD")
