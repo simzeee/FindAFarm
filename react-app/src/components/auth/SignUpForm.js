@@ -9,6 +9,7 @@ import styles from './SignUpForm.module.css'
 const SignUpForm = () => {
   const dispatch = useDispatch()
   const user = useSelector(state => state.session.user)
+  const [errors, setErrors] = useState([])
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,9 +19,12 @@ const SignUpForm = () => {
     e.preventDefault();
     if (password === repeatPassword) {
       const data = await dispatch(signUp(username, email, password));
+      if (data.errors){
+        setErrors(data.errors)
+      }
     }
     else {
-      alert("Passwords Do Not Match")
+     setErrors(['Your Passwords Must Match'])
     }
   };
 
@@ -46,6 +50,11 @@ const SignUpForm = () => {
 
   return (
     <div className={styles.signUpFormContainer}>
+      <div>
+      {errors.map((error)=>(
+        <div key={error}>{error}</div>
+      ))}
+      </div>
     <form className={styles.signUpForm} onSubmit={onSignUp}>
         <label>User Name:</label>
       <div>
@@ -72,6 +81,7 @@ const SignUpForm = () => {
           name="password"
           onChange={updatePassword}
           value={password}
+          required={true}
         ></input>
       </div>
         <label>Repeat Password:</label>
