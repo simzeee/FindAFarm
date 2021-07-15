@@ -19,7 +19,7 @@ import EditFarm from './components/EditFarm/EditFarm';
 import EditFarmPhotos from './components/EditFarmPhotos/EditFarmPhotos';
 import EditAmenity from './components/EditAmenity/EditAmenity'
 import SearchResults from './components/SearchResults/SearchResults';
-import Footer from './components/Footer/Footer';
+
 import { authenticate } from './store/session';
 
 
