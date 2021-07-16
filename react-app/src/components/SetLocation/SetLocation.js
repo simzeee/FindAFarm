@@ -68,6 +68,7 @@ const SetLocation = () => {
   });
 
   const testFunction = (id) => {
+    window.scrollTo(0,0)
     history.push(`/farms/${id}`)
   }
 

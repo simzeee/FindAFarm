@@ -38,12 +38,12 @@ export default function SplashPage() {
           <img id={styles.cuteCow} src={cuteCow}/>
         </div>
       </div>
-      <div>
+      <div className={styles.mapContainer}>
         <SetLocation></SetLocation>
       </div>
-      <div>
+      {/* <div>
         <MapContainer></MapContainer>
-      </div>
+      </div> */}
     </div>
   );
 }
