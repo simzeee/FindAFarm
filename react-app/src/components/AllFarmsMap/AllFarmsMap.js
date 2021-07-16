@@ -10,6 +10,7 @@ import {
 import { getAllFarms } from '../../store/farms';
 
 import circleFarmer from '../ApiGoogleMap/farmer.png';
+import styles from './AllFarmsMap.module.css'
 
 const defaultCenter = {
   lat: 37.6872,
@@ -86,7 +87,7 @@ const SetLocation = () => {
         {locations?.map((marker) => {
           return (
             <Marker
-              key={Math.random()}
+              key={marker.id}
               position={marker.location}
               icon={{
                 url: circleFarmer,
@@ -108,7 +109,7 @@ const SetLocation = () => {
               setSelected(null);
             }}
           >
-            <div onClick={() => testFunction(selected.id)}>
+            <div className={styles.infoBox} onClick={() => testFunction(selected.id)} >
               <h4>{selected.name}</h4>
             </div>
           </InfoWindow>
