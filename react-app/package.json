@@ -10,6 +10,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "date-fns": "^2.22.1",
+    "dotenv": "^8.2.0",
     "google-map-react": "^2.1.10",
     "http-proxy-middleware": "^1.0.5",
     "react": "^17.0.0",

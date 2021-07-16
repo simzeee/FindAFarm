@@ -34,11 +34,6 @@ const defaultCenter = {
   lng: -75.6624,
 };
 
-const options = {
-  styles: mapContainerStyle,
-  disableDefaultUI: true,
-  // zoomControl: true,
-};
 
 const MapContainer = () => {
   const [markers, setMarkers] = useState([]);
