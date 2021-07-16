@@ -7,6 +7,7 @@ import { getAllFarms } from '../../store/farms';
 import { useEffect } from 'react';
 import { getAllAmenities } from '../../store/amenities';
 import Amenity from '../EditAmenity/EditAmenity';
+import GoogleMaps from '../GoogleMaps/GoogleMaps';
 
 export default function Farm() {
   const { farmId } = useParams();
@@ -15,15 +16,11 @@ export default function Farm() {
 
   const farm = useSelector((state) => state.farms[farmId]);
   const user = useSelector((state) => state.session.user);
-  // const amenityId = useSelector((state) => state.farms[farmId]?.amenityId);
+ 
 
   const amenities = useSelector((state) => state.farms[farmId]?.farmAmenities);
 
-  // let amenitiesArray = [];
 
-  // for (const key in amenities) {
-  //   if (amenities[key] === true) amenitiesArray.push(key);
-  // }
 
   useEffect(() => {
     dispatch(getAllFarms());
@@ -204,6 +201,7 @@ export default function Farm() {
           </div>
           </div>
           </div>
+          <div><GoogleMaps location={farm?.location} name={farm?.name}></GoogleMaps></div>
         </div>
       </>
     );

@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { getAllFarms } from '../../store/farms';
 import { getAllAmenities } from '../../store/amenities';
 import MakeAFarmer from '../MakeAFarmer/MakeAFarmer';
-import MapContainer from '../GoogleMaps/GoogleMaps';
+import MapContainer from '../ApiGoogleMap/ApiGoogleMap';
 
 import styles from './AllFarms.module.css';
 

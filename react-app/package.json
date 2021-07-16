@@ -4,10 +4,12 @@
   "private": true,
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.12.1",
+    "@reach/combobox": "^0.15.3",
     "@react-google-maps/api": "^2.2.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "date-fns": "^2.22.1",
     "google-map-react": "^2.1.10",
     "http-proxy-middleware": "^1.0.5",
     "react": "^17.0.0",
@@ -17,7 +19,8 @@
     "react-scripts": "3.4.3",
     "redux": "^4.1.0",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "use-places-autocomplete": "^1.9.3"
   },
   "scripts": {
     "start": "react-scripts start",

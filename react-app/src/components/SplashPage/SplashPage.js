@@ -7,6 +7,8 @@ import styles from './SplashPage.module.css';
 import gardenImage from './VegetableGarden.jpeg';
 import cutePigs from './cutePigs.jpeg'
 import cuteCow from './cuteCow.png'
+import MapContainer from '../ApiGoogleMap/ApiGoogleMap';
+
 
 export default function SplashPage() {
   // const dispatch = useDispatch();
@@ -34,6 +36,9 @@ export default function SplashPage() {
         <div className={styles.cow}>
           <img id={styles.cuteCow} src={cuteCow}/>
         </div>
+      </div>
+      <div>
+        <MapContainer></MapContainer>
       </div>
     </div>
   );

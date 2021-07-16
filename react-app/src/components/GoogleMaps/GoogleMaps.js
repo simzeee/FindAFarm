@@ -3,29 +3,36 @@
 import React from "react";
 import GoogleMapReact from 'google-map-react';
 
-const Marker = ({ text }) => <div>{text}</div>;
 
-export default function SimpleMap(){
-  const defaultProps = {
+export default function GoogleMaps(props){
+
+  console.log(props)
+
+  let locationArray = props.location?.split(" ")
+
+  // console.log(parseFloat(locationArray[1], 10))
+
+  const locater = {
     center: {
-      lat: 41.4090,
-      lng: -75.6624
+      lat: parseFloat(locationArray[1], 10)? parseFloat(locationArray[1], 10) : "",
+      lng: parseFloat(locationArray[3], 10)? parseFloat(locationArray[3], 10): ""
     },
     zoom: 14
   };
-
+  const Marker = ({ text }) => <div>{text}</div>;
+  
   return (
     // Important! Always set the container height explicitly
     <div style={{ height: '50vh', width: '50%' }}>
       <GoogleMapReact
         bootstrapURLKeys={{ key: "" }}
-        defaultCenter={defaultProps.center}
-        defaultZoom={defaultProps.zoom}
+        defaultCenter={locater.center}
+        defaultZoom={locater.zoom}
       >
         <Marker
-          lat={41.4090}
-          lng={-75.6624}
-          text="SCRANTON"
+          lat={locater.center.lat}
+          lng={locater.center.lng}
+          text={props.name}
         />
       </GoogleMapReact>
     </div>
