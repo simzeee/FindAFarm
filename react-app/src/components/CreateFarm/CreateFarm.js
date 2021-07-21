@@ -129,7 +129,7 @@ export default function CreateFarm() {
     dispatch(createOneFarm(payload))
     
 
-    history.push('/setLocation');
+    history.push('/');
   };
 
   const updateImage = (e) => {

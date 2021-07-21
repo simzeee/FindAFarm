@@ -21,7 +21,7 @@ import {
 } from '@reach/combobox';
 
 import circleFarmer from '../ApiGoogleMap/farmer.png';
-import styles from './SetLocationMap.module.css'
+import styles from './EditFarmLocationMap.module.css'
 
 const mapContainerStyle = {
   width: '50vw',
@@ -30,8 +30,8 @@ const mapContainerStyle = {
 const libraries = ['places'];
 
 const defaultCenter = {
-  lat: 37.6872,
-  lng: -97.3301,
+  lat: 41.4090,
+  lng: -75.6624,
 };
 
 
@@ -86,8 +86,8 @@ export default function SetLocationMap({location, setLocation}){
     <>
       <Search panTo={panTo}/>
       <GoogleMap
-        zoom={4}
-        center={defaultCenter}
+        zoom={8}
+        center={{lat: parseFloat(location?.split(" ")[1],10), lng: parseFloat(location?.split(" ")[3],10)}}
         mapContainerStyle={mapContainerStyle}
         onClick={onMapClick}
         //You are given the lat/lng on click

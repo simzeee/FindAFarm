@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles from './EditFarm.module.css';
 import { editOneFarm, deleteOneFarm, getAllFarms } from '../../store/farms';
 import { deleteOneAmenity, getAllAmenities } from '../../store/amenities';
-import SetLocationMap from '../SetLocationMap/SetLocationMap';
+import EditFarmLocationMap from '../EditFarmLocationMap/EditFarmLocationMap'
 
 export default function EditFarm() {
   const history = useHistory();
@@ -12,13 +12,12 @@ export default function EditFarm() {
   const { farmId } = useParams();
 
   const currentFarm = useSelector((state) => state.farms[farmId]);
-  const amenityId = currentFarm?.amenityId
+  const amenityId = currentFarm?.amenityId;
 
-  console.log(currentFarm)
+  console.log(currentFarm);
 
   //current values
 
-  
   const [farmName, setFarmName] = useState(currentFarm?.name);
   const [pricePerDay, setPricePerDay] = useState(currentFarm?.pricePerDay);
   const [location, setLocation] = useState(currentFarm?.location);
@@ -43,9 +42,7 @@ export default function EditFarm() {
     setDescription(e.target.value);
   };
 
-
   const handleSubmit = async (e) => {
-
     const payload = {
       farmName,
       pricePerDay,
@@ -55,22 +52,22 @@ export default function EditFarm() {
     };
 
     dispatch(editOneFarm(payload));
-    dispatch(getAllAmenities())
-    history.push(`/farms/${farmId}`)
+    dispatch(getAllAmenities());
+    history.push(`/farms/${farmId}`);
   };
 
-const handleDelete = (e) => {
-  const payload = {farmId}
-  dispatch(deleteOneFarm(payload))
-  dispatch(deleteOneAmenity({amenityId}))
-  dispatch(getAllAmenities())
-  dispatch(getAllFarms())
-  history.push('/farms')
-}
+  const handleDelete = (e) => {
+    const payload = { farmId };
+    dispatch(deleteOneFarm(payload));
+    dispatch(deleteOneAmenity({ amenityId }));
+    dispatch(getAllAmenities());
+    dispatch(getAllFarms());
+    history.push('/farms');
+  };
 
-useEffect(()=>{
-dispatch(getAllFarms())
-},[])
+  useEffect(() => {
+    dispatch(getAllFarms());
+  }, []);
 
   return (
     <>
@@ -79,7 +76,12 @@ dispatch(getAllFarms())
           <div className={styles.farmFormTitle}>
             <h3>Your Farm:</h3>
           </div>
-          <form className={styles.editFarmForm} action="" id="farmForm" onSubmit={(e) => handleSubmit(e)}>
+          <form
+            className={styles.editFarmForm}
+            action=""
+            id="farmForm"
+            onSubmit={(e) => handleSubmit(e)}
+          >
             <label>Farm Name:</label>
             <input
               type="text"
@@ -94,12 +96,12 @@ dispatch(getAllFarms())
               onChange={updatePricePerDay}
             ></input>
             <label>Location:</label>
-            {/* <input
+            <input
               type="text"
               value={location}
               onChange={updateLocation}
               required={true}
-            ></input> */}
+            ></input>
             <label>Description:</label>
             <textarea
               form="farmForm"
@@ -107,16 +109,23 @@ dispatch(getAllFarms())
               onChange={updateDescription}
               required={true}
             ></textarea>
-             <button id="farmSubmit" type="submit">
+            <button id="farmSubmit" type="submit">
               Submit
             </button>
           </form>
-      <div className={styles.deleteFarm}>
-        <h3>Would you like to remove your farm?</h3>
-        <div><button onClick={(e) => handleDelete(e)}>Remove Your Farm</button></div>
-      </div>
+          <div className={styles.deleteFarm}>
+            <h3>Would you like to remove your farm?</h3>
+            <div>
+              <button onClick={(e) => handleDelete(e)}>Remove Your Farm</button>
+            </div>
+          </div>
         </div>
-        <SetLocationMap setLocation={setLocation}/>
+      <div>
+        <EditFarmLocationMap
+          location={currentFarm?.location}
+          setLocation={setLocation}
+        />
+      </div>
       </div>
     </>
   );
