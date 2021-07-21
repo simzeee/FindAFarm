@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles from './EditFarm.module.css';
 import { editOneFarm, deleteOneFarm, getAllFarms } from '../../store/farms';
 import { deleteOneAmenity, getAllAmenities } from '../../store/amenities';
+import SetLocationMap from '../SetLocationMap/SetLocationMap';
 
 export default function EditFarm() {
   const history = useHistory();
@@ -93,12 +94,12 @@ dispatch(getAllFarms())
               onChange={updatePricePerDay}
             ></input>
             <label>Location:</label>
-            <input
+            {/* <input
               type="text"
               value={location}
               onChange={updateLocation}
               required={true}
-            ></input>
+            ></input> */}
             <label>Description:</label>
             <textarea
               form="farmForm"
@@ -115,6 +116,7 @@ dispatch(getAllFarms())
         <div><button onClick={(e) => handleDelete(e)}>Remove Your Farm</button></div>
       </div>
         </div>
+        <SetLocationMap setLocation={setLocation}/>
       </div>
     </>
   );

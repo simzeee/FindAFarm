@@ -25,7 +25,7 @@ import styles from './SetLocationMap.module.css'
 
 const mapContainerStyle = {
   width: '50vw',
-  height: '50vh',
+  height: '25vh',
 };
 const libraries = ['places'];
 
@@ -35,10 +35,12 @@ const defaultCenter = {
 };
 
 
-export default function SetLocationMap(){
+export default function SetLocationMap({setLocation}){
+
+
   const [markers, setMarkers] = useState([]);
   const [selected, setSelected] = useState(null);
-  const [location, setLocation] = useState()
+  // const [location, setLocation] = useState()
 
   const onMapClick = useCallback((e) => {
     setMarkers((current) => [
@@ -50,6 +52,8 @@ export default function SetLocationMap(){
       },
     ]);
     
+    setLocation(`lat: ${e.latLng.lat()} lng: ${e.latLng.lng()}`)
+
   }, []);
   // console.log(markers)
 
@@ -113,15 +117,13 @@ export default function SetLocationMap(){
           </InfoWindow>
         ) : null} */}
       </GoogleMap>
-      <div>location= lat: {markers[0]?.lat} lng: {markers[0]?.lng}</div>
+      {/* <div>location= lat: {markers[0]?.lat} lng: {markers[0]?.lng}</div> */}
     </>
   );
 };
 
 
-// funciton Locate({panTo}) {
-//   return <button><img src=""></img></button>
-// }
+
 
 function Search({panTo}) {
   const {

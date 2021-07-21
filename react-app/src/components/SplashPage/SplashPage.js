@@ -8,7 +8,7 @@ import gardenImage from './VegetableGarden.jpeg';
 import cutePigs from './cutePigs.jpeg'
 import cuteCow from './cuteCow.png'
 import MapContainer from '../ApiGoogleMap/ApiGoogleMap';
-import SetLocation from '../AllFarmsMap/AllFarmsMap';
+import AllFarmsMap from '../AllFarmsMap/AllFarmsMap';
 
 
 export default function SplashPage() {
@@ -39,7 +39,7 @@ export default function SplashPage() {
         </div>
       </div>
       <div className={styles.mapContainer}>
-        <SetLocation></SetLocation>
+        <AllFarmsMap></AllFarmsMap>
       </div>
       {/* <div>
         <MapContainer></MapContainer>

@@ -66,9 +66,6 @@ export default function AllFarms() {
             <NavLink to="/createFarm">Share Your Farm</NavLink>
           </button>
         </div>
-        <div>
-        <SetLocationMap/>
-        </div>
       </>
     );
   }

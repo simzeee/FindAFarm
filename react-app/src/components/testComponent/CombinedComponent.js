@@ -1,18 +1,195 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
+import {
+  GoogleMap,
+  useLoadScript,
+  Marker,
+  InfoWindow,
+} from '@react-google-maps/api';
+import { formatRelative } from 'date-fns';
+
+import usePlacesAutocomplete, {
+  getGeocode,
+  getLatLng,
+} from 'use-places-autocomplete';
+
+import {
+  Combobox,
+  ComboboxInput,
+  ComboboxPopover,
+  ComboboxList,
+  ComboboxOption,
+} from '@reach/combobox';
+
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import styles from './CreateFarm.module.css';
+import styles from '../CreateFarm/CreateFarm.module.css'
 import { createOneFarm } from '../../store/farms';
 import { createOneAmenity } from '../../store/amenities';
 import { getAllFarms } from '../../store/farms';
 import { getAllAmenities } from '../../store/amenities';
-import SetLocationMap from '../SetLocationMap/SetLocationMap';
+// import SetLocationMap from '../SetLocationMap/SetLocationMap';
+
+import circleFarmer from '../ApiGoogleMap/farmer.png';
+// import styles from './SetLocationMap.module.css'
+
+
+const mapContainerStyle = {
+  width: '50vw',
+  height: '25vh',
+};
+const libraries = ['places'];
+
+const defaultCenter = {
+  lat: 41.4090,
+  lng: -75.6624,
+};
+
+
+let location = {}
+console.log("location", location)
+
+function SetLocationMap(){
+  const [markers, setMarkers] = useState([]);
+  const [selected, setSelected] = useState(null);
+  // const [location, setLocation] = useState()
+
+  const onMapClick = useCallback((e) => {
+    setMarkers((current) => [
+      // ...current,
+      {
+        lat: e.latLng.lat(),
+        lng: e.latLng.lng(),
+        time: new Date(),
+      },
+    ]);
+    location = { lat: e.latLng.lat(),
+      lng: e.latLng.lng()}
+      console.log(location)
+  }, []);
+  // console.log(markers)
+
+  const mapRef = useRef();
+  const onMapLoad = useCallback((map) => {
+    mapRef.current = map;
+  }, []);
+
+  const { isLoaded, loadError } = useLoadScript({
+    googleMapsApiKey: 'AIzaSyAmBZfHdH2gpZoY_2em_Zfl4DGAq-ZJ38E',
+    libraries,
+  });
+
+
+  const panTo = useCallback(({lat, lng}) => {
+    mapRef.current.panTo({lat, lng});
+    mapRef.current.setZoom(14);
+  }, [])
+
+
+  if (loadError) return 'Error loading maps';
+  if (!isLoaded) return 'Loading Maps';
+
+  return (
+    <>
+      <Search panTo={panTo}/>
+      <GoogleMap
+        zoom={8}
+        center={defaultCenter}
+        mapContainerStyle={mapContainerStyle}
+        onClick={onMapClick}
+        //You are given the lat/lng on click
+        onLoad={onMapLoad}
+      >
+        {markers.map((marker) => (
+          <Marker
+            key={marker.time.toISOString()}
+            position={{ lat: marker.lat, lng: marker.lng }}
+            icon={{
+              url: circleFarmer,
+              scaledSize: new window.google.maps.Size(30, 30),
+              origin: new window.google.maps.Point(0, 0),
+              anchor: new window.google.maps.Point(15, 15),
+            }}
+            onClick={() => {
+              setSelected(marker);
+            }}
+          />
+        ))}
+
+        {/* {selected ? (
+          <InfoWindow
+            position={{ lat: selected.lat, lng: selected.lng }}
+            onCloseClick={() => {
+              setSelected(null);
+            }}
+          >
+            <div>
+              <h2>A farm</h2>
+            </div>
+          </InfoWindow>
+        ) : null} */}
+      </GoogleMap>
+      <div>location= lat: {markers[0]?.lat} lng: {markers[0]?.lng}</div>
+    </>
+  );
+};
+
+
+function Search({panTo}) {
+  const {
+    ready,
+    value,
+    suggestions: { status, data },
+    setValue,
+    clearSuggestions,
+  } = usePlacesAutocomplete({
+    requestOptions: {
+      location: { lat: () => 43.653225, lng: () => -79.383186 },
+      radius: 200 * 1000,
+    },
+  });
+
+  return (
+    <div className={styles.comboBox}>
+      <Combobox
+        onSelect={async (address) => {
+          setValue(address, false);
+          clearSuggestions()
+
+          try {
+            const results = await getGeocode({ address });
+            const {lat, lng} = await getLatLng(results[0]);
+            panTo({lat, lng})
+          } catch (error) {
+            console.log('error');
+          }
+        }}
+      >
+        <ComboboxInput
+          value={value}
+          onChange={(e) => {
+            setValue(e.target.value);
+          }}
+          disabled={!ready}
+          placeholder="Enter an address"
+        />
+        <ComboboxPopover>
+          <ComboboxList>
+          {status === 'OK' &&
+
+            data.map(({ id, description }) => (
+              <ComboboxOption key={Math.random()} value={description}></ComboboxOption>
+            ))}
+
+          </ComboboxList>
+        </ComboboxPopover>
+      </Combobox>
+    </div>
+  );
+}
 
 
 
-
-
-export default function CreateFarm() {
+export default function Test() {
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -26,11 +203,9 @@ export default function CreateFarm() {
   const [imageLoading, setImageLoading] = useState(false);
   const [farmName, setFarmName] = useState('');
   const [pricePerDay, setPricePerDay] = useState(0);
-  const [location, setLocation] = useState('');
+  const [alocation, setLocation] = useState(location);
   const [description, setDescription] = useState('');
   const [checkedState, setCheckedState] = useState(false);
-
-  console.log("LOCATION", location)
 
   const initialStateSetter = (all) => {
     const stateObject = {};
@@ -124,12 +299,12 @@ export default function CreateFarm() {
       description,
       stateAmenities
     };
-    console.log(payload)
+    console.log("PAYLOAD", payload)
 
     dispatch(createOneFarm(payload))
     
 
-    history.push('/setLocation');
+    // history.push('/setLocation');
   };
 
   const updateImage = (e) => {
@@ -232,7 +407,7 @@ export default function CreateFarm() {
             {imageLoading && <p>Loading...</p>}
           </form>
         </div>
-        <div><SetLocationMap setLocation={setLocation}/></div>
+        <div><SetLocationMap /></div>
       </div>
     </>
   );

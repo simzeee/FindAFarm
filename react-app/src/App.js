@@ -15,10 +15,13 @@ import EditBooking from './components/EditBooking/EditBooking';
 import AllFarms from './components/AllFarms/AllFarms';
 import Farm from './components/OneFarm/OneFarm';
 import CreateFarm from './components/CreateFarm/CreateFarm';
+import SetLocationMap from './components/SetLocationMap/SetLocationMap';
 import EditFarm from './components/EditFarm/EditFarm';
 import EditFarmPhotos from './components/EditFarmPhotos/EditFarmPhotos';
 import EditAmenity from './components/EditAmenity/EditAmenity'
 import SearchResults from './components/SearchResults/SearchResults';
+
+import Test from './components/testComponent/CombinedComponent';
 
 import { authenticate } from './store/session';
 
@@ -79,6 +82,9 @@ function App() {
         <ProtectedRoute path="/createFarm" exact={true}>
           <CreateFarm></CreateFarm>
         </ProtectedRoute>
+        <ProtectedRoute path="/setLocation" exact={true}>
+          <SetLocationMap></SetLocationMap>
+        </ProtectedRoute>
         <ProtectedRoute path="/editFarm/:farmId" exact={true}>
           <EditFarm></EditFarm>
         </ProtectedRoute>
@@ -91,6 +97,9 @@ function App() {
         <Route path="/searchResults" exact={true}>
           <SearchResults></SearchResults>
         </Route>
+        <ProtectedRoute path="/test" exact = {true}>
+          <Test></Test>
+        </ProtectedRoute>
       </Switch>
     </BrowserRouter>
   );
