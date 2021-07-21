@@ -97,6 +97,7 @@ export default function Farm() {
               </div>
           </div>
           </div>
+          <div><GoogleMaps location={farm?.location} name={farm?.name}></GoogleMaps></div>
         </div>
       </>
     );

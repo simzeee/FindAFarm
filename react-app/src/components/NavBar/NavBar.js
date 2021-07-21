@@ -11,7 +11,7 @@ export default function NavBar(){
   return (
     <nav>
       <div className={styles.navContainer}>
-      <a href="https://github.com/simzeee/FindAFarm">John's Github</a>
+      <a href="https://github.com/simzeee/FindAFarm" target="_blank">John's Github</a>
         <div>
           <NavLink to="/" exact={true} activeClassName="active">
             Home
