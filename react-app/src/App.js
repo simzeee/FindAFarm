@@ -21,8 +21,6 @@ import EditFarmPhotos from './components/EditFarmPhotos/EditFarmPhotos';
 import EditAmenity from './components/EditAmenity/EditAmenity'
 import SearchResults from './components/SearchResults/SearchResults';
 
-import Test from './components/testComponent/CombinedComponent';
-
 import { authenticate } from './store/session';
 
 
@@ -97,9 +95,6 @@ function App() {
         <Route path="/searchResults" exact={true}>
           <SearchResults></SearchResults>
         </Route>
-        <ProtectedRoute path="/test" exact = {true}>
-          <Test></Test>
-        </ProtectedRoute>
       </Switch>
     </BrowserRouter>
   );
