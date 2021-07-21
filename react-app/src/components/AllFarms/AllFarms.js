@@ -4,7 +4,8 @@ import { NavLink } from 'react-router-dom';
 import { getAllFarms } from '../../store/farms';
 import { getAllAmenities } from '../../store/amenities';
 import MakeAFarmer from '../MakeAFarmer/MakeAFarmer';
-import MapContainer from '../ApiGoogleMap/ApiGoogleMap';
+// import MapContainer from '../ApiGoogleMap/ApiGoogleMap';
+import SetLocationMap from '../SetLocationMap/SetLocationMap';
 
 import styles from './AllFarms.module.css';
 
@@ -65,9 +66,9 @@ export default function AllFarms() {
             <NavLink to="/createFarm">Share Your Farm</NavLink>
           </button>
         </div>
-        {/* <div>
-        <MapContainer/>
-        </div> */}
+        <div>
+        <SetLocationMap/>
+        </div>
       </>
     );
   }

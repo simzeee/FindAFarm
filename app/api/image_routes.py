@@ -20,6 +20,8 @@ def upload_image():
     print("PRIMARY IMAGE", request.files["primaryImage"])
     print("ALL FILES", request.files)
 
+    # refactor thought: check for the length >= 1, upload one, check for 2, upload 2, etc.
+
     if len(request.files) == 1:
         print("ONE FILE")
         image = request.files["primaryImage"] 
