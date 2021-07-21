@@ -38,6 +38,7 @@ const defaultCenter = {
 export default function SetLocationMap(){
   const [markers, setMarkers] = useState([]);
   const [selected, setSelected] = useState(null);
+  const [location, setLocation] = useState()
 
   const onMapClick = useCallback((e) => {
     setMarkers((current) => [
@@ -50,6 +51,7 @@ export default function SetLocationMap(){
     ]);
     
   }, []);
+  // console.log(markers)
 
   const mapRef = useRef();
   const onMapLoad = useCallback((map) => {
@@ -73,7 +75,7 @@ export default function SetLocationMap(){
 
   return (
     <>
-      {/* <Search panTo={panTo}/> */}
+      <Search panTo={panTo}/>
       <GoogleMap
         zoom={8}
         center={defaultCenter}
@@ -111,6 +113,7 @@ export default function SetLocationMap(){
           </InfoWindow>
         ) : null} */}
       </GoogleMap>
+      <div>location= lat: {markers[0]?.lat} lng: {markers[0]?.lng}</div>
     </>
   );
 };

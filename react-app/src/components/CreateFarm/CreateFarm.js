@@ -6,6 +6,7 @@ import { createOneFarm } from '../../store/farms';
 import { createOneAmenity } from '../../store/amenities';
 import { getAllFarms } from '../../store/farms';
 import { getAllAmenities } from '../../store/amenities';
+import SetLocationMap from '../SetLocationMap/SetLocationMap';
 
 export default function CreateFarm() {
   const history = useHistory();
@@ -226,6 +227,7 @@ export default function CreateFarm() {
             {imageLoading && <p>Loading...</p>}
           </form>
         </div>
+        <div><SetLocationMap/></div>
       </div>
     </>
   );
