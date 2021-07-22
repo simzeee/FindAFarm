@@ -39,7 +39,7 @@ export default function SetLocationMap({location, setLocation}){
 
   console.log("LOCATION OBJECT",location?.split(" "))
 
-  const newCenter = {lat: parseFloat(location?.split(" ")[1],10), lng: parseFloat(location?.split(" ")[3],10)}
+  let newCenter = {lat: parseFloat(location?.split(" ")[1],10), lng: parseFloat(location?.split(" ")[3],10)}
   console.log("NEW CENTER", newCenter)
   
 

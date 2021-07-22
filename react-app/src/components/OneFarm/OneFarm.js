@@ -94,10 +94,10 @@ export default function Farm() {
               <div key={amenity.id}>{amenity.amenityName}</div>
               ))}
           </div>
+          <div className={styles.oneFarmMap}><GoogleMaps location={farm?.location} name={farm?.name}></GoogleMaps></div>
               </div>
           </div>
           </div>
-          <div><GoogleMaps location={farm?.location} name={farm?.name}></GoogleMaps></div>
         </div>
       </>
     );
@@ -149,8 +149,6 @@ export default function Farm() {
           </div>
           <div className={styles.infoContainer}>
           <div className={styles.infoLeft}>
-          <div>
-          </div>
                     <div>
                       {farm?.userId === user.id ? (
                         <NavLink to={`/editFarmPhotos/${farmId}`}>
@@ -178,11 +176,11 @@ export default function Farm() {
             )}
           </div>
               <div className={styles.amenitiesTitle}>
-                <h3>Amenities:</h3>
                 </div>
             <div className={styles.amenitiesContainer}>
+                <h3>Amenities:</h3>
             {amenities?.map((amenity) => (
-              <div key={amenity.id}>{amenity.amenityName}</div>
+              <div className={styles.individualAmenity} key={amenity.id}>{amenity.amenityName}</div>
               ))}
           </div>
           <div>
@@ -202,7 +200,7 @@ export default function Farm() {
           </div>
           </div>
           </div>
-          <div><GoogleMaps location={farm?.location} name={farm?.name}></GoogleMaps></div>
+          <div className={styles.oneFarmMap}><GoogleMaps location={farm?.location} name={farm?.name}></GoogleMaps></div>
         </div>
       </>
     );

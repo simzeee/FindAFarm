@@ -43,7 +43,6 @@ export default function GoogleMaps(props){
   if (!isLoaded) return 'Loading Map...';
   
   return (
-    
     <GoogleMap mapContainerStyle={mapStyles} zoom={10} center={locater.center}>
       <Marker position={locater.center}
               icon={{
@@ -55,5 +54,6 @@ export default function GoogleMaps(props){
 
       </Marker>
     </GoogleMap>
+    
   );
 }

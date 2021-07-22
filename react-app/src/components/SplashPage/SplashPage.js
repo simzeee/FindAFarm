@@ -39,7 +39,7 @@ export default function SplashPage() {
         </div>
       </div>
       <div className={styles.mapContainer}>
-        <AllFarmsMap></AllFarmsMap>
+          <AllFarmsMap></AllFarmsMap>
       </div>
       {/* <div>
         <MapContainer></MapContainer>
