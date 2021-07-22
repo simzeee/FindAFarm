@@ -37,7 +37,7 @@ export default function SearchResults() {
           {farms.map((farm) => (
           <div className={styles.farmImageContainer}>
             <NavLink to={`/farms/${farm.id}`} key={farm.id}>
-              <div onClick={clearSearch}>{farm.name}</div>
+              <div className={styles.farmName} onClick={clearSearch}>{farm.name}:</div>
             <img onClick={clearSearch}
                   className={styles.actualFarmImage}
                   src={farm.primaryImage}
