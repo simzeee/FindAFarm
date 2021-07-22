@@ -50,6 +50,11 @@
   height: 100%;
   width: 50%;
   margin-right: 1%;
+  transition: transform 250ms;
+}
+
+.pigs:hover {
+  transform: translateY(-10px);
 }
 
 #cutePigs {
@@ -67,6 +72,11 @@
 .cow {
   height: 100%;
   width: 50%;
+  transition: transform 250ms;
+}
+
+.cow:hover {
+  transform: translateY(-10px);
 }
 
 .mapContainer {
