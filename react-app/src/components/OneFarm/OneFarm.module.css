@@ -127,6 +127,7 @@
   height: fit-content;
   padding: 15px 5px 15px 15px;
   font-weight: 300;
+  border-radius: 24px;
 }
 
 .amenitiesContainer h3{
