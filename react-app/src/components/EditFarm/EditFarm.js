@@ -120,7 +120,7 @@ export default function EditFarm() {
             </div>
           </div>
         </div>
-      <div>
+      <div className={styles.mapContainer}>
         <EditFarmLocationMap
           location={currentFarm?.location}
           setLocation={setLocation}

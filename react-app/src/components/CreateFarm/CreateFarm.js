@@ -232,7 +232,7 @@ export default function CreateFarm() {
             {imageLoading && <p>Loading...</p>}
           </form>
         </div>
-        <div><SetLocationMap setLocation={setLocation}/></div>
+        <div className={styles.mapContainer}><SetLocationMap setLocation={setLocation}/></div>
       </div>
     </>
   );

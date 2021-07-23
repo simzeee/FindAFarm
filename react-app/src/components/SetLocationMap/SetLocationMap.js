@@ -25,7 +25,7 @@ import styles from './SetLocationMap.module.css'
 
 const mapContainerStyle = {
   width: '50vw',
-  height: '30vh',
+  height: '50vh',
 };
 const libraries = ['places'];
 
@@ -117,8 +117,6 @@ export default function SetLocationMap({location, setLocation}){
 };
 
 
-
-
 function Search({panTo}) {
   const {
     ready,
@@ -134,7 +132,7 @@ function Search({panTo}) {
   });
 
   return (
-    <div className={styles.comboBox}>
+    <div className={styles.search}>
       <Combobox
         onSelect={async (address) => {
           setValue(address, false);
@@ -145,7 +143,7 @@ function Search({panTo}) {
             const {lat, lng} = await getLatLng(results[0]);
             panTo({lat, lng})
           } catch (error) {
-            console.log('error');
+            console.log('There was an error');
           }
         }}
       >
@@ -162,7 +160,7 @@ function Search({panTo}) {
           {status === 'OK' &&
 
             data.map(({ id, description }) => (
-              <ComboboxOption key={Math.random()} value={description}></ComboboxOption>
+              <ComboboxOption className={styles.searchSuggest} key={Math.random()} value={description}></ComboboxOption>
             ))}
 
           </ComboboxList>

@@ -21,31 +21,30 @@ import {
 } from '@reach/combobox';
 
 import circleFarmer from '../ApiGoogleMap/farmer.png';
-import styles from './EditFarmLocationMap.module.css'
+import styles from './EditFarmLocationMap.module.css';
 
 const mapContainerStyle = {
   width: '50vw',
-  height: '30vh',
+  height: '50vh',
 };
 const libraries = ['places'];
 
 const defaultCenter = {
-  lat: 41.4090,
+  lat: 41.409,
   lng: -75.6624,
 };
 
+export default function SetLocationMap({ location, setLocation }) {
+  console.log('LOCATION OBJECT', location?.split(' '));
 
-export default function SetLocationMap({location, setLocation}){
-
-  console.log("LOCATION OBJECT",location?.split(" "))
-
-  const newCenter = {lat: parseFloat(location?.split(" ")[1],10), lng: parseFloat(location?.split(" ")[3],10)}
-  console.log("NEW CENTER", newCenter)
-  
+  const newCenter = {
+    lat: parseFloat(location?.split(' ')[1], 10),
+    lng: parseFloat(location?.split(' ')[3], 10),
+  };
+  console.log('NEW CENTER', newCenter);
 
   const [markers, setMarkers] = useState([]);
   const [selected, setSelected] = useState(null);
-  
 
   const onMapClick = useCallback((e) => {
     setMarkers((current) => [
@@ -56,9 +55,8 @@ export default function SetLocationMap({location, setLocation}){
         time: new Date(),
       },
     ]);
-    
-    setLocation(`lat: ${e.latLng.lat()} lng: ${e.latLng.lng()}`)
 
+    setLocation(`lat: ${e.latLng.lat()} lng: ${e.latLng.lng()}`);
   }, []);
   // console.log(markers)
 
@@ -72,22 +70,23 @@ export default function SetLocationMap({location, setLocation}){
     libraries,
   });
 
-
-  const panTo = useCallback(({lat, lng}) => {
-    mapRef.current.panTo({lat, lng});
+  const panTo = useCallback(({ lat, lng }) => {
+    mapRef.current.panTo({ lat, lng });
     mapRef.current.setZoom(14);
-  }, [])
-
+  }, []);
 
   if (loadError) return 'Error loading maps';
   if (!isLoaded) return 'Loading Maps';
 
   return (
     <>
-      <Search panTo={panTo}/>
+      <Search panTo={panTo} />
       <GoogleMap
         zoom={8}
-        center={{lat: parseFloat(location?.split(" ")[1],10), lng: parseFloat(location?.split(" ")[3],10)}}
+        center={{
+          lat: parseFloat(location?.split(' ')[1], 10),
+          lng: parseFloat(location?.split(' ')[3], 10),
+        }}
         mapContainerStyle={mapContainerStyle}
         onClick={onMapClick}
         //You are given the lat/lng on click
@@ -108,18 +107,12 @@ export default function SetLocationMap({location, setLocation}){
             }}
           />
         ))}
-
-
       </GoogleMap>
-      
     </>
   );
-};
+}
 
-
-
-
-function Search({panTo}) {
+function Search({ panTo }) {
   const {
     ready,
     value,
@@ -134,16 +127,16 @@ function Search({panTo}) {
   });
 
   return (
-    <div className={styles.comboBox}>
+    <div className={styles.search}>
       <Combobox
         onSelect={async (address) => {
           setValue(address, false);
-          clearSuggestions()
+          clearSuggestions();
 
           try {
             const results = await getGeocode({ address });
-            const {lat, lng} = await getLatLng(results[0]);
-            panTo({lat, lng})
+            const { lat, lng } = await getLatLng(results[0]);
+            panTo({ lat, lng });
           } catch (error) {
             console.log('error');
           }
@@ -159,12 +152,14 @@ function Search({panTo}) {
         />
         <ComboboxPopover>
           <ComboboxList>
-          {status === 'OK' &&
-
-            data.map(({ id, description }) => (
-              <ComboboxOption key={Math.random()} value={description}></ComboboxOption>
-            ))}
-
+            {status === 'OK' &&
+              data.map(({ id, description }) => (
+                <ComboboxOption
+                  key={Math.random()}
+                  className={styles.searchSuggest}
+                  value={description}
+                ></ComboboxOption>
+              ))}
           </ComboboxList>
         </ComboboxPopover>
       </Combobox>
