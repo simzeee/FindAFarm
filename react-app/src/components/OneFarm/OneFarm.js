@@ -16,11 +16,8 @@ export default function Farm() {
 
   const farm = useSelector((state) => state.farms[farmId]);
   const user = useSelector((state) => state.session.user);
- 
 
   const amenities = useSelector((state) => state.farms[farmId]?.farmAmenities);
-
-
 
   useEffect(() => {
     dispatch(getAllFarms());
@@ -31,7 +28,7 @@ export default function Farm() {
   if (!user) {
     return (
       <>
-       <div className={styles.oneFarmRootContainer}>
+        <div className={styles.oneFarmRootContainer}>
           <div className={styles.imageContainer}>
             <div className={styles.primaryImageContainer}>
               <img
@@ -61,7 +58,7 @@ export default function Farm() {
                   <img
                     className={styles.actualImage}
                     src={farm.fourthImage ? farm.fourthImage : ''}
-                    ></img>
+                  ></img>
                 </div>
               )}
               {farm.fifthImage && (
@@ -69,35 +66,38 @@ export default function Farm() {
                   <img
                     className={styles.actualImage}
                     src={farm.fifthImage ? farm.fifthImage : ''}
-                    ></img>
+                  ></img>
                 </div>
               )}
             </div>
           </div>
           <div className={styles.infoContainer}>
-          <div className={styles.infoLeft}>
-          <div>
-          </div>
-          <div className={styles.farmTitleContainer}>
-            <h3 id={styles.farmTitle}>{farm?.name}</h3>
-            <div className={styles.descriptionContainer}>
-              <h3>About:</h3>
-              <div> {farm?.description}</div>
+            <div className={styles.infoLeft}>
+              <div className={styles.farmTitleContainer}>
+                <h3 id={styles.farmTitle}>{farm?.name}</h3>
+                <div className={styles.descriptionContainer}>
+                  <h3>About:</h3>
+                  <div> {farm?.description}</div>
+                </div>
+              </div>
+              <div>
+                <div className={styles.amenitiesTitle}>
+                  <h3>Amenities:</h3>
+                </div>
+                <div className={styles.amenitiesContainer}>
+                  {amenities?.map((amenity) => (
+                    <div key={amenity.id}>{amenity.amenityName}</div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
-          <div>
-              <div className={styles.amenitiesTitle}>
-                <h3>Amenities:</h3>
+                <div className={styles.oneFarmMap}>
+                  <GoogleMaps
+                    location={farm?.location}
+                    name={farm?.name}
+                  ></GoogleMaps>
                 </div>
-            <div className={styles.amenitiesContainer}>
-            {amenities?.map((amenity) => (
-              <div key={amenity.id}>{amenity.amenityName}</div>
-              ))}
-          </div>
-          <div className={styles.oneFarmMap}><GoogleMaps location={farm?.location} name={farm?.name}></GoogleMaps></div>
-              </div>
-          </div>
-          </div>
         </div>
       </>
     );
@@ -134,7 +134,7 @@ export default function Farm() {
                   <img
                     className={styles.actualImage}
                     src={farm.fourthImage ? farm.fourthImage : ''}
-                    ></img>
+                  ></img>
                 </div>
               )}
               {farm.fifthImage && (
@@ -142,65 +142,71 @@ export default function Farm() {
                   <img
                     className={styles.actualImage}
                     src={farm.fifthImage ? farm.fifthImage : ''}
-                    ></img>
+                  ></img>
                 </div>
               )}
             </div>
           </div>
           <div className={styles.infoContainer}>
-          <div className={styles.infoLeft}>
-                    <div>
-                      {farm?.userId === user.id ? (
-                        <NavLink to={`/editFarmPhotos/${farmId}`}>
-                          <button>Edit Your Farm's Photos</button>
-                        </NavLink>
-                      ) : (
-                        ''
-                      )}
+            <div className={styles.infoLeft}>
+              <div>
+                {farm?.userId === user.id ? (
+                  <NavLink to={`/editFarmPhotos/${farmId}`}>
+                    <button>Edit Your Farm's Photos</button>
+                  </NavLink>
+                ) : (
+                  ''
+                )}
+              </div>
+              <div className={styles.farmTitleContainer}>
+                <h3 id={styles.farmTitle}>{farm?.name}</h3>
+                <div className={styles.descriptionContainer}>
+                  <h3>About:</h3>
+                  <div> {farm?.description}</div>
+                </div>
+              </div>
+              <div>
+                <div>
+                  {farm?.userId === user.id ? (
+                    <NavLink to={`/editFarm/${farmId}`}>
+                      <button>Edit Your Farm</button>
+                    </NavLink>
+                  ) : (
+                    ''
+                  )}
+                </div>
+                <div className={styles.amenitiesTitle}></div>
+                <div className={styles.amenitiesContainer}>
+                  <h3>Amenities:</h3>
+                  {amenities?.map((amenity) => (
+                    <div className={styles.individualAmenity} key={amenity.id}>
+                      {amenity.amenityName}
                     </div>
-          <div className={styles.farmTitleContainer}>
-            <h3 id={styles.farmTitle}>{farm?.name}</h3>
-            <div className={styles.descriptionContainer}>
-              <h3>About:</h3>
-              <div> {farm?.description}</div>
+                  ))}
+                </div>
+                <div>
+                  {farm?.userId === user.id ? (
+                    <NavLink to={`/editAmenities/${farmId}`}>
+                      <button>Edit Your Amenities</button>
+                    </NavLink>
+                  ) : (
+                    ''
+                  )}
+                </div>
+              </div>
+            </div>
+            <div className={styles.infoRight}>
+              <div>
+                <CreateBooking></CreateBooking>
+              </div>
             </div>
           </div>
-          <div>
-          <div>
-            {farm?.userId === user.id ? (
-              <NavLink to={`/editFarm/${farmId}`}>
-                <button>Edit Your Farm</button>
-              </NavLink>
-            ) : (
-              ''
-            )}
+          <div className={styles.oneFarmMap}>
+            <GoogleMaps
+              location={farm?.location}
+              name={farm?.name}
+            ></GoogleMaps>
           </div>
-              <div className={styles.amenitiesTitle}>
-                </div>
-            <div className={styles.amenitiesContainer}>
-                <h3>Amenities:</h3>
-            {amenities?.map((amenity) => (
-              <div className={styles.individualAmenity} key={amenity.id}>{amenity.amenityName}</div>
-              ))}
-          </div>
-          <div>
-            {farm?.userId === user.id ? (
-              <NavLink to={`/editAmenities/${farmId}`}>
-                <button>Edit Your Amenities</button>
-              </NavLink>
-            ) : (
-              ''
-            )}
-          </div>
-              </div>
-          </div>
-          <div className={styles.infoRight}>
-          <div>
-            <CreateBooking></CreateBooking>
-          </div>
-          </div>
-          </div>
-          <div className={styles.oneFarmMap}><GoogleMaps location={farm?.location} name={farm?.name}></GoogleMaps></div>
         </div>
       </>
     );

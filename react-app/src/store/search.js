@@ -16,7 +16,6 @@ const clearSearch = (id) => ({
 })
 
 export const searchAllFarms = (payload) => async (dispatch) => {
-  console.log('WE ARE IN THE SEARCH');
 
   let data = await fetch('/api/search/', {
     method: 'POST',
@@ -32,7 +31,7 @@ export const searchAllFarms = (payload) => async (dispatch) => {
   if (data.errors) {
     return;
   }
-  console.log('MY DATA RESPONSE', data);
+  
   dispatch(search(data));
 };
 
@@ -47,18 +46,15 @@ export default function reducer(state = initialState, action) {
     case SEARCH_RESULTS: {
       const newState = { ...state };
       Object.values(action.payload.results).forEach((farm)=>{
-        console.log("EACH FARM", farm, typeof(farm))
+        
         newState[farm.id] = farm
       })
-      console.log('SEARCH RESULTS ACTION.PAYLOAD', typeof(action.payload), action.payload);
+
       return newState;
     }
     case CLEAR_RESULTS:{
       const newState = {...state}
-      console.log("ACTION PAYLOAD", action.payload)
-      console.log("NEW STATE", newState, typeof(newState), newState[1])
       Object.values(action.payload.ids).forEach((id)=>{
-        console.log("INSIDE FOR EACH", id)
         delete newState[id]
       })
       return newState

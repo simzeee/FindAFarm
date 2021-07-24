@@ -35,7 +35,7 @@ export const authenticate = () => async (dispatch) => {
 };
 
 export const login = (email, password) => async (dispatch) => {
-  console.log("login")
+  
   const response = await fetch('/api/auth/login', {
     method: 'POST',
     headers: {
@@ -57,9 +57,7 @@ export const login = (email, password) => async (dispatch) => {
 };
 
 export const becomeFarmer = (id) => async (dispatch) => {
-  console.log("DID WE DISPATCH?")
-  console.log("id in becomeFarmer", id)
-// const {userId} = id
+
   const response = await fetch('/api/auth/login', {
     method: 'PUT',
     headers: {
@@ -73,9 +71,6 @@ export const becomeFarmer = (id) => async (dispatch) => {
   if (data.errors) {
     return;
   }
-
-  console.log("DATA MAKE A FARMER", data)
-
 
   dispatch(makeAFarmer(data));
 }
@@ -123,8 +118,6 @@ export default function reducer(state = initialState, action) {
       return {user: null}
     case MAKE_FARMER:
       const newState = {...state}
-      console.log("NEW STATE", newState)
-      console.log("ACTION PAYLOAD MAKE A FARMER", action.payload)
       return {user: action.payload}
     default:
       return state;

@@ -47,12 +47,10 @@ export const createOneAmenity = (amenity) => async (dispatch) => {
   if (data.errors) {
     return;
   }
-  console.log("OUR DATA HERE", data)
   dispatch(createAmenity(data));
 };
 
 export const deleteOneAmenity = (payload) => async (dispatch) => {
-  console.log('IN DELETE AMENITY THUNK', payload);
   const { amenityId } = payload;
   let id = amenityId;
 
@@ -75,7 +73,6 @@ export default function reducer(state = initialState, action) {
     }
     case CREATE_AMENITY: {
       const newState = { ...state };
-      console.log("Our New State", newState)
       newState[action.payload.id] = action.payload.farmAmenities
       return newState;
     }

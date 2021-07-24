@@ -232,7 +232,6 @@ export default function reducer(state = initialState, action) {
     }
     case CREATE_BOOKING: {
       const newState = { ...state };
-      // console.log("ID", action.payload.bookingId)
       newState[action.payload.bookingId] = action.payload;
       return newState;
     }

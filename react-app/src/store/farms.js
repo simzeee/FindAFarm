@@ -74,7 +74,7 @@ export const createOneFarm = (farm) => async (dispatch) => {
   if (data.errors) {
     return;
   }
-  console.log('FROM BACKEND CREATE FARM', data);
+  
   dispatch(createFarm(data));
 };
 
@@ -90,7 +90,7 @@ export const editOneFarm = (farm) => async (dispatch) => {
     tableMaking,
     amenityId,
   } = farm;
-  console.log('WE DISPATCHED');
+  
 
   const response = await fetch('/api/farms/', {
     method: 'PUT',
@@ -118,8 +118,6 @@ export const editOneFarm = (farm) => async (dispatch) => {
 };
 
 export const editOneFarmAmenities = (payload) => async (dispatch) => {
-  console.log('EDIT ONE FARM AMENITY');
-  console.log('PAYLOAD IN THUNK', payload)
 
   const response = await fetch('/api/farms/amenities/', {
     method: 'PATCH',
@@ -134,7 +132,6 @@ export const editOneFarmAmenities = (payload) => async (dispatch) => {
     return;
   }
 
-  console.log('DATA', data);
 
   dispatch(editFarmAmenities(data));
 };
@@ -174,7 +171,6 @@ export default function reducer(state = initialState, action) {
     }
     case CREATE_FARM: {
       const newState = { ...state };
-      // console.log("Payload from create farm", action.payload)
       newState[action.payload.farm.id] = action.payload.farm;
       return newState;
     }
@@ -185,9 +181,6 @@ export default function reducer(state = initialState, action) {
     }
     case DELETE_FARM: {
       const newState = { ...state };
-      // console.log("NEW STATE", newState)
-      // console.log("ACTION PAYLOAD HERE DELETE", action.payload)
-      // console.log("STATE STUFF", newState[action.payload.id])
       delete newState[action.payload.id];
       return newState;
     }
