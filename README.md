@@ -76,3 +76,5 @@ I am constantly in the process of adding new features and optimizing the current
 - Farmer's have a unique booking experience, where they can view who is staying at their farm
 - Farmers can review guests (Dun dun duuuun!)
 - Users can toggle between Farmer/Guest experience
+
+Please, feel free to reach out to me on [LinkedIn](https://www.linkedin.com/in/jwsims/)
