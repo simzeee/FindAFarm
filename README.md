@@ -43,27 +43,27 @@ When creating a farm, the farmer must choose their location and input the variou
 
 ## The "Find" in Find A Farm
 
-To search for a farm via amenities, the React component keeps track of the "checked" state for each dynamically updated amenity. This involves carefully keeping track of each amenity's state and setting its checked state to true or false based on the user's selection. Having at least one selection allows the submit function to be enabled that upon clicking, sends an object with the key being the name of the amenity and the value being "true" or "false".
+To search for a farm via amenities, the React component keeps track of the "checked" state for each dynamically updated amenity. This involves carefully keeping track of each amenity's state and setting its checked state to true or false based on the user's selection. Having at least one selection allows the submit button to be enabled. Upon submitting, an object is sent with the key being the name of the amenity, and the value being the "checked" value of "true" or "false".
 
 ![](githubReadMe/SearchStateSetter.png)
 
-Then, in the backend a "trueList" is made of all amenities where checked equals true. Then, a new list of farms is constructed from the set of farms based on whether or not that farm contains the amenity. Finally, the result is returned as a dictionary and displayed in the search results.
+Then, in the backend a "trueList" is made of all amenities where checked "===" true. A new list of farms is then constructed from the set of farms based on whether or not that farm contains the amenity. Finally, the result is returned as a dictionary and displayed in the search results.
 
 ![](githubReadMe/SearchBackend.png)
 
 ## Farms Around the World
 
-The second way to search a farm involves viewing a map of the world and choosing a location that is most desired by the user. When a new farm is created, the user sets the location via clicking on an interactive map and setting the latitude and longitude. The locations map React component sets the initial locations on the map by iterating through the farm Redux state's locations and extracting the lat/long in a way that the Google Maps Api can understand. Then, markers are set using the array of objects created earlier that also include each farm's id so that when the farm icon is clicked on, the info window can easily redirect you to that farm's page. 
+The second way to search a farm involves viewing a map of the world and choosing a location that is most desired by the user. When a new farm is created, the user sets the location via clicking on an interactive map and setting the latitude and longitude. The "locations" React map component sets the initial locations on the map by iterating through the farms locations state, and extracting the lat/long in a way that the Google Maps Api can understand. Then, markers are set using the array of objects created earlier, which also include each farm's id so that when the farm icon is clicked, the info window can easily redirect you to that farm's page. 
 
 ![](githubReadMe/allFarmsMap.png)
 
 # Farmers Create. It's what they do.
 
-When a farm is created, a sophisticated dance begins. The timing was very important because image routes, amenity routes, and farm description routes are all separate for maximum customization. We start by appending formData with the images uploaded and then posting the images in the backend. 
+When a farm is created, a sophisticated dance begins. The timing was very important because image routes, amenity routes, and farm description routes are all separate for maximum customization. If one thing happens out of order, the entire process fails. We start by appending formData with the images uploaded and then posting the images in the backend. 
 
 ![](githubReadMe/createFarmFrontend.png)
 
-Then, we send the payload of the new farm information to the backend route where the farm is located by name in order to associate it with it's previously created image row in the database. Finally, we create a list of all checked amenities and associate the farm with the amenities they have selected. The new farm is then returned to the frontend, and seamlessly updates with the new photos, description, Google Maps location.
+Then, we send the payload of the new farm information to the "create farm" backend route where the farm is located by name in order to associate it with it's previously created "image" row in the database. Finally, we create a list of all checked amenities and associate the farm with the amenities they have selected. The new farm is then returned to the frontend, and seamlessly updates with the new photos, description, and Google Maps location/icon.
 
 ![](githubReadMe/createFarmBackend.png)
 
