@@ -32,11 +32,11 @@ Users can also interact with a searchable map and click on whatever farm they wo
 
 ![](githubReadMe/searchGoogleMap.png)
 
-Then, once a farm is selected, the guest can view between one and 5 photos as well as details concerning what the farm offers in order to get an idea for what staying at this farm would be like. 
+Then, once a farm is selected, the guest can view between one and 5 photos as well as details concerning what the farm offers in order to get an idea for what staying at this farm would be like. Farmers can see their current posted farm and edit each feature individually.
 
 ![](githubReadMe/oneFarmImages.png)
 ![](githubReadMe/oneFarmEdit.png)
 
-Farmers can see their current posted farm and edit each feature individually. When creating a farm, they must choose and input the various characteristics as as well as photos and amenities that they will offer. 
+ When creating a farm, the farmer must choose their location and input the various characteristics as as well as photos and amenities that they will offer. 
 
 ![](githubReadMe/createFarmForm.png)
