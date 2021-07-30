@@ -37,7 +37,7 @@ Then, once a farm is selected, the guest can view between one and 5 photos as we
 ![](githubReadMe/oneFarmImages.png)
 ![](githubReadMe/oneFarmEdit.png)
 
- When creating a farm, the farmer must choose their location and input the various characteristics as as well as photos and amenities that they will offer. 
+When creating a farm, the farmer must choose their location and input the various characteristics as as well as photos and amenities that they will offer. There is a searchable Google Maps interface that allows farmer's to easily located their farm and click the map to set their location.
 
 ![](githubReadMe/createFarmForm.png)
 
@@ -57,3 +57,15 @@ Then, in the backend a "trueList" is made of all amenities where checked equals 
 The second way to search a farm involves viewing a map of the world and choosing a location that is most desired by the user. When a new farm is created, the user sets the location via clicking on an interactive map and setting the latitude and longitude. The locations map React component sets the initial locations on the map by iterating through the farm Redux state's locations and extracting the lat/long in a way that the Google Maps Api can understand. Then, markers are set using the array of objects created earlier that also include each farm's id so that when the farm icon is clicked on, the info window can easily redirect you to that farm's page. 
 
 ![](githubReadMe/allFarmsMap.png)
+
+# Farmers Create. It's what they do.
+
+When a farm is created, a sophisticated dance begins. The timing was very important because image routes, amenity routes, and farm description routes are all separate for maximum customization. We start by appending formData with the images uploaded and then posting the images in the backend. 
+
+![](githubReadMe/createFarmFrontend.png)
+
+Then, we send the payload of the new farm information to the backend route where the farm is located by name in order to associate it with it's previously created image row in the database. Finally, we create a list of all checked amenities and associate the farm with the amenities they have selected. The new farm is then returned to the frontend and displays it's photos, description, and new location on Google Maps seamlessly.
+
+![](githubReadMe/createFarmBackend.png)
+
+
