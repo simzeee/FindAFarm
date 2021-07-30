@@ -112,8 +112,6 @@ export default function CreateFarm() {
       setImageLoading(false);
     } else {
       setImageLoading(false);
-      // a real app would probably use more advanced
-      // error handling
       console.log('error');
     }
 
@@ -124,11 +122,8 @@ export default function CreateFarm() {
       description,
       stateAmenities
     };
-    console.log(payload)
 
     dispatch(createOneFarm(payload))
-    
-
     history.push('/');
   };
 

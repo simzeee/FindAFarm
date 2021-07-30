@@ -26,13 +26,8 @@ def createFarm():
     newFarm = request.json
 
     imageFarmName = newFarm["farmName"]
- 
-    print("NEW FARM NEW FARM", newFarm)
-    print("NEW FAR NAME", imageFarmName)
 
     farmImages = Image.query.filter(Image.farmName == imageFarmName).first()
-
-    # print("FARM IMAGES", farmImages, "FARM PRIMARY")
 
     farm = Farm(
         name=newFarm["farmName"],
@@ -58,11 +53,11 @@ def createFarm():
     for key, value in array:
         if value is True:
             trueValues.append(key)
-    
+
     amenities = Amenity.query.filter(Amenity.amenityName.in_(trueValues)).all()
-    farm.amenities.extend(amenities)  
-    
-    #This is in the database after commit
+    farm.amenities.extend(amenities)
+
+    # This is in the database after commit
 
     db.session.commit()
 
@@ -74,8 +69,6 @@ def createFarm():
 def editFarm():
 
     editedFarm = request.json
-
-    print("EDITED INFORATION", editedFarm)
 
     imageFarmId = editedFarm["farmId"]
 
@@ -94,8 +87,6 @@ def editFarm():
     farmToEdit.description = editedFarm["description"]
     farmToEdit.userId = current_user.id
 
-    print("RETURN VALUE", {"farm": farmToEdit.to_dict()})
-
     db.session.commit()
 
     return {"farm": farmToEdit.to_dict()}
@@ -104,9 +95,8 @@ def editFarm():
 @farm_routes.route('/amenities/', methods=["PATCH"])
 @login_required
 def editFarmAmenities():
-    print("PATCH ROUTE")
+
     editedFarm = request.json
-    print("EDITED FARM 121", editedFarm)
 
     farmId = editedFarm["farmId"]
 
@@ -116,11 +106,11 @@ def editFarmAmenities():
 
     array = editedFarm["stateAmenities"].items()
     trueValues = []
-    
+
     for key, value in array:
         if value is True:
             trueValues.append(key)
-    
+
     print("TRUE VALUES", trueValues)
 
     amenities = Amenity.query.filter(Amenity.amenityName.in_(trueValues)).all()
@@ -129,15 +119,11 @@ def editFarmAmenities():
     for a in amenities:
         print("HERE IS PRINT", a.amenityName)
 
-    print(farmToEdit.amenities, "RIGHT HERE RIGHT HERE")
-
     i = len(farmToEdit.amenities)-1
 
     while i >= 0:
         farmToEdit.amenities.pop(i)
         i -= 1
-    
-    print("AFTER CLEAR", farmToEdit.amenities)
 
     for a in amenities:
         farmToEdit.amenities.append(a)
@@ -160,4 +146,3 @@ def deleteFarm(id):
     # db.session.delete(amenityToDelete)
     db.session.commit()
     return {"id": id}
-
