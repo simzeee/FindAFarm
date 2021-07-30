@@ -40,3 +40,20 @@ Then, once a farm is selected, the guest can view between one and 5 photos as we
  When creating a farm, the farmer must choose their location and input the various characteristics as as well as photos and amenities that they will offer. 
 
 ![](githubReadMe/createFarmForm.png)
+
+
+## The "Find" in Find A Farm
+
+To search for a farm via amenities, the React component keeps track of the "checked" state for each dynamically updated amenity. This involves carefully keeping track of each amenity's state and setting its checked state to true or false based on the user's selection. Having at least one selection allows the submit function to be enabled that upon clicking, sends an object with the key being the name of the amenity and the value being "true" or "false".
+
+![](githubReadMe/SearchStateSetter.png)
+
+Then, in the backend a "trueList" is made of all amenities where checked equals true. Then, a new list of farms is constructed from the set of farms based on whether or not that farm contains the amenity. Finally, the result is returned as a dictionary and displayed in the search results.
+
+![](githubReadMe/SearchBackend.png)
+
+## Farms Around the World
+
+The second way to search a farm involves viewing a map of the world and choosing a location that is most desired by the user. When a new farm is created, the user sets the location via clicking on an interactive map and setting the latitude and longitude. The locations map React component sets the initial locations on the map by iterating through the farm Redux state's locations and extracting the lat/long in a way that the Google Maps Api can understand. Then, markers are set using the array of objects created earlier that also include each farm's id so that when the farm icon is clicked on, the info window can easily redirect you to that farm's page. 
+
+![](githubReadMe/allFarmsMap.png)
