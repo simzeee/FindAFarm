@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory} from 'react-router-dom'
+import { useHistory } from 'react-router-dom';
 import {
   GoogleMap,
   useLoadScript,
@@ -10,7 +10,7 @@ import {
 import { getAllFarms } from '../../store/farms';
 
 import circleFarmer from '../ApiGoogleMap/farmer.png';
-import styles from './AllFarmsMap.module.css'
+import styles from './AllFarmsMap.module.css';
 
 const defaultCenter = {
   lat: 37.6872,
@@ -26,21 +26,20 @@ const libraries = ['places'];
 
 const SetLocation = () => {
   const dispatch = useDispatch();
-  const history = useHistory()
+  const history = useHistory();
 
   const farms = useSelector((state) => state.farms);
   const [selected, setSelected] = useState(null);
 
   const locationsArray = Object.values(farms)?.map((farm) => {
-    return [farm.location, farm.name, farm.id]
+    return [farm.location, farm.name, farm.id];
   });
 
   const makeLocationsArray = (initialArray) => {
-    console.log("INITIAL", initialArray)
     const resultArray = [];
     initialArray.forEach((location) => {
       const locationObject = {};
-      console.log("INSIDE FOR EACH", location)
+
       let splitLocation = location[0].split(' ');
 
       locationObject.location = {
@@ -48,10 +47,9 @@ const SetLocation = () => {
         lng: parseFloat(splitLocation[3], 10),
       };
 
-      locationObject.name = location[1]
-      console.log(locationObject)
+      locationObject.name = location[1];
 
-      locationObject.id = location[2]
+      locationObject.id = location[2];
 
       resultArray.push(locationObject);
     });
@@ -69,9 +67,9 @@ const SetLocation = () => {
   });
 
   const testFunction = (id) => {
-    window.scrollTo(0,0)
-    history.push(`/farms/${id}`)
-  }
+    window.scrollTo(0, 0);
+    history.push(`/farms/${id}`);
+  };
 
   useEffect(() => {
     dispatch(getAllFarms());
@@ -104,12 +102,18 @@ const SetLocation = () => {
 
         {selected ? (
           <InfoWindow
-            position={{ lat: selected.location.lat, lng: selected.location.lng }}
+            position={{
+              lat: selected.location.lat,
+              lng: selected.location.lng,
+            }}
             onCloseClick={() => {
               setSelected(null);
             }}
           >
-            <div className={styles.infoBox} onClick={() => testFunction(selected.id)} >
+            <div
+              className={styles.infoBox}
+              onClick={() => testFunction(selected.id)}
+            >
               <h4>{selected.name}</h4>
             </div>
           </InfoWindow>
