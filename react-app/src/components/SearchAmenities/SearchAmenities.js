@@ -34,15 +34,10 @@ export default function SearchAmenities() {
     } else {
       submitButton.disabled = true;
     }
-    console.log(someState);
   };
 
   const updateAmenityState = (e, amenityName, amenityValue) => {
-    console.log(e.target.id);
-
     setStateAmenities((oldState) => {
-      // console.log(amenityName)
-      console.log('VALUE', e.target.id.checked, amenityValue, e.target.checked);
       if (e.target.id.checked === false) {
         setCheckedState(true);
       }
@@ -55,7 +50,6 @@ export default function SearchAmenities() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('STATE AMENITIES', stateAmenities);
 
     dispatch(searchAllFarms(stateAmenities));
 
@@ -93,14 +87,18 @@ export default function SearchAmenities() {
               </div>
             </div>
           ))}
-        <div className={styles.searchButtonContainer}>
-          <button className={styles.searchButton} id="searchSubmit" type="submit" disabled={true}>
-            Search
-          </button>
-        </div>
+          <div className={styles.searchButtonContainer}>
+            <button
+              className={styles.searchButton}
+              id="searchSubmit"
+              type="submit"
+              disabled={true}
+            >
+              Search
+            </button>
+          </div>
         </form>
       </div>
     </>
   );
 }
-
