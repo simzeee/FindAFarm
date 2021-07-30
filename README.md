@@ -64,8 +64,16 @@ When a farm is created, a sophisticated dance begins. The timing was very import
 
 ![](githubReadMe/createFarmFrontend.png)
 
-Then, we send the payload of the new farm information to the backend route where the farm is located by name in order to associate it with it's previously created image row in the database. Finally, we create a list of all checked amenities and associate the farm with the amenities they have selected. The new farm is then returned to the frontend and displays it's photos, description, and new location on Google Maps seamlessly.
+Then, we send the payload of the new farm information to the backend route where the farm is located by name in order to associate it with it's previously created image row in the database. Finally, we create a list of all checked amenities and associate the farm with the amenities they have selected. The new farm is then returned to the frontend, and seamlessly updates with the new photos, description, Google Maps location.
 
 ![](githubReadMe/createFarmBackend.png)
 
+## More to Come
 
+I am constantly in the process of adding new features and optimizing the current ones. Here is a taste of things to come!
+
+- Guests can leave reviews on the quality of their stays
+- Guests and farmers can exchange messages
+- Farmer's have a unique booking experience, where they can view who is staying at their farm
+- Farmers can review guests (Dun dun duuuun!)
+- Users can toggle between Farmer/Guest experience
