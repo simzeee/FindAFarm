@@ -77,4 +77,4 @@ I am constantly in the process of adding new features and optimizing the current
 - Farmers can review guests (Dun dun duuuun!)
 - Users can toggle between Farmer/Guest experience
 
-Please, feel free to reach out to me on [LinkedIn](https://www.linkedin.com/in/jwsims/)
+Please, feel free to reach out to me on [LinkedIn](https://www.linkedin.com/in/jwsims/).
