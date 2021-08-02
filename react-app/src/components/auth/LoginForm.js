@@ -77,10 +77,10 @@ const LoginForm = () => {
         />
       </div>
         <button type="submit">Login</button>
-      
+      <div className={styles.buttonContainer}>
         <button type="submit" onClick={guestDemoLogin}>Demo Guest Login</button>
         <button type="submit" onClick={guestFarmerLogin}>Demo Farmer Login</button>
-      
+      </div>
     </form>
     </div>
   );
