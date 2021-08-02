@@ -25,8 +25,6 @@ export default function Amenity({ amenities }) {
     idsArray.push(farmAmenitiesObject[key].id)
   }
 
-  console.log("IDS ARRAY", idsArray)
-
 
   const initialStateSetter = (all) => {
     const stateObject = {};
@@ -35,15 +33,14 @@ export default function Amenity({ amenities }) {
 
         let amChecked = document.getElementById(`${amenity.amenityName}`)
 
-        console.log("INITIAL SETTER", amenity.amenityName)
 
         if(amChecked){
-          console.log("EVER HAPPENING?")
+          
           stateObject[amenity.amenityName] = amChecked.checked;  
         }
         stateObject[amenity.amenityName] = amChecked?.checked;
       });
-      console.log("STATE OBJECT", stateObject)
+      
     return stateObject;
   };
 
@@ -58,18 +55,13 @@ export default function Amenity({ amenities }) {
     } else {
       submitButton.disabled = true;
     }
-    console.log(someState);
+  
   };
 
-  console.log("ETHER STATE AMENITIES", stateAmenities)
+  
   const updateAmenityState = (e, amenityName, amenityValue) => {
-    console.log(e.target.id);
-    console.log("STATE AMENITIES IN UPDATE", stateAmenities)
 
     setStateAmenities((oldState) => {
-      console.log(amenityName);
-      console.log('VALUE', e.target.id.checked, amenityValue);
-      console.log("OLD STATE", oldState)
 
       let result = { ...oldState, [amenityName]: e.target.checked };
       changeSubmit(result);
@@ -80,7 +72,6 @@ export default function Amenity({ amenities }) {
   const handleSubmit = async (e) => {
     e.preventDefault()
     const payload = {stateAmenities,farmId}
-    console.log("PAYLOAD", payload)
     // debugger
     dispatch(editOneFarmAmenities(payload))
     dispatch(getAllFarms())
@@ -91,7 +82,6 @@ export default function Amenity({ amenities }) {
     dispatch(getAllAmenities());
     dispatch(getAllFarms());
     setStateAmenities(initialStateSetter(allAmenities))
-    // changeSubmit(stateAmenities)
   }, []);
 
   return (

@@ -3,12 +3,13 @@
   align-items: center;
   width: 100%;
   justify-content: space-around;
-  height: 5.5vh;
+  height: 9vh;
   background-color: rgb(2 196 133);
   font-size: 18px;
   letter-spacing: 0.22px;
   font-family: Calibre, Arial, Helvetica, sans-serif;
-  padding-bottom: 7px;
+  /* padding-bottom: 5px; */
+  padding-top: 3px;
 }
 
 a {
@@ -16,3 +17,12 @@ a {
   color: black;
   font-weight: 100;
 }
+
+.farmIconContainer {
+margin-right: 2%;
+}
+
+.farmIcon {
+  max-width: 73px;
+}
+

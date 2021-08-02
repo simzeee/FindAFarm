@@ -4,6 +4,8 @@ import { NavLink } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import styles from './NavBar.module.css'
 
+import farmIcon from './farmIcon.png'
+
 export default function NavBar(){
 
   const currentUser = useSelector((state)=>state.session.user)
@@ -11,14 +13,14 @@ export default function NavBar(){
   return (
     <nav>
       <div className={styles.navContainer}>
-      <a href="https://github.com/simzeee/FindAFarm" target="_blank">John's Github</a>
-        <div>
+        <div className={styles.farmIconContainer}>
           <NavLink to="/" exact={true} activeClassName="active">
-            Home
+            <img className={styles.farmIcon} src={farmIcon}></img>
           </NavLink>
         </div>
+      {/* <a href="https://github.com/simzeee/FindAFarm" target="_blank">John's Github</a> */}
         {!currentUser &&
-        <div>
+        <div className={styles.loginContainer}>
           <NavLink to="/login" exact={true} activeClassName="active">
             Login
           </NavLink>

@@ -4,7 +4,8 @@
   align-items: center;
   justify-content: space-evenly;
   height: 60vh;
-  
+  /* background-color: tomato; */
+  margin-bottom: 200px;
 }
 
 .loginForm {

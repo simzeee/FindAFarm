@@ -15,9 +15,6 @@ export default function EditFarmPhotos() {
   const currentFarm = useSelector((state) => state.farms[farmId]);
   const amenityId = currentFarm?.amenityId
 
-  console.log("AMENITY ID IN EDIT FARM PHOTOS", amenityId)
-  console.log("current farm", currentFarm)
-
   const [primaryImage, setPrimaryImage] = useState(currentFarm?.primaryImage);
   const [secondImage, setSecondImage] = useState(currentFarm?.secondImage);
   const [thirdImage, setThirdImage] = useState(currentFarm?.thirdImage);
@@ -48,13 +45,9 @@ export default function EditFarmPhotos() {
       return;
     }
     submitButton.disabled = false;
-    console.log(files[0]);
     setSecondImage(files[0]);
-    console.log(files[1]);
     setThirdImage(files[1]);
-    console.log(files[2]);
     setFourthImage(files[2]);
-    console.log(files[3]);
     setFifthImage(files[3]);
   };
 
@@ -69,7 +62,6 @@ export default function EditFarmPhotos() {
     formData.append('fifthImage', fifthImage);
     formData.append('farmId', farmId);
 
-    console.log(formData)
     // aws uploads can be a bit slow—displaying
     // some sort of loading message is a good idea
     setImageLoading(true);

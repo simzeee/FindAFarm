@@ -8,18 +8,19 @@
   /* background-color:seagreen; */
   /* height: 20vh; */
   padding: 20px;
+  margin-bottom: 200px;
 }
 
 .editAmenityForm {
-  /* margin-top: 5%; */
+  /* margin-top: 12%; */
   box-shadow: rgb(0 0 0 / 8%) 0px 2px 4px 0px;
   background-color: rgba(255, 255, 255, 0.851);
   display: flex;
   flex-flow: column;
   align-items: center;
   justify-content: space-between;
-  width: 20%;
-  /* height: 30%; */
+  width: fit-content;
+  height: fit-content;
   padding: 10px;
   border-radius: 24px;
 }
@@ -29,9 +30,7 @@
 }
 
 .editAmenityInputs {
-
   display: flex;
   align-items: center;
   padding: 10px;
-  
 }
