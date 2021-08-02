@@ -1,5 +1,5 @@
 .bookingRootContainer {
-  background-color: red;
+  /* background-color: red; */
   height: 75vh;
   display: flex;
   flex-direction: column;
