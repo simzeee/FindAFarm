@@ -1,23 +1,15 @@
 .oneFarmRootContainer{
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
-  /* box-sizing: border-box; */
-  /* min-height: 100vh; */
-  /* justify-content: center; */
 }
 
 .imageContainer{
   display: flex;
-  /* flex-flow: row; */
-  /* justify-content: center; */
-  /* align-items: center; */
   /* background-color: blue; */
   height: 67vh;
   width: 80%;
   margin-left: 10%;
   margin-top: 2%;
-  margin-bottom: 5%;
 }
 
 .amenitiesMainContainer {
@@ -28,7 +20,7 @@
 .primaryImageContainer{
   height: 100%;
   width: 70%;
-  margin-bottom: 2vh;
+  /* margin-bottom: 2vh; */
 }
 
 #primaryImage {
@@ -39,17 +31,12 @@
 }
 
 .additionalImages{
-  /* position: absolute; */
   display: flex;
   flex-flow: row wrap;
-  /* align-items: center; */
   justify-content: space-evenly;
-  /* grid-template-columns: 50% 50%;
-  grid-template-rows: 50% 50%; */ 
   /* background-color: darkgoldenrod; */
   height: 100%;
   width: 100%;
-  
 }
 
 .oneImage{
@@ -71,9 +58,9 @@
   align-items: flex-end;
   /* flex-direction: column; */
   /* background-color: blue; */
-  height: 40vh;
-  margin-top: 10vh;
-  /* margin-bottom: 40vh; */
+  /* height: 40vh; */
+  margin-top: 30px;
+
 }
 
 .farmTitleContainer{
@@ -81,7 +68,7 @@
   margin-top: 15px;
   margin-bottom: 20px;  
   /* border-bottom: 3px solid gainsboro; */
-  width: 75%;
+  width: 800px;
 }
 
 .infoLeft {
@@ -150,6 +137,7 @@
   box-shadow: rgb(0 0 0 / 8%) 0px 4px 8px 0px;
   padding: 20px;
   border-radius: 24px;
+  width: fit-content;
   /* margin-right: 25%; */
 }
 

@@ -149,7 +149,7 @@ export default function Farm() {
           </div>
           <div className={styles.infoContainer}>
             <div className={styles.infoLeft}>
-              <div>
+              {/* <div className={styles.editPhotosButtonContainer}> */}
                 {farm?.userId === user.id ? (
                   <NavLink to={`/editFarmPhotos/${farmId}`}>
                     <button>Edit Your Farm's Photos</button>
@@ -157,7 +157,7 @@ export default function Farm() {
                 ) : (
                   ''
                 )}
-              </div>
+              {/* </div> */}
               <div className={styles.farmTitleContainer}>
                 <h3 id={styles.farmTitle}>{farm?.name}</h3>
                 <div className={styles.descriptionContainer}>
@@ -196,9 +196,9 @@ export default function Farm() {
               </div>
             </div>
             <div className={styles.infoRight}>
-              <div>
+              {/* <div> */}
                 <CreateBooking></CreateBooking>
-              </div>
+              {/* </div> */}
             </div>
           </div>
           <div className={styles.oneFarmMap}>
