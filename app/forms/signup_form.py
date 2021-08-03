@@ -5,12 +5,13 @@ from app.models import User
 
 
 def user_exists(form, field):
-    print("Checking if user exits", field.data)
+    print("Checking if user exists", field.data)
     email = field.data
     user = User.query.filter(User.email == email).first()
     if user:
         raise ValidationError("User is already registered.")
-
+    if '@' or '.' not in email:
+        raise ValidationError("Please provide a valid email address.")
 
 
 class SignUpForm(FlaskForm):

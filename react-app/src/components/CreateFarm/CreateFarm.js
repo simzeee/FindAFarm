@@ -30,8 +30,6 @@ export default function CreateFarm() {
   const [description, setDescription] = useState('');
   const [checkedState, setCheckedState] = useState(false);
 
-  console.log("LOCATION", location)
-
   const initialStateSetter = (all) => {
     const stateObject = {};
     all &&
@@ -55,11 +53,9 @@ export default function CreateFarm() {
   };
 
   const updateAmenityState = (e, amenityName, amenityValue) => {
-    console.log(e.target.id);
+    
 
     setStateAmenities((oldState) => {
-      console.log(amenityName);
-      console.log('VALUE', e.target.id.checked, amenityValue);
       if (e.target.id.checked === false) {
         setCheckedState(true);
       }
@@ -178,13 +174,6 @@ export default function CreateFarm() {
               value={pricePerDay}
               onChange={updatePricePerDay}
             ></input>
-            {/* <label>Location:</label>
-            <input
-              type="text"
-              value={location}
-              onChange={updateLocation}
-              // required={true}
-            ></input> */}
             <label>Description:</label>
             <textarea
               form="farmForm"
@@ -221,8 +210,8 @@ export default function CreateFarm() {
               multiple
               onChange={updateSupplementalImages}
             ></input>
-            <button id="farmSubmit" type="submit">
-              Submit
+            <button id="farmSubmit" type="submit" disabled={true}>
+              Create Farm
             </button>
             {imageLoading && <p>Loading...</p>}
           </form>

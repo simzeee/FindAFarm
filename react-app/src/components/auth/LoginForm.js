@@ -50,12 +50,12 @@ const LoginForm = () => {
 
   return (
     <div className={styles.loginFormContainer}>
-    <form className={styles.loginForm} onSubmit={onLogin}>
       <div>
         {errors.map((error) => (
-          <div>{error}</div>
+          <div className={styles.errors}>{error}</div>
         ))}
       </div>
+    <form className={styles.loginForm} onSubmit={onLogin}>
         <label htmlFor="email">Email:</label>
       <div>
         <input

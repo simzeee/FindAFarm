@@ -20,6 +20,11 @@ const SignUpForm = () => {
     if (password === repeatPassword) {
       const data = await dispatch(signUp(username, email, password));
       if (data.errors){
+        console.log(data.errors)
+        data.errors.forEach((error)=>{
+          error[0].toUpperCase()
+          console.log(error[0])
+        })
         setErrors(data.errors)
       }
     }
@@ -50,9 +55,9 @@ const SignUpForm = () => {
 
   return (
     <div className={styles.signUpFormContainer}>
-      <div>
+      <div >
       {errors.map((error)=>(
-        <div key={error}>{error}</div>
+        <div className={styles.errors} key={error}>{error}</div>
       ))}
       </div>
     <form className={styles.signUpForm} onSubmit={onSignUp}>
@@ -81,7 +86,6 @@ const SignUpForm = () => {
           name="password"
           onChange={updatePassword}
           value={password}
-          required={true}
         ></input>
       </div>
         <label>Repeat Password:</label>
@@ -91,7 +95,6 @@ const SignUpForm = () => {
           name="repeat_password"
           onChange={updateRepeatPassword}
           value={repeatPassword}
-          required={true}
         ></input>
       </div>
       <button type="submit">Sign Up</button>

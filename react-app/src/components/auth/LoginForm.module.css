@@ -5,12 +5,12 @@
   justify-content: space-evenly;
   height: 500px;
   /* background-color: tomato; */
-  margin-bottom: 220px;
+  margin-bottom: 233px;
 }
 
 .loginForm {
   font-family: Arial, Helvetica, sans-serif;
-  margin-top: 180px;
+  /* margin-top: 180px; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,4 +30,19 @@
 .buttonContainer button {
   margin-right: 3px;
   margin-left: 3px;
+}
+
+.errors{
+  margin-top: 8%;
+  background-color: rgba(255, 255, 255, 0.851);
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: fit-content;
+  padding: 10px 15px 10px 15px;
+  border-radius: 24px;
+  box-shadow: rgb(0 0 0 / 8%) 0px 4px 8px 0px;
+  color: red;
 }

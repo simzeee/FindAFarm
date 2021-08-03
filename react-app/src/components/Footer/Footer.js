@@ -2,13 +2,13 @@ import React from 'react';
 
 import styles from './Footer.module.css';
 import linkedIn from './linkedIn.png';
-import github from './github.png'
+import github from './github.png';
 
 export default function Footer() {
   return (
     <div className={styles.footerContainer}>
       <div className={styles.footerContent}>
-        Created by John Sims
+        <div>Created by John Sims 2021</div>
         <a href="https://www.devjohnsims.com" target="_blank">
           <img
             className={styles.headShot}
@@ -19,7 +19,7 @@ export default function Footer() {
           <img className={styles.linkedIn} src={linkedIn} />
         </a>
         <a href="https://github.com/simzeee" target="_blank">
-          <img className={styles.github} src={github}/>
+          <img className={styles.github} src={github} />
         </a>
       </div>
       {/* <div>Copyright 2021</div> */}

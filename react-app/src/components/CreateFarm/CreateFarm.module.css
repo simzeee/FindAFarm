@@ -13,13 +13,9 @@
 .formTitle {
   display: flex;
   justify-content: center;
-  /* background-color: steelblue; */
-  /* margin-top: 25%; */
-  /* margin-bottom: 5%; */
 }
 
 .newFarmForm {
-  /* margin-top: 1%; */
   border-radius: 24px;
   display: flex;
   flex-direction: column;
@@ -28,6 +24,11 @@
   height: 85%;
   padding: 15px 50px 15px 50px;
   box-shadow: rgb(0 0 0 / 8%) 0px 2px 4px 0px;
+}
+
+.newFarmForm button {
+  background-color: rgb(2, 196, 183);
+
 }
 
 form label {
