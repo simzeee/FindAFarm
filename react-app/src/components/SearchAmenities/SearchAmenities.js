@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { searchAllFarms } from '../../store/search';
 import { useHistory } from 'react-router';
 import { getAllAmenities } from '../../store/amenities';
+import { clearSearchResults } from '../../store/search';
 
 import styles from './SearchAmenities.module.css';
 
@@ -11,6 +12,7 @@ export default function SearchAmenities() {
   const history = useHistory();
 
   const [checkedState, setCheckedState] = useState(false);
+  const [errors, setErrors] = useState('');
 
   const allAmenities = useSelector((state) => state.amenities);
 
@@ -31,8 +33,10 @@ export default function SearchAmenities() {
     const submitButton = document.querySelector('#searchSubmit');
     if (Object.values(someState).includes(true)) {
       submitButton.disabled = false;
+      setErrors('');
     } else {
       submitButton.disabled = true;
+      setErrors('Please, make a selection.');
     }
   };
 
@@ -51,13 +55,18 @@ export default function SearchAmenities() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    dispatch(searchAllFarms(stateAmenities));
-
-    history.push('/searchResults');
+    if (Object.entries(stateAmenities).length === 0) {
+      setErrors('Please, make a selection.');
+    } else {
+      dispatch(searchAllFarms(stateAmenities));
+      history.push('/searchResults');
+    }
   };
 
   useEffect(() => {
     dispatch(getAllAmenities());
+    // setStateAmenities(initialStateSetter(allAmenities))
+    // dispatch(clearSearchResults)
   }, []);
 
   return (
@@ -65,6 +74,7 @@ export default function SearchAmenities() {
       <div className={styles.searchContainer}>
         <div>
           <label>Search:</label>
+          <div className={styles.errors}>{errors}</div>
         </div>
         <form
           action=""
@@ -89,10 +99,11 @@ export default function SearchAmenities() {
           ))}
           <div className={styles.searchButtonContainer}>
             <button
+              // onClick={() => console.log('hi')}
               className={styles.searchButton}
               id="searchSubmit"
               type="submit"
-              disabled={true}
+              // disabled={true}
             >
               Search
             </button>
