@@ -13,24 +13,24 @@
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  padding-bottom: 3px;
+  /* padding-bottom: 3px; */
 }
 
 .headShot {
   max-width: 70px;
   border-radius: 50%;
-  padding-top: 8px;
+  padding-top: 3px;
   margin-left: 30px;
 }
 
 .linkedIn {
   max-width: 70px;
-  padding-top: 8px;
+  padding-top: 3px;
   margin-left: 30px;
 }
 
 .github{
   max-width: 85px;
-  padding-top: 8px;
+  padding-top: 3px;
   margin-left: 30px;
 }
