@@ -4,13 +4,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
-  margin-bottom: 110px;
+  justify-content: center;
+  margin-bottom: 57px;
 }
 
 .bookingTitle{
   font-family: Calibre, Helvetica, Arial, sans-serif;
   color:rgba(40, 64, 12);
+  margin-bottom: 100px;
 }
 
 .bookingsContainer {
@@ -19,7 +20,7 @@
   display: flex;
   flex-flow: row wrap;
   justify-content: space-evenly;
-  /* margin-bottom: 50%; */
+  margin-bottom: 50px;
 }
 
 .oneBooking {
@@ -28,4 +29,20 @@
   padding: 10px 20px 10px 20px;
   border-radius: 24px;
   margin-bottom: 2%;
+}
+
+.noResultsContainer{
+  /* background-color: aqua; */
+  height: 600px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 167px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgba(40, 64, 12);
+}
+
+.noResultsContainer h2 {
+  margin-bottom: 50px;
 }

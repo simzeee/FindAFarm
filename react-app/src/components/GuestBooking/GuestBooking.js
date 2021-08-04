@@ -25,8 +25,8 @@ export default function GuestBooking(){
   // console.log("CURRENT USER HERE", currentUser)
   
   useEffect(()=>{
-    console.log("IDS IN USE EFFECT", ids)
-    console.log("In use effect?\n\n\n\n")
+    // console.log("IDS IN USE EFFECT", ids)
+    // console.log("In use effect?\n\n\n\n")
     dispatch(clearBookings({ids}))
     dispatch(getAllBookings())
     dispatch(getAllFarms())
@@ -40,7 +40,6 @@ export default function GuestBooking(){
   if(!bookings.length)
   return (
     <div className={styles.noResultsContainer}>
-    <img></img>
     <h2 id={styles.noResultsHeader}>
       You have no bookings! Let's plan a trip!
     </h2>
