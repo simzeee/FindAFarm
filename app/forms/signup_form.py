@@ -10,7 +10,7 @@ def user_exists(form, field):
     user = User.query.filter(User.email == email).first()
     if user:
         raise ValidationError("User is already registered.")
-    if '@' or '.' not in email:
+    if '@' and '.' not in email:
         raise ValidationError("Please provide a valid email address.")
 
 

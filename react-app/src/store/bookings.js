@@ -5,6 +5,7 @@ const GET_ONE_BOOKING = 'booking/GET_ONE_BOOKING';
 const CREATE_BOOKING = 'booking/CREATE_BOOKING';
 const EDIT_BOOKING = 'booking/EDIT_BOOKING';
 const DELETE_BOOKING = 'booking/DELETE_BOOKING';
+const CLEAR_BOOKINGS = 'booking/CLEAR_BOOKING';
 
 // action creators
 
@@ -17,6 +18,11 @@ const getBooking = (booking) => ({
   type: GET_ONE_BOOKING,
   payload: booking,
 });
+
+const clearBooking = (ids) => ({
+  type: CLEAR_BOOKINGS,
+  payload: ids
+})
 
 const createBooking = (
   userId,
@@ -85,6 +91,12 @@ export const getAllBookings = () => async (dispatch) => {
 
   dispatch(getBookings(data.bookings));
 };
+
+export const clearBookings = (ids) => async (dispatch) => {
+  console.log("HERE ARE MY IDS", ids)
+  dispatch(clearBooking(ids))
+}
+
 
 export const getOneBooking = (id) => async (dispatch) => {
   let data = await fetch(`/api/bookings/${id}`);
@@ -244,6 +256,13 @@ export default function reducer(state = initialState, action) {
       const newState = { ...state };
       delete newState[action.payload.id];
       return newState;
+    }
+    case CLEAR_BOOKINGS: {
+      const newState = {...state};
+      Object.values(action.payload.ids).forEach((id)=>{
+        delete newState[id]
+      })
+      return newState
     }
     default:
       return state;

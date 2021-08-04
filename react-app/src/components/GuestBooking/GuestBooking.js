@@ -2,21 +2,53 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllBookings } from '../../store/bookings'
 import { getAllFarms } from '../../store/farms';
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
+import { clearBookings } from '../../store/bookings';
 
 import styles from './GuestBooking.module.css'
 
 export default function GuestBooking(){
+  const history = useHistory()
 
   const dispatch = useDispatch()
 
   const bookings = useSelector((state) => Object.values(state.bookings))
+  const currentUser = useSelector((state) => state.session.user);
+  
+  let ids = bookings.map((booking) => {
+   
+    return booking.id;
+  });
+
+
+
+  // console.log("CURRENT USER HERE", currentUser)
   
   useEffect(()=>{
+    console.log("IDS IN USE EFFECT", ids)
+    console.log("In use effect?\n\n\n\n")
+    dispatch(clearBookings({ids}))
     dispatch(getAllBookings())
     dispatch(getAllFarms())
   },[])
 
+  const returnHome = () => {
+    window.scrollTo(0,0);
+    history.push("/")
+  };
+
+  if(!bookings.length)
+  return (
+    <div className={styles.noResultsContainer}>
+    <img></img>
+    <h2 id={styles.noResultsHeader}>
+      You have no bookings! Let's plan a trip!
+    </h2>
+    <div className={styles.returnButton}>
+      <button onClick={()=> returnHome()}>Find a farm!</button>
+    </div>
+  </div>
+  )
 
   return(
     <>
