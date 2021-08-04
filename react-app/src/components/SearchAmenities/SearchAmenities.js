@@ -16,17 +16,18 @@ export default function SearchAmenities() {
 
   const allAmenities = useSelector((state) => state.amenities);
 
-  const initialStateSetter = (all) => {
-    const stateObject = {};
-    all &&
-      Object.values(all).forEach((amenity) => {
-        stateObject[amenity.amenityName] = false;
-      });
-    return stateObject;
-  };
+  // const initialStateSetter = (all) => {
+  //   const stateObject = {};
+  //   all &&
+  //     Object.values(all).forEach((amenity) => {
+  //       stateObject[amenity.amenityName] = false;
+  //     });
+  //   return stateObject;
+  // };
 
   const [stateAmenities, setStateAmenities] = useState(
-    initialStateSetter(allAmenities)
+    // initialStateSetter(allAmenities)
+    {}
   );
 
   const changeSubmit = (someState) => {
@@ -65,8 +66,7 @@ export default function SearchAmenities() {
 
   useEffect(() => {
     dispatch(getAllAmenities());
-    // setStateAmenities(initialStateSetter(allAmenities))
-    // dispatch(clearSearchResults)
+    setStateAmenities({})
   }, []);
 
   return (

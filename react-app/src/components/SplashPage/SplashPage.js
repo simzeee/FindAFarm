@@ -9,15 +9,20 @@ import cutePigs from './cutePigs.jpeg'
 import cuteCow from './cuteCow.png'
 import MapContainer from '../ApiGoogleMap/ApiGoogleMap';
 import AllFarmsMap from '../AllFarmsMap/AllFarmsMap';
+import { clearSearchResults } from '../../store/search';
 
 
 export default function SplashPage() {
-  // const dispatch = useDispatch();
-  // const farms = useSelector((state) => state.farms);
+  const dispatch = useDispatch();
+  
+  const farms = useSelector((state) => Object.values(state.searchResults));
+  let ids = farms.map((farm) => {
+    return farm.id;
+  });
 
-  // useEffect(() => {
-  //   dispatch(getAllFarms());
-  // },[]);
+  useEffect(() => {
+    dispatch(clearSearchResults({ids}))
+  },[]);
 
   return (
     <div className={styles.rootContainer}>
