@@ -35,7 +35,8 @@
 .farmImageContainer {
   height: fit-content;
   width: fit-content;
-  margin-left: 1.5%;
+  margin-left: 12px;
+  margin-bottom: 12px;
 }
 
 .actualFarmImage {
@@ -45,8 +46,3 @@
 }
 
 
-
-/* .shareButton button {
-  margin-right: 15%;
-  margin-bottom: 5px;
-} */

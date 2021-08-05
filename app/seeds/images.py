@@ -16,7 +16,7 @@ def seed_images():
 
     northwestFarm = Image(user=2, primaryImage="https://findafarmbucket.s3.amazonaws.com/48a35167809d472c95bc2ef63ca7c3d8.jpeg", farmId=6, farmName="Northwest Farm")
 
-    floridaFarm = Image(user=2, primaryImage="https://findafarmbucket.s3.amazonaws.com/48a35167809d472c95bc2ef63ca7c3d8.jpeg", farmId=6, farmName="Florida Farm")
+    floridaFarm = Image(user=2, primaryImage="https://findafarmbucket.s3.amazonaws.com/77e5e749e5824d689c4a54d3c4dceb35.png", farmId=7, farmName="Florida Farm")
 
     db.session.add(schruteFarms)
     db.session.add(dairyFarm)
@@ -24,6 +24,7 @@ def seed_images():
     db.session.add(austensFarm)
     db.session.add(lizziesFarm)
     db.session.add(northwestFarm)
+    db.session.add(floridaFarm)
     db.session.commit()
 
 

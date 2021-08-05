@@ -25,8 +25,8 @@ def seed_farms():
     farm6 = Farm(name="Northwest Farm", pricePerDay=200, location="lat: 47.837155604135596 lng: -120.38627519531249", primaryImage="https://findafarmbucket.s3.amazonaws.com/48a35167809d472c95bc2ef63ca7c3d8.jpeg", secondImage="https://findafarmbucket.s3.amazonaws.com/48a35167809d472c95bc2ef63ca7c3d8.jpeg", thirdImage='https://findafarmbucket.s3.amazonaws.com/48a35167809d472c95bc2ef63ca7c3d8.jpeg',
     fourthImage='https://findafarmbucket.s3.amazonaws.com/48a35167809d472c95bc2ef63ca7c3d8.jpeg', fifthImage="https://findafarmbucket.s3.amazonaws.com/48a35167809d472c95bc2ef63ca7c3d8.jpeg", userId=2, description="A welcoming host in one of the greatest climates.")
 
-    farm7 = Farm(name="Florida Farm", pricePerDay=200, location="lat: 47.837155604135596 lng: -120.38627519531249", primaryImage="https://findafarmbucket.s3.amazonaws.com/48a35167809d472c95bc2ef63ca7c3d8.jpeg", secondImage="https://findafarmbucket.s3.amazonaws.com/48a35167809d472c95bc2ef63ca7c3d8.jpeg", thirdImage='https://findafarmbucket.s3.amazonaws.com/48a35167809d472c95bc2ef63ca7c3d8.jpeg',
-    fourthImage='https://findafarmbucket.s3.amazonaws.com/48a35167809d472c95bc2ef63ca7c3d8.jpeg', fifthImage="https://findafarmbucket.s3.amazonaws.com/48a35167809d472c95bc2ef63ca7c3d8.jpeg", userId=2, description="A welcoming host in one of the greatest climates.")
+    farm7 = Farm(name="Florida Farm", pricePerDay=200, location="lat: 25.604446875991687 lng: -80.84803222143479", primaryImage="https://findafarmbucket.s3.amazonaws.com/77e5e749e5824d689c4a54d3c4dceb35.png", secondImage="https://findafarmbucket.s3.amazonaws.com/77e5e749e5824d689c4a54d3c4dceb35.png", thirdImage='https://findafarmbucket.s3.amazonaws.com/77e5e749e5824d689c4a54d3c4dceb35.png',
+    fourthImage='https://findafarmbucket.s3.amazonaws.com/77e5e749e5824d689c4a54d3c4dceb35.png', fifthImage="https://findafarmbucket.s3.amazonaws.com/77e5e749e5824d689c4a54d3c4dceb35.png", userId=2, description="Look out for all the gators!")
 
     db.session.add(farm1)
     db.session.add(farm2)
