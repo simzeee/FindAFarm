@@ -6,10 +6,10 @@
 .imageContainer{
   display: flex;
   /* background-color: blue; */
-  height: 67vh;
-  width: 80%;
-  margin-left: 10%;
-  margin-top: 2%;
+  height: 500px;
+  width: 75%;
+  margin-left: 12%;
+  margin-top: 4%;
 }
 
 .amenitiesMainContainer {
@@ -75,14 +75,14 @@
   /* background-color: red; */
   font-family: Calibre, Helvetica, Arial, sans-serif;
   width: 65%;
-  margin-left: 10%;
+  margin-left: 12%;
 }
 
 #farmTitle{
   font-family: Calibre, Helvetica, Arial, sans-serif;
   font-weight: 700;
   font-size: 55px;
-  /* margin-left: 5%; */
+  /* margin-left: 52; */
   color:rgba(40, 64, 12);
   padding-bottom: 3px;
   border-bottom: 3px solid gainsboro;
@@ -138,7 +138,7 @@
   padding: 20px;
   border-radius: 24px;
   width: fit-content;
-  /* margin-right: 25%; */
+  margin-right: 400px;
 }
 
 button {
@@ -150,7 +150,7 @@ button {
 .oneFarmMap {
   background-color: rgb(250, 250, 250);
   margin-top: 6vh;
-  margin-left: 10%;
+  margin-left: 12%;
   /* display: flex; */
   /* justify-content: center; */
   border: 3px solid rgb(250, 250, 250);

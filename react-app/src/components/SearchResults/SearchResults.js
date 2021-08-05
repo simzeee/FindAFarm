@@ -50,7 +50,7 @@ export default function SearchResults() {
     return (
       <>
         <div className={styles.allFarmsTitle}>
-          <h1>Results</h1>
+          <h1>Your Results:</h1>
         </div>
         <div className={styles.allFarmsContainer}>
           {farms.map((farm) => (
