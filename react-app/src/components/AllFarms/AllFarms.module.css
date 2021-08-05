@@ -1,46 +1,52 @@
-.loggedInHomeContainer{
-  /* background-color: red; */
+/* .loggedInHomeContainer{
+  background-color: red;
   display: flex;
   flex-flow: column nowrap;
   align-items: flex-end;
-}
+} */
 
 .allFarmsTitle {
   /* background-color: red; */
   font-family: Calibre, Helvetica, Arial, sans-serif;
   color:rgba(40, 64, 12);
-  margin: 2% 10% 3% 10%;
-}
-
-.allFarmsContainer {
-  /* background-color: tomato; */
-  margin: 0 10% 0 12%;
-  display: flex;
-  height: 50vh;
-  width: 75vw;
-  margin-bottom: 161px;
-}
-
-.farmImageContainer {
-  height: 75%;
-  width: 75%;
-  margin-left: 1.5%;
-}
-
-.actualFarmImage {
-  height: 100%;
-  width: 100%;
-  border-radius: 24px;
+  margin: 50px 0 50px 6%;
+  width: fit-content; 
 }
 
 .shareButton {
+  margin-top: 30px;
   display: flex;
   justify-content: flex-end;
 }
 
-.shareButton button {
-  /* position: absolute; */
+
+.allFarmsContainer {
+  /* background-color: tomato; */
+  
+  margin: 50px 0 125px 15%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  height: fit-content;
+  width: 75%;
+  /* margin-bottom: 161px; */
+}
+
+.farmImageContainer {
+  height: fit-content;
+  width: fit-content;
+  margin-left: 1.5%;
+}
+
+.actualFarmImage {
+  height: 250px;
+  width: 250px;
+  border-radius: 24px;
+}
+
+
+
+/* .shareButton button {
   margin-right: 15%;
   margin-bottom: 5px;
-  /* margin-top: 10vh; */
-}
+} */

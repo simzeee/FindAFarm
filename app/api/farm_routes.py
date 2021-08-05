@@ -76,6 +76,11 @@ def editFarm():
 
     farmToEdit = Farm.query.get(imageFarmId)
 
+    print("FARM TO EDIT", farmToEdit)
+    print("FAR IMAGES", farmImages)
+    print(imageFarmId)
+    print(editedFarm)
+
     farmToEdit.name = editedFarm["farmName"]
     farmToEdit.pricePerDay = editedFarm["pricePerDay"]
     farmToEdit.primaryImage = farmImages.primaryImage

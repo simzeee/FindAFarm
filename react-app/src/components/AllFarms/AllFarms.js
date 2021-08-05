@@ -48,6 +48,11 @@ export default function AllFarms() {
       <>
         <div className={styles.allFarmsTitle}>
           <h1>All Farms:</h1>
+          <div className={styles.shareButton}>
+          <button>
+            <NavLink to="/createFarm">Share Your Farm</NavLink>
+          </button>
+        </div>
         </div>
         <div className={styles.allFarmsContainer}>
           {farms.map((farm) => (
@@ -61,11 +66,7 @@ export default function AllFarms() {
             </div>
           ))}
         </div>
-        <div className={styles.shareButton}>
-          <button>
-            <NavLink to="/createFarm">Share Your Farm</NavLink>
-          </button>
-        </div>
+       
       </>
     );
   }
