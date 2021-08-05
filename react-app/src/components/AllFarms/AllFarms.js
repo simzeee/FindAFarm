@@ -16,10 +16,12 @@ export default function AllFarms() {
   const farms = useSelector((state) => Object.values(state.farms));
   const currentUser = useSelector((state) => state.session.user);
 
+
   useEffect(() => {
     dispatch(getAllFarms());
     dispatch(getAllAmenities());
   }, [dispatch, farms.length]);
+
 
   if (!farms.length) return null;
 

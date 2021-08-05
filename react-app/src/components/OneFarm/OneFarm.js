@@ -19,9 +19,14 @@ export default function Farm() {
 
   const amenities = useSelector((state) => state.farms[farmId]?.farmAmenities);
 
+  const scroll = () => {
+    window.scrollTo(0,0)
+  }
+
   useEffect(() => {
     dispatch(getAllFarms());
     dispatch(getAllAmenities());
+    scroll()
   }, [dispatch]);
 
   if (!farm) return null;
