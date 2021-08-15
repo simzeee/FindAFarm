@@ -16,3 +16,39 @@
   height: 25vh;
   padding: 5px;
 }
+
+.noUser {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  /* border: 3px solid red; */
+  width: 8rem;
+  font-family: Calibre, Helvetica, Arial, sans-serif;
+  font-size: 1.5rem;
+  /* padding: 3px; */
+}
+
+.noUser p {
+  text-align: center;
+  display: flex;
+  flex-flow: column wrap;
+  /* border: 5px solid blue; */
+  padding: 2px;
+}
+
+.noUser a {
+  transition: 0.8s;
+  padding: 3px;
+  width: max-content;
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 0.3rem;
+  color: rgb(99, 197, 230);
+}
+
+.noUser a:hover {
+  background-color: rgb(99, 197, 230);
+  color: white;
+  border-radius: 12px;
+  /* padding: 2px 3px; */
+}

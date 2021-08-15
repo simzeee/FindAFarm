@@ -1,9 +1,9 @@
-/* .loggedInHomeContainer{
-  background-color: red;
+.loggedInHomeContainer{
+  /* background-color: red; */
   display: flex;
   flex-flow: column nowrap;
   align-items: flex-end;
-} */
+}
 
 .allFarmsTitle {
   /* background-color: red; */

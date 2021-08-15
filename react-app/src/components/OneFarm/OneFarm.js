@@ -96,6 +96,11 @@ export default function Farm() {
                 </div>
               </div>
             </div>
+            <div className={styles.infoRight}>
+              {/* <div> */}
+                <CreateBooking></CreateBooking>
+              {/* </div> */}
+            </div>
           </div>
                 <div className={styles.oneFarmMap}>
                   <GoogleMaps
