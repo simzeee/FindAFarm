@@ -22,10 +22,11 @@
   flex-flow: column nowrap;
   align-items: center;
   /* border: 3px solid red; */
-  width: 8rem;
+  width: 10rem;
   font-family: Calibre, Helvetica, Arial, sans-serif;
   font-size: 1.5rem;
-  /* padding: 3px; */
+  padding: 3px 3px;
+  margin: 5px;
 }
 
 .noUser p {
@@ -33,7 +34,8 @@
   display: flex;
   flex-flow: column wrap;
   /* border: 5px solid blue; */
-  padding: 2px;
+  padding: 5px;
+  font-weight: 200;
 }
 
 .noUser a {
@@ -42,7 +44,6 @@
   width: max-content;
   font-size: 1.5rem;
   font-weight: 400;
-  margin-bottom: 0.3rem;
   color: rgb(99, 197, 230);
 }
 
